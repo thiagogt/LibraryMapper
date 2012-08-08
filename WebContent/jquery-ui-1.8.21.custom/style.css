@@ -1,0 +1,59 @@
+.body{
+	width: 1200px;
+	height: 800px;	
+	background-color: gray;
+	border: 2px solid black;
+	position: absolute;
+	top: 50px;
+	left: 10px;
+}
+
+
+.createButton {
+	
+	width: 30px;
+	height: 30px;
+	background-color: black;
+	position: absolute;
+	top: 50px;
+	left: 10px;
+}
+
+.canvas{
+	width: 600px;
+	height: 300px;
+	background-color: white;
+	border: 2px solid red;
+	position: absolute;
+	top: 100px;
+	right: 100px;
+}
+
+.bloco{
+	width: 150px;
+	height: 150px;
+	margin:10px;
+	background-color: blue;
+	position: absolute;
+	top: 10px;
+	
+}
+
+.label{
+	position: absolute;
+	top: 30px;
+	left: 60px		
+}
+.ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
+.ui-resizable { position: absolute;}
+.ui-resizable-handle { position: absolute;font-size: 0.1px; display: block; }
+.ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle { display: none; }
+.ui-resizable-n { cursor: n-resize; height: 7px; width: 100%; top: -5px; left: 0; }
+.ui-resizable-s { cursor: s-resize; height: 7px; width: 100%; bottom: -5px; left: 0; }
+.ui-resizable-e { cursor: e-resize; width: 7px; right: -5px; top: 0; height: 100%; }
+.ui-resizable-w { cursor: w-resize; width: 7px; left: -5px; top: 0; height: 100%; }
+.ui-resizable-se { cursor: se-resize; width: 12px; height: 12px; right: 1px; bottom: 1px; }
+.ui-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: -5px; bottom: -5px; }
+.ui-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; }
+.ui-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}
+.ui-selectable-helper { position: absolute; z-index: 100; border:1px dotted black; }
