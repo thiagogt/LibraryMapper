@@ -1,4 +1,5 @@
 var idBloco = 0;
+var actualX,actualY;
 $(function(){
 	$(".createButton").click( function() {
 		
@@ -10,8 +11,22 @@ $(function(){
 			        var currentPos = $(this).position();
 			        $(".label").text("Position: \nLeft: " + currentPos.left + "\nTop: " + currentPos.top);
 			    }
-			}).resizable();
+			}).resizable({resize: function(event, ui) { 
+				
+					actualY = $(this).height();
+					actualX = $(this).width();
+			
+				}
+			});
 		
 		idBloco++;
 	});
+});
+
+jQuery(document).ready(function(){
+	   $(document).mousemove(function(e){
+		   
+		   
+	      $('#status').html(actualX +', '+ actualY);
+	   }); 
 });
