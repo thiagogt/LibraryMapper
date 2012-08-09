@@ -1,15 +1,18 @@
 var idBloco = 0;
-var actualX,actualY;
+var actualX=0,actualY=0;
 $(function(){
 	$(".createButton").click( function() {
 		
 		$(".canvas").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
-		
+		actualX=$("#bloco-"+idBloco).width();
+		actualY=$("#bloco-"+idBloco).height();
 		$("#bloco-"+idBloco).draggable({ containment: [100, 100, 700, 400] , cursor: "crosshair" },
 				{drag: function(event, ui) {
 			        // Show the current dragged position of image
 			        var currentPos = $(this).position();
 			        $(".label").text("Position: \nLeft: " + currentPos.left + "\nTop: " + currentPos.top);
+			        actualY = $(this).height();
+					actualX = $(this).width();
 			    }
 			}).resizable({resize: function(event, ui) { 
 				
