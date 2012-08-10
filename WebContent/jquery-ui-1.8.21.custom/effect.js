@@ -5,7 +5,7 @@ var velocidade = 0.01;
 $(function(){
 	$(".createButton").click( function() {
 		
-		$(".canvas").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
+		$("#mapa").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
 		actualX=$("#bloco-"+idBloco).width();
 		actualY=$("#bloco-"+idBloco).height();
 		$("#bloco-"+idBloco).draggable({ cursor: "crosshair" },
@@ -40,9 +40,9 @@ jQuery(document).ready(function(){
 	      $('#status').html(actualX +', '+ actualY);
 	   }); 
 	  
-	   $('#quadro').bind('mousewheel', function(event,delta){
+	   $('#mapa').bind('mousewheel', function(event,delta){
 		   
-		   var div = document.getElementById('quadro');
+		   var div = document.getElementById('mapa');
 		   var property = getTransformProperty(div);
 		   if (delta > 0) {
 		   	 $(".label").text("Position: just whell up"); 
