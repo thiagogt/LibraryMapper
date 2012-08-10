@@ -6,14 +6,18 @@
 	position: absolute;
 	top: 50px;
 	left: 10px;
-	
+	overflow:hidden;
 }
 
 .zoom_out{
 	zoom:-20%;
+	-moz-transform: -scale(0.20);
+	-webkit-transform: -scale(0.20);
 }
 .zoom_in{
-	zoom : 20%;
+	zoom:200%;
+	-moz-transform: scale(2.0);
+	-webkit-transform: scale(2.20);
 }
 .createButton {
 	
