@@ -5,7 +5,7 @@ var velocidade = 0.01;
 $(function(){
 	$(".createButton").click( function() {
 		
-		$("#mapa").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
+		$("#mapa").append( "<div class='bloco' id='bloco-"+idBloco+"'><img src=\"armario.svg\" /></div>");
 		actualX=$("#bloco-"+idBloco).width();
 		actualY=$("#bloco-"+idBloco).height();
 		$("#bloco-"+idBloco).draggable({ cursor: "crosshair" },
