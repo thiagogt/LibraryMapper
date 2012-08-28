@@ -1,0 +1,80 @@
+.body{
+	width: 1200px;
+	height: 600px;	
+	background-color: gray;
+	border: 2px solid black;
+	position: absolute;
+	top: 50px;
+	left: 10px;
+	
+}
+
+.zoom_out{
+	zoom:-20%;
+	-moz-transform: -scale(0.20);
+	-webkit-transform: -scale(0.20);
+}
+.zoom_in{
+	zoom:200%;
+	-moz-transform: scale(2.0);
+	-webkit-transform: scale(2.20);
+}
+.createButton {
+	
+	width: 30px;
+	height: 30px;
+	background-color: black;
+	position: absolute;
+	top: 50px;
+	left: 10px;
+}
+
+.canvas{
+	width: 996px;
+	height: 596px;
+	background-color: white;
+	
+	position: absolute;
+	
+}
+#mapa.canvas{
+	width: 996px;
+	height: 1796px;
+}
+#quadroLimitador.canvas {
+	background-color:red;
+	overflow:hidden;
+	top: 0px;
+	left: 200px;	
+	border: 2px solid gray;
+}
+
+.bloco{
+	width: 30px;
+	height: 30px;
+	
+	
+	position: absolute;
+	top: 50px;
+	left: 10px;
+	
+}
+
+.label{
+	position: absolute;
+	top: 10px;
+	left: 10px		
+}
+.ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
+.ui-resizable { position: absolute;}
+.ui-resizable-handle { position: absolute;font-size: 0.1px; display: block; }
+.ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle { display: none; }
+.ui-resizable-n { cursor: n-resize; height: 7px; width: 100%; top: -5px; left: 0; }
+.ui-resizable-s { cursor: s-resize; height: 7px; width: 100%; bottom: -5px; left: 0; }
+.ui-resizable-e { cursor: e-resize; width: 7px; right: -5px; top: 0; height: 100%; }
+.ui-resizable-w { cursor: w-resize; width: 7px; left: -5px; top: 0; height: 100%; }
+.ui-resizable-se { cursor: se-resize; width: 12px; height: 12px; right: 1px; bottom: 1px; }
+.ui-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: -5px; bottom: -5px; }
+.ui-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; }
+.ui-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}
+.ui-selectable-helper { position: absolute; z-index: 100; border:1px dotted black; }
