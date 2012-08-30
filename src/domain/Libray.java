@@ -9,16 +9,18 @@ public class Libray {
 	int size_Y;
 	ArrayList<BookShelf> bookShelves;
 	ArrayList<QRCodesMark> qrCodesMarks;
-	int[][] map;
+	Node[][] map;
 	
-	public void Library(int newSize_X, int newSize_Y){
+	public void Library(int newSize_X, int newSize_Y,int totalQRMarkers){
 		setSize_X(newSize_X);
 		setSize_Y(newSize_Y);
-		setMap(new int[this.size_X][this.size_Y]);
+		setMap(new Node[this.size_X][this.size_Y]);
 		
 		for (int i = 0; i < this.size_X; i++) {
 			for (int j = 0; j < this.size_Y; j++) {
-				this.map[i][j] = GlobalUtils.EMPTY_VALUE; 
+				this.map[i][j].mapValue = GlobalUtils.EMPTY_VALUE;
+				this.map[i][j].contents = new Content[totalQRMarkers];
+				
 			}
 			
 		}
@@ -48,10 +50,10 @@ public class Libray {
 	public void setQrCodesMarks(ArrayList<QRCodesMark> qrCodesMarks) {
 		this.qrCodesMarks = qrCodesMarks;
 	}
-	public int[][] getMap() {
+	public Node[][] getMap() {
 		return map;
 	}
-	public void setMap(int[][] map) {
+	public void setMap(Node[][] map) {
 		this.map = map;
 	}
 	
