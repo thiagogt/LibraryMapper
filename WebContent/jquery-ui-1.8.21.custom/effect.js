@@ -2,6 +2,8 @@ var idBloco = 0;
 var actualX=0,actualY=0;
 var escala = 1;
 var velocidade = 0.01;
+var porcentagemMinima = 0.1;
+var porcentagemMaxima = 1.1;
 $(function(){
 	$(".createButton").click( function() {
 		
@@ -21,7 +23,7 @@ $(function(){
 					}
 			    }
 			}).resizable({resize: function(event, ui) { 
-				
+					
 					actualY = $(this).height();
 					actualX = $(this).width();
 			
@@ -48,7 +50,9 @@ jQuery(document).ready(function(){
 		   	 $(".label").text("Position: just whell up"); 
 		   	if (property) {
 		   	    
-   	    		escala =escala-velocidade;
+		   		escala =getEscala(-velocidade);
+		   		var retorno = getEscala(-velocidade);
+		   		
    	            div.style[property] = 'scale('+escala+','+escala+')';
    	    
    		}
@@ -56,8 +60,8 @@ jQuery(document).ready(function(){
 		   } else {
 		   	 $(".label").text("Position: just whell down");
 		   	if (property) {
-		   	    
-		   	    		escala =escala+velocidade;
+		   		
+		   	    		escala =getEscala(velocidade);
 		   	            div.style[property] = 'scale('+escala+','+escala+')';
 		   	    
 		   		}
@@ -67,7 +71,21 @@ jQuery(document).ready(function(){
 		   	}
 	   });
 });
-
+function getEscala(elemento){
+	var retorno = escala+elemento;
+	$(".label").text("Position: just whell up: "+retorno);
+	if(elemento < 0){
+		$(".label").text("Position: just whell up: "+retorno +"no if");
+		if(retorno <= porcentagemMinima.valueOf())
+			retorno = porcentagemMinima;
+		
+	}
+	else{
+		$(".label").text("Position: just whell up: "+retorno +"no else");
+		if(retorno >= porcentagemMaxima.valueOf())
+			retorno = porcentagemMaxima;
+	}
+}
 function getTransformProperty(element) {
     // Note that in some versions of IE9 it is critical that
     // msTransform appear in this list before MozTransform
