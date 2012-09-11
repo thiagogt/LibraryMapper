@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="library.mapper.BookshelfMapper" >
+  <resultMap id="BaseResultMap" type="library.domain.Bookshelf" >
+    <id column="id_bookshelf" property="idBookshelf" jdbcType="INTEGER" />
+    <result column="id_library" property="idLibrary" jdbcType="INTEGER" />
+    <result column="code_id" property="codeId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_bookshelf, id_library, code_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="library.domain.BookshelfExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from public.bookshelf
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from public.bookshelf
+    where id_bookshelf = #{idBookshelf,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from public.bookshelf
+    where id_bookshelf = #{idBookshelf,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="library.domain.BookshelfExample" >
+    delete from public.bookshelf
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="library.domain.Bookshelf" >
+    insert into public.bookshelf (id_bookshelf, id_library, code_id
+      )
+    values (#{idBookshelf,jdbcType=INTEGER}, #{idLibrary,jdbcType=INTEGER}, #{codeId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="library.domain.Bookshelf" >
+    insert into public.bookshelf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idBookshelf != null" >
+        id_bookshelf,
+      </if>
+      <if test="idLibrary != null" >
+        id_library,
+      </if>
+      <if test="codeId != null" >
+        code_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idBookshelf != null" >
+        #{idBookshelf,jdbcType=INTEGER},
+      </if>
+      <if test="idLibrary != null" >
+        #{idLibrary,jdbcType=INTEGER},
+      </if>
+      <if test="codeId != null" >
+        #{codeId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="library.domain.BookshelfExample" resultType="java.lang.Integer" >
+    select count(*) from public.bookshelf
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update public.bookshelf
+    <set >
+      <if test="record.idBookshelf != null" >
+        id_bookshelf = #{record.idBookshelf,jdbcType=INTEGER},
+      </if>
+      <if test="record.idLibrary != null" >
+        id_library = #{record.idLibrary,jdbcType=INTEGER},
+      </if>
+      <if test="record.codeId != null" >
+        code_id = #{record.codeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update public.bookshelf
+    set id_bookshelf = #{record.idBookshelf,jdbcType=INTEGER},
+      id_library = #{record.idLibrary,jdbcType=INTEGER},
+      code_id = #{record.codeId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="library.domain.Bookshelf" >
+    update public.bookshelf
+    <set >
+      <if test="idLibrary != null" >
+        id_library = #{idLibrary,jdbcType=INTEGER},
+      </if>
+      <if test="codeId != null" >
+        code_id = #{codeId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_bookshelf = #{idBookshelf,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="library.domain.Bookshelf" >
+    update public.bookshelf
+    set id_library = #{idLibrary,jdbcType=INTEGER},
+      code_id = #{codeId,jdbcType=VARCHAR}
+    where id_bookshelf = #{idBookshelf,jdbcType=INTEGER}
+  </update>
+</mapper>
