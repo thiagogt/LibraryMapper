@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="library.mapper.NodeMapper" >
+  <resultMap id="BaseResultMap" type="library.domain.Node" >
+    <id column="id_node" property="idNode" jdbcType="INTEGER" />
+    <result column="position_x" property="positionX" jdbcType="INTEGER" />
+    <result column="position_y" property="positionY" jdbcType="INTEGER" />
+    <result column="content_id" property="contentId" jdbcType="INTEGER" />
+    <result column="id_library" property="idLibrary" jdbcType="INTEGER" />
+    <result column="content_type" property="contentType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_node, position_x, position_y, content_id, id_library, content_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="library.domain.NodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from public.node
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from public.node
+    where id_node = #{idNode,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from public.node
+    where id_node = #{idNode,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="library.domain.NodeExample" >
+    delete from public.node
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="library.domain.Node" >
+    insert into public.node (id_node, position_x, position_y, 
+      content_id, id_library, content_type
+      )
+    values (#{idNode,jdbcType=INTEGER}, #{positionX,jdbcType=INTEGER}, #{positionY,jdbcType=INTEGER}, 
+      #{contentId,jdbcType=INTEGER}, #{idLibrary,jdbcType=INTEGER}, #{contentType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="library.domain.Node" >
+    insert into public.node
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idNode != null" >
+        id_node,
+      </if>
+      <if test="positionX != null" >
+        position_x,
+      </if>
+      <if test="positionY != null" >
+        position_y,
+      </if>
+      <if test="contentId != null" >
+        content_id,
+      </if>
+      <if test="idLibrary != null" >
+        id_library,
+      </if>
+      <if test="contentType != null" >
+        content_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idNode != null" >
+        #{idNode,jdbcType=INTEGER},
+      </if>
+      <if test="positionX != null" >
+        #{positionX,jdbcType=INTEGER},
+      </if>
+      <if test="positionY != null" >
+        #{positionY,jdbcType=INTEGER},
+      </if>
+      <if test="contentId != null" >
+        #{contentId,jdbcType=INTEGER},
+      </if>
+      <if test="idLibrary != null" >
+        #{idLibrary,jdbcType=INTEGER},
+      </if>
+      <if test="contentType != null" >
+        #{contentType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="library.domain.NodeExample" resultType="java.lang.Integer" >
+    select count(*) from public.node
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update public.node
+    <set >
+      <if test="record.idNode != null" >
+        id_node = #{record.idNode,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionX != null" >
+        position_x = #{record.positionX,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionY != null" >
+        position_y = #{record.positionY,jdbcType=INTEGER},
+      </if>
+      <if test="record.contentId != null" >
+        content_id = #{record.contentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.idLibrary != null" >
+        id_library = #{record.idLibrary,jdbcType=INTEGER},
+      </if>
+      <if test="record.contentType != null" >
+        content_type = #{record.contentType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update public.node
+    set id_node = #{record.idNode,jdbcType=INTEGER},
+      position_x = #{record.positionX,jdbcType=INTEGER},
+      position_y = #{record.positionY,jdbcType=INTEGER},
+      content_id = #{record.contentId,jdbcType=INTEGER},
+      id_library = #{record.idLibrary,jdbcType=INTEGER},
+      content_type = #{record.contentType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="library.domain.Node" >
+    update public.node
+    <set >
+      <if test="positionX != null" >
+        position_x = #{positionX,jdbcType=INTEGER},
+      </if>
+      <if test="positionY != null" >
+        position_y = #{positionY,jdbcType=INTEGER},
+      </if>
+      <if test="contentId != null" >
+        content_id = #{contentId,jdbcType=INTEGER},
+      </if>
+      <if test="idLibrary != null" >
+        id_library = #{idLibrary,jdbcType=INTEGER},
+      </if>
+      <if test="contentType != null" >
+        content_type = #{contentType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_node = #{idNode,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="library.domain.Node" >
+    update public.node
+    set position_x = #{positionX,jdbcType=INTEGER},
+      position_y = #{positionY,jdbcType=INTEGER},
+      content_id = #{contentId,jdbcType=INTEGER},
+      id_library = #{idLibrary,jdbcType=INTEGER},
+      content_type = #{contentType,jdbcType=VARCHAR}
+    where id_node = #{idNode,jdbcType=INTEGER}
+  </update>
+</mapper>

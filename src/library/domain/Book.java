@@ -6,13 +6,13 @@ public class Book {
 	String nomeLivro;
 	String autorLivro;
 	int copiasNessaBiblioteca;
-	BookShelf bookShelf;
+	Bookshelf bookShelf;
 	
 	
-	public BookShelf getBookShelf() {
+	public Bookshelf getBookShelf() {
 		return bookShelf;
 	}
-	public void setBookShelf(BookShelf bookShelf) {
+	public void setBookShelf(Bookshelf bookShelf) {
 		this.bookShelf = bookShelf;
 	}
 	public int getId() {

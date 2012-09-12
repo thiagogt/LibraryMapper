@@ -13,7 +13,11 @@ public class Node {
 
     private String contentType;
     
-    int mapValue;
+    private Node parentFromBeginNode;
+    
+    private Node parentFromEndNode;
+    
+    private int mapValue;
 
     public int getMapValue() {
 		return mapValue;
@@ -70,4 +74,21 @@ public class Node {
     public void setContentType(String contentType) {
         this.contentType = contentType;
     }
+    
+    public Node getParentFromBeginNode() {
+		return parentFromBeginNode;
+	}
+
+	public void setParentFromBeginNode(Node parentFromBeginNode) {
+		this.parentFromBeginNode = parentFromBeginNode;
+	}
+
+	public Node getParentFromEndNode() {
+		return parentFromEndNode;
+	}
+
+	public void setParentFromEndNode(Node parentFromEndNode) {
+		this.parentFromEndNode = parentFromEndNode;
+	}
+
 }
