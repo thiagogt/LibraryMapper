@@ -8,25 +8,25 @@ $(function(){
 		$("#mapa").append( "<div class='bloco' ><img id='bloco-"+idBloco+"' src=\"images/armario.svg\" /></div>");
 		actualX=$("#bloco-"+idBloco).width();
 		actualY=$("#bloco-"+idBloco).height();
-		$("#bloco-"+idBloco).draggable({ cursor: "crosshair" },
-				{drag: function(event, ui) {
-			        // Show the current dragged position of image
-			        var currentPos = $(this).position();
-			        $(".label").text("Position: \nLeft: " + currentPos.left + "\nTop: " + currentPos.top);
-			        actualY = $(this).height();
-					actualX = $(this).width();
-					
-					if(currentPos.left == 100){
-						//cria o codigo dentro do canvas.....mas tava dando delay e pau
-					}
-			    }
-			}).resizable({resize: function(event, ui) { 
+		$("#bloco-"+idBloco).resizable({resize: function(event, ui) { 
 				
 					actualY = $(this).height();
 					actualX = $(this).width();
 			
 				}
-			});
+			}).parent().draggable({ cursor: "crosshair" },
+					{drag: function(event, ui) {
+				        // Show the current dragged position of image
+				        var currentPos = $(this).position();
+				        $(".label").text("Position: \nLeft: " + currentPos.left + "\nTop: " + currentPos.top);
+				        actualY = $(this).height();
+						actualX = $(this).width();
+						
+						if(currentPos.left == 100){
+							//cria o codigo dentro do canvas.....mas tava dando delay e pau
+						}
+				    }
+				});
 		
 		idBloco++;
 	});
