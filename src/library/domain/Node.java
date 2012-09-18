@@ -12,6 +12,27 @@ public class Node {
     private Integer idLibrary;
 
     private String contentType;
+    
+    private Node parentFromBeginNode;
+    
+    public Node getParentFromBeginNode() {
+		return parentFromBeginNode;
+	}
+
+	public void setParentFromBeginNode(Node parentFromBeginNode) {
+		this.parentFromBeginNode = parentFromBeginNode;
+	}
+
+	public Node getParentFromEndNode() {
+		return parentFromEndNode;
+	}
+
+	public void setParentFromEndNode(Node parentFromEndNode) {
+		this.parentFromEndNode = parentFromEndNode;
+	}
+
+	private Node parentFromEndNode;
+    
 
     public Integer getIdNode() {
         return idNode;
