@@ -5,7 +5,7 @@
     <commentGenerator>
 	  <property name="suppressAllComments" value="true" />
 	</commentGenerator>
-    <jdbcConnection driverClass="org.postgresql.Driver" connectionURL="jdbc:postgresql://localhost:5432/libraryMapper" userId="postgres" password="postgres" />
+    <jdbcConnection driverClass="org.postgresql.Driver" connectionURL="jdbc:postgresql://localhost:5432/libraryMapperDB" userId="postgres" password="postgres" />
     <javaModelGenerator targetPackage="library.domain" targetProject="LibraryMapper" />
     <sqlMapGenerator targetPackage="library.dominio.xml" targetProject="LibraryMapper" />
     <javaClientGenerator targetPackage="library.mapper" targetProject="LibraryMapper" type="XMLMAPPER" />

@@ -10,5 +10,7 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="/home/thiago/workspace/LibraryMapper/postgresql-9.1-902.jdbc3.jar"/>
+	<classpathentry kind="lib" path="/home/thiago/workspace/LibraryMapper/mybatis-3.1.1-bundle.zip"/>
+	<classpathentry kind="lib" path="/home/thiago/workspace/LibraryMapper/mybatis-3.1.1/mybatis-3.1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

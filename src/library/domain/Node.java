@@ -12,22 +12,8 @@ public class Node {
     private Integer idLibrary;
 
     private String contentType;
-    
-    private Node parentFromBeginNode;
-    
-    private Node parentFromEndNode;
-    
-    private int mapValue;
 
-    public int getMapValue() {
-		return mapValue;
-	}
-
-	public void setMapValue(int mapValue) {
-		this.mapValue = mapValue;
-	}
-
-	public Integer getIdNode() {
+    public Integer getIdNode() {
         return idNode;
     }
 
@@ -74,21 +60,4 @@ public class Node {
     public void setContentType(String contentType) {
         this.contentType = contentType;
     }
-    
-    public Node getParentFromBeginNode() {
-		return parentFromBeginNode;
-	}
-
-	public void setParentFromBeginNode(Node parentFromBeginNode) {
-		this.parentFromBeginNode = parentFromBeginNode;
-	}
-
-	public Node getParentFromEndNode() {
-		return parentFromEndNode;
-	}
-
-	public void setParentFromEndNode(Node parentFromEndNode) {
-		this.parentFromEndNode = parentFromEndNode;
-	}
-
 }

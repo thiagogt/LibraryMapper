@@ -1,5 +1,6 @@
 package library.utils;
 
+import java.io.Reader;
 import java.sql.*;
 import org.apache.ibatis.io.Resources;
 
@@ -42,7 +43,7 @@ public class SQLFactory {
 
 	}
 
-	}
+
 	
 	
 	
