@@ -7,7 +7,9 @@ import java.sql.SQLException;
 
 
 import library.domain.Bookshelf;
+import library.domain.Node;
 import library.mapper.BookshelfMapper;
+import library.mapper.NodeMapper;
 import library.utils.SQLFactory;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,11 +20,11 @@ public class LibraryMain {
 		
 		SqlSession section = SQLFactory.abrirSessao();
 		
-		BookshelfMapper bookshelf = section.getMapper(BookshelfMapper.class);
+		NodeMapper bookshelf = section.getMapper(NodeMapper.class);
 		
-		Bookshelf realBookShelf = bookshelf.selectByPrimaryKey(1);
+		Node realBookShelf = bookshelf.selectByPositionXAndY(1,0,1);
 		
-		System.out.println(realBookShelf.getIdLibrary());
+		System.out.println(realBookShelf.getContentType());
 		
 		section.close();
 	}

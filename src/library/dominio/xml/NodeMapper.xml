@@ -70,6 +70,8 @@
   <sql id="Base_Column_List" >
     id_node, position_x, position_y, content_id, id_library, content_type
   </sql>
+  
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="library.domain.NodeExample" >
     select
     <if test="distinct" >
@@ -84,6 +86,18 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPositionXAndY" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+     
+    
+    from public.node
+    where  id_library = #{idLibrary,jdbcType=INTEGER} AND 
+    position_x = #{positionX,jdbcType=INTEGER} AND
+    position_y = #{positionY,jdbcType=INTEGER}
+  </select>
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
