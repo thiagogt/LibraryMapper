@@ -12,34 +12,37 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class SQLFactory {
 	private static final SqlSessionFactory sqlSessionFactory;
-
+	public static SqlSession section;
 	static {
 
-	try {
+		try {
+	
+			Reader reader = Resources.getResourceAsReader("MapperConfig.xml");
 
-	Reader reader = Resources.getResourceAsReader("MapperConfig.xml");
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+			
+			section = SQLFactory.abrirSessao();
+			
 
-	sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		} catch (Exception e) {
 
-	} catch (Exception e) {
-
-	e.printStackTrace();
-
-	throw new RuntimeException("Error initializing MyAppSqlConfig class. Cause: " + e);
+			e.printStackTrace();
+	
+			throw new RuntimeException("Error initializing MyAppSqlConfig class. Cause: " + e);
+	
+		}
 
 	}
-
-	}
-
+	
 	public static SqlSessionFactory getSqlSessionFactory() {
 
-	return sqlSessionFactory;
+		return sqlSessionFactory;
 
 	}
 
 	public static SqlSession abrirSessao(){
 
-	return getSqlSessionFactory().openSession();
+		return getSqlSessionFactory().openSession();
 
 	}
 

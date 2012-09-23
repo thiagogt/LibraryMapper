@@ -18,15 +18,20 @@ public class LibraryMain {
 
 	public static void main(String[] args) throws SQLException {
 		
-		SqlSession section = SQLFactory.abrirSessao();
 		
-		NodeMapper bookshelf = section.getMapper(NodeMapper.class);
+		NodeMapper bookshelf = SQLFactory.section.getMapper(NodeMapper.class);
 		
-		Node realBookShelf = bookshelf.selectByPositionXAndY(1,0,1);
+		Node realBookShelf = new Node(); 
+				realBookShelf = bookshelf.selectByPositionXAndY(1,1,1);
 		
 		System.out.println(realBookShelf.getContentType());
 		
-		section.close();
+		Node node = realBookShelf.IsDownBrotherReachable(realBookShelf);
+		node = realBookShelf.IsUpBrotherReachable(realBookShelf);
+		node = realBookShelf.IsLeftBrotherReachable(realBookShelf);
+		node = realBookShelf.IsRightBrotherReachable(realBookShelf);
+		
+		SQLFactory.section.close();
 	}
 
 }
