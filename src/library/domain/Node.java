@@ -1,32 +1,33 @@
 package library.domain;
 
+import java.util.concurrent.Semaphore;
+
 import library.mapper.NodeMapper;
+import library.utils.GlobalUtils;
 import library.utils.SQLFactory;
 
 import org.apache.ibatis.session.SqlSession;
 
-public class Node {
-    private Integer idNode;
-
+public class Node extends Thread{
+    
+	private Integer idNode;
     private Integer positionX;
-
     private Integer positionY;
-
     private Integer contentId;
-
     private Integer idLibrary;
-
     private String contentType;//Free,QrCode,Forbidden,Shelf
-    
     private Node parentFromBeginNode;
-    
     private Node parentFromEndNode;
-
 	public int isInUse;
-	
+	private Semaphore semaphore;
 	private String color;
-	
 	private int pathCost;
+
+	public Node(){
+		this.semaphore = new Semaphore(1);
+		this.color = "WHITE";
+		this.idLibrary = GlobalUtils.idLibrary;
+	}
 	
 	public int getPathCost() {
 		return pathCost;
@@ -43,8 +44,6 @@ public class Node {
 	public void setColor(String color) {
 		this.color = color;
 	}
-
-	
     
     public int getIsInUse() {
 		return isInUse;
@@ -121,8 +120,12 @@ public class Node {
         this.contentType = contentType;
     }
 
-	public boolean estaEmUsoParaleloAgora() {
-		// TODO Auto-generated method stub
+	public boolean estaEmUsoParaleloAgora(Node adjNode) {
+		if(adjNode.getIsInUse() == 2){
+			adjNode.semaphore.release();
+			return true;
+		}
+		adjNode.semaphore.release();
 		return false;
 	}
 
@@ -167,6 +170,14 @@ public class Node {
 			System.out.println("Nao existe");
 			return null;
 		}
+	}
+
+	public Semaphore getSemaphore() {
+		return semaphore;
+	}
+
+	public void setSemaphore(Semaphore semaphore) {
+		this.semaphore = semaphore;
 	}
 
 	

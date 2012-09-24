@@ -19,9 +19,10 @@ public class SearchGrid {
 				
 				for (Node adjNode : brothersPrincipalNode) {
 					whoIsYourDaddy(adjNode,principalNode,fromWhoInicialNodeComes);
-					//tem q ser atomico
+					//P(adjNode)
+					adjNode.getSemaphore().acquire();
 					adjNode.isInUse++;
-					if(adjNode.estaEmUsoParaleloAgora()){//ate aqui tem q ser atomico)
+					if(adjNode.estaEmUsoParaleloAgora(adjNode)){//V(adjNode)
 						Node middleNode = adjNode;
 						return buildBFSPath(middleNode);
 					}
@@ -52,16 +53,15 @@ public class SearchGrid {
 		// stopAllOtherTasks();
 		ArrayList<Node> firstHalfList = CreateListFromBeginToMidle(middleNode);
 		ArrayList<Node> secondHalfList = CreateListFromMiddleToEnd(middleNode);
-		ArrayList<Node> completeList = new ArrayList<Node>();
-		System.arraycopy(firstHalfList, 0, completeList, 0, firstHalfList.size());
-		System.arraycopy(secondHalfList, 0, completeList, firstHalfList.size(), secondHalfList.size());
-		return completeList;
+		firstHalfList.addAll(secondHalfList);
+
+		return firstHalfList;
 	}
 
 	public static ArrayList<Node> CreateListFromMiddleToEnd(Node middleNode) {
 		ArrayList<Node> secondHalfList = new ArrayList<Node>();
 		Node actualNode = middleNode.getParentFromEndNode(); 
-		while(actualNode.getParentFromEndNode()!=null){
+		while(actualNode != null){
 			secondHalfList.add(actualNode);
 			actualNode = actualNode.getParentFromEndNode();
 		}
@@ -72,7 +72,7 @@ public class SearchGrid {
 	public static ArrayList<Node> CreateListFromBeginToMidle(Node middleNode) {
 		ArrayList<Node> firstHalfList = new ArrayList<Node>();
 		Node actualNode = middleNode; 
-		while(actualNode.getParentFromBeginNode()!=null){
+		while(actualNode!=null){
 			firstHalfList.add(actualNode);
 			actualNode = actualNode.getParentFromBeginNode();
 		}

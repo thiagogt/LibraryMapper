@@ -19,12 +19,13 @@ public class SearchTests {
 	
 	static Node principalNode;
 	static Queue<Node> queueNode;
+	static NodeMapper nodeMapper;
 	
 	static{
-		NodeMapper bookshelf = SQLFactory.section.getMapper(NodeMapper.class);
+		nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
 		queueNode = new LinkedList<Node>();
 		principalNode = new Node(); 
-				principalNode = bookshelf.selectByPositionXAndY(1,3,2);
+				principalNode = nodeMapper.selectByPositionXAndY(principalNode.getIdLibrary(),3,2);
 		
 		System.out.println(principalNode.getContentType());
 	}
@@ -48,11 +49,8 @@ public class SearchTests {
 //		for (Node node : reverseList) {
 //			System.out.println(node.getContentType());
 //		}
-//				
-//		SQLFactory.section.close();
-//				
 //	}
-//	
+	
 	@Test
 	public void testfindReachablesBrothers(){
 		Queue<Node> queue = SearchGrid.findReachablesBrothers(principalNode);
@@ -61,5 +59,39 @@ public class SearchTests {
 			System.out.println(node.getContentType() + ", at position : " + node.getPositionX()+","+node.getPositionY() );
 		}
 	}
-
+	@Test
+	public void testBuidPath(){
+		Node s = new Node();
+		Node node13 = new Node(); 
+		Node node23 = new Node();
+		Node node33 = new Node();
+		Node c = new Node();
+		
+		s = nodeMapper.selectByPositionXAndY(s.getIdLibrary(),0,3);
+		
+		c = nodeMapper.selectByPositionXAndY(c.getIdLibrary(),3,2);
+		
+		node13 = nodeMapper.selectByPositionXAndY(node13.getIdLibrary(),1,3);
+		node13.setParentFromBeginNode(s);
+		
+		node33 = nodeMapper.selectByPositionXAndY(node33.getIdLibrary(),3,3);
+		node33.setParentFromEndNode(c);
+		
+		
+		node23 = nodeMapper.selectByPositionXAndY(node23.getIdLibrary(),2,3);
+		node23.setParentFromBeginNode(node13);
+		node23.setParentFromEndNode(node33);
+		
+		
+		
+		
+		Node middleNode = node23;
+		ArrayList<Node> pathMap = SearchGrid.buildBFSPath(middleNode);
+		for (Node node : pathMap) {
+			System.out.print(node.getPositionX()+","+node.getPositionY() +" - ");
+		}
+	}
+	
+	
+	
 }
