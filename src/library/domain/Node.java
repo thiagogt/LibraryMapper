@@ -147,12 +147,24 @@ public class Node {
 			brotherNode = bookshelf.selectByPositionXAndY(1,brotherPositionX,brotherPositionY);
 			System.out.println(brotherNode.getContentType());
 			if(brotherNode.getContentType().equals("Empty"))
-				return brotherNode;
+				try{
+					if(brotherNode.getColor().equals("BLACK"))
+						brotherNode = null;
+					return brotherNode;
+				}	
+				catch (Exception e) {
+					System.out.println("Ainda nao tem cor");
+					return brotherNode;
+				}
+		
+		
 			else
 				return null;
 				
+			
+				
 		} catch (Exception e) {
-			System.out.println("Nao ha esse irmao" + e);
+			System.out.println("Nao existe");
 			return null;
 		}
 	}

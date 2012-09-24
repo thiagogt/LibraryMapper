@@ -12,5 +12,6 @@
 	<classpathentry exported="true" kind="lib" path="/home/thiago/workspace/LibraryMapper/postgresql-9.1-902.jdbc3.jar"/>
 	<classpathentry kind="lib" path="/home/thiago/workspace/LibraryMapper/mybatis-3.1.1-bundle.zip"/>
 	<classpathentry kind="lib" path="/home/thiago/workspace/LibraryMapper/mybatis-3.1.1/mybatis-3.1.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

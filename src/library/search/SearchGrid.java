@@ -48,7 +48,7 @@ public class SearchGrid {
 		return null;
 	}
 
-	private static ArrayList<Node> buildBFSPath(Node middleNode) {
+	public static ArrayList<Node> buildBFSPath(Node middleNode) {
 		// stopAllOtherTasks();
 		ArrayList<Node> firstHalfList = CreateListFromBeginToMidle(middleNode);
 		ArrayList<Node> secondHalfList = CreateListFromMiddleToEnd(middleNode);
@@ -58,7 +58,7 @@ public class SearchGrid {
 		return completeList;
 	}
 
-	private static ArrayList<Node> CreateListFromMiddleToEnd(Node middleNode) {
+	public static ArrayList<Node> CreateListFromMiddleToEnd(Node middleNode) {
 		ArrayList<Node> secondHalfList = new ArrayList<Node>();
 		Node actualNode = middleNode.getParentFromEndNode(); 
 		while(actualNode.getParentFromEndNode()!=null){
@@ -69,7 +69,7 @@ public class SearchGrid {
 		
 				
 	}
-	private static ArrayList<Node> CreateListFromBeginToMidle(Node middleNode) {
+	public static ArrayList<Node> CreateListFromBeginToMidle(Node middleNode) {
 		ArrayList<Node> firstHalfList = new ArrayList<Node>();
 		Node actualNode = middleNode; 
 		while(actualNode.getParentFromBeginNode()!=null){
@@ -79,16 +79,16 @@ public class SearchGrid {
 		return reverseList(firstHalfList);
 	}
 
-	private static ArrayList<Node> reverseList(ArrayList<Node> secondHalfList) {
+	public static ArrayList<Node> reverseList(ArrayList<Node> secondHalfList) {
 		ArrayList<Node> reverseList = new ArrayList<Node>();
-		for (int i = secondHalfList.size(); i > 0; i--) {
+		for (int i = secondHalfList.size() -1; i >= 0; i--) {
 			reverseList.add(secondHalfList.get(i));
 		}
-		return null;
+		return reverseList;
 	}
 
 
-	private static void whoIsYourDaddy(Node adjNode, Node principalNode,
+	public static void whoIsYourDaddy(Node adjNode, Node principalNode,
 			String fromWhoInicialNodeComes) {
 		if(fromWhoInicialNodeComes.equals("BEGIN")){
 			adjNode.setParentFromBeginNode(principalNode);
@@ -98,7 +98,7 @@ public class SearchGrid {
 		}
 	}
 
-	private static Queue<Node> findReachablesBrothers(Node principalNode) {
+	public static Queue<Node> findReachablesBrothers(Node principalNode) {
 		Queue<Node> reachablesBrothers = new LinkedList<Node>();
 		Node upBrotherNode = principalNode.IsUpBrotherReachable(principalNode);
 		Node leftBrotherNode = principalNode.IsLeftBrotherReachable(principalNode);
