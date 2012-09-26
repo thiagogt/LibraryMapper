@@ -11,8 +11,10 @@ import javax.management.Query;
 import library.domain.Node;
 import library.mapper.NodeMapper;
 import library.search.SearchGrid;
+import library.utils.GlobalUtils;
 import library.utils.SQLFactory;
 
+import org.apache.tomcat.jni.Global;
 import org.junit.Test;
 
 public class SearchTests {
@@ -94,8 +96,20 @@ public class SearchTests {
 	@Test
 	public void testBfs() throws Throwable{
 		
-		Thread inicialSearch = new Thread();
-		Thread finalSearch = new Thread();
+		SearchGrid inicialSearch = new SearchGrid("BEGIN", 1, 3);
+		SearchGrid finalSearch = new SearchGrid("END", 1, 0);
+		
+		inicialSearch.start();
+		finalSearch.start();
+		
+		while(!GlobalUtils.stopAllOtherTasks);
+		inicialSearch.interrupt();
+		finalSearch.interrupt();
+		
+		for (Node node : GlobalUtils.pathMap) {
+			
+			System.out.println("("+node.getPositionX()+","+node.getPositionY()+")"+" | ");
+		}
 		
 		
 	}

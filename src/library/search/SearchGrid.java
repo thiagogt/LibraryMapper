@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.apache.tomcat.jni.Global;
+
 import library.domain.Node;
 import library.utils.GlobalUtils;
 
@@ -12,11 +14,13 @@ public class SearchGrid extends Thread{
 	private int nodeIndexX;
 	private int nodeIndexY;
 	private String fromWhoInicialNodeComes;
+	private Queue<Node> queueSearch;
 	
 	public SearchGrid(String fromNode, int positionX, int posittionY){
 		this.setNodeIndexX(positionX);
 		this.setNodeIndexY(posittionY);
 		this.setFromWhoInicialNodeComes(fromNode);
+		this.setQueueSearch(new LinkedList<Node>());
 	}
 	
 	public String getFromWhoInicialNodeComes() {
@@ -43,11 +47,19 @@ public class SearchGrid extends Thread{
 		this.nodeIndexY = nodeIndexY;
 	}
 
-	public ArrayList<Node> BreadthFirstSearch( Node inicial, Queue<Node> queue){
+	public Queue<Node> getQueueSearch() {
+		return queueSearch;
+	}
+
+	public void setQueueSearch(Queue<Node> queueSearch) {
+		this.queueSearch = queueSearch;
+	}
+
+	public ArrayList<Node> BreadthFirstSearch( Node inicial){
 		
-		while(!queue.isEmpty()){
+		while(!queueSearch.isEmpty()){
 			try {
-				Node principalNode = queue.remove();
+				Node principalNode = queueSearch.remove();
 				Queue<Node> brothersPrincipalNode = findReachablesBrothers(principalNode);
 				
 				for (Node adjNode : brothersPrincipalNode) {
@@ -68,7 +80,7 @@ public class SearchGrid extends Thread{
 						if(adjNode.getColor().equals("WHITE")){
 							adjNode.setColor("GRAY");
 							adjNode.setPathCost(principalNode.getPathCost()+1);
-							queue.add(adjNode);
+							queueSearch.add(adjNode);
 						}
 						else{
 							if(adjNode.getColor().equals("GRAY")){
@@ -159,7 +171,10 @@ public class SearchGrid extends Thread{
 	}
 	
 	public void run(){
-		
+		Node node = Node.getNodeByPosition(this.nodeIndexX, this.nodeIndexY);
+		queueSearch.add(node);
+		GlobalUtils.pathMap = this.BreadthFirstSearch(node);
+		GlobalUtils.stopAllOtherTasks = true;
 	}
 }
 
