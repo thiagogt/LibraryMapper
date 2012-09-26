@@ -7,7 +7,7 @@ var porcentagemMaxima = 1.1;
 $(function(){
 	$(".createButton").click( function() {
 		
-		$("#mapa").append( "<div class='bloco' id='bloco-"+idBloco+"'><img src=\"armario.svg\" /></div>");
+		$("#mapa").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
 		actualX=$("#bloco-"+idBloco).width();
 		actualY=$("#bloco-"+idBloco).height();
 		$("#bloco-"+idBloco).draggable({ cursor: "crosshair" },
