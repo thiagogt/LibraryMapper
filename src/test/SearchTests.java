@@ -91,6 +91,15 @@ public class SearchTests {
 			System.out.print(node.getPositionX()+","+node.getPositionY() +" - ");
 		}
 	}
+	@Test
+	public void testBfs() throws Throwable{
+		
+		Thread inicialSearch = new Thread();
+		Thread finalSearch = new Thread();
+		
+		
+	}
+
 	
 	
 	

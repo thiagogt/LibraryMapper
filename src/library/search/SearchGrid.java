@@ -5,12 +5,45 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import library.domain.Node;
+import library.utils.GlobalUtils;
 
-public class SearchGrid {
+public class SearchGrid extends Thread{
+	
+	private int nodeIndexX;
+	private int nodeIndexY;
+	private String fromWhoInicialNodeComes;
+	
+	public SearchGrid(String fromNode, int positionX, int posittionY){
+		this.setNodeIndexX(positionX);
+		this.setNodeIndexY(posittionY);
+		this.setFromWhoInicialNodeComes(fromNode);
+	}
+	
+	public String getFromWhoInicialNodeComes() {
+		return fromWhoInicialNodeComes;
+	}
 
-	
-	
-	public static ArrayList<Node> BreadthFirstSearch(String fromWhoInicialNodeComes, Node inicial, Queue<Node> queue){
+	public void setFromWhoInicialNodeComes(String fromWhoInicialNodeComes) {
+		this.fromWhoInicialNodeComes = fromWhoInicialNodeComes;
+	}
+
+	public int getNodeIndexX() {
+		return nodeIndexX;
+	}
+
+	public void setNodeIndexX(int nodeIndexX) {
+		this.nodeIndexX = nodeIndexX;
+	}
+
+	public int getNodeIndexY() {
+		return nodeIndexY;
+	}
+
+	public void setNodeIndexY(int nodeIndexY) {
+		this.nodeIndexY = nodeIndexY;
+	}
+
+	public ArrayList<Node> BreadthFirstSearch( Node inicial, Queue<Node> queue){
 		
 		while(!queue.isEmpty()){
 			try {
@@ -18,15 +51,20 @@ public class SearchGrid {
 				Queue<Node> brothersPrincipalNode = findReachablesBrothers(principalNode);
 				
 				for (Node adjNode : brothersPrincipalNode) {
-					whoIsYourDaddy(adjNode,principalNode,fromWhoInicialNodeComes);
+					whoIsYourDaddy(adjNode,principalNode);
+				
 					//P(adjNode)
 					adjNode.getSemaphore().acquire();
 					adjNode.isInUse++;
 					if(adjNode.estaEmUsoParaleloAgora(adjNode)){//V(adjNode)
 						Node middleNode = adjNode;
 						return buildBFSPath(middleNode);
+						
+						//TODO: resolver  o problema do broadcast de fim
+						
 					}
 					else{
+						
 						if(adjNode.getColor().equals("WHITE")){
 							adjNode.setColor("GRAY");
 							adjNode.setPathCost(principalNode.getPathCost()+1);
@@ -50,7 +88,7 @@ public class SearchGrid {
 	}
 
 	public static ArrayList<Node> buildBFSPath(Node middleNode) {
-		// stopAllOtherTasks();
+		GlobalUtils.stopAllOtherTasks = true;
 		ArrayList<Node> firstHalfList = CreateListFromBeginToMidle(middleNode);
 		ArrayList<Node> secondHalfList = CreateListFromMiddleToEnd(middleNode);
 		firstHalfList.addAll(secondHalfList);
@@ -88,9 +126,8 @@ public class SearchGrid {
 	}
 
 
-	public static void whoIsYourDaddy(Node adjNode, Node principalNode,
-			String fromWhoInicialNodeComes) {
-		if(fromWhoInicialNodeComes.equals("BEGIN")){
+	public  void whoIsYourDaddy(Node adjNode, Node principalNode) {
+		if(this.fromWhoInicialNodeComes.equals("BEGIN")){
 			adjNode.setParentFromBeginNode(principalNode);
 		}
 		else{
@@ -119,6 +156,10 @@ public class SearchGrid {
 		}
 		
 		return reachablesBrothers;
+	}
+	
+	public void run(){
+		
 	}
 }
 

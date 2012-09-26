@@ -144,10 +144,9 @@ public class Node extends Thread{
 	}
 	private Node brotherReachable(Node principalNode, Integer brotherPositionX, Integer brotherPositionY) {
 		
-		NodeMapper bookshelf = SQLFactory.section.getMapper(NodeMapper.class);
+		
 		try {
-			Node brotherNode = new Node();
-			brotherNode = bookshelf.selectByPositionXAndY(1,brotherPositionX,brotherPositionY);
+			Node brotherNode  = getNodeByPosition(brotherPositionX,brotherPositionY);
 			System.out.println(brotherNode.getContentType());
 			if(brotherNode.getContentType().equals("Empty"))
 				try{
@@ -178,6 +177,13 @@ public class Node extends Thread{
 
 	public void setSemaphore(Semaphore semaphore) {
 		this.semaphore = semaphore;
+	}
+
+	public static Node getNodeByPosition( int positionX, int positionY) {
+		
+		NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
+		return nodeMapper.selectByPositionXAndY(GlobalUtils.idLibrary, positionX, positionY);
+		
 	}
 
 	

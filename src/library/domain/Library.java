@@ -8,20 +8,19 @@ public class Library {
     private Integer sizeX;
 
     private Integer sizeY;
-    ArrayList<Bookshelf> bookShelves;
-	ArrayList<QrCodeMark> qrCodesMarks;
-	Node[][] map;
+    private ArrayList<Bookshelf> bookShelves;
+	private ArrayList<QrCodeMark> qrCodesMarks;
+	private Node[][] map;
 	
-	public Library(int newSize_X, int newSize_Y,int totalQRMarkers){
+	public Library(int newSize_X, int newSize_Y){
 		setSizeX(newSize_X);
 		setSizeY(newSize_Y);
-		setMap(new Node[this.sizeX][this.sizeY]);
+		map = new Node[this.sizeX][this.sizeY];
 		
 		for (int i = 0; i < this.sizeX; i++) {
-			for (int j = 0; j < this.sizeY; j++) {
-				this.map[i][j].setContentType("Free");
-				
-				
+			for (int j = 0; j < newSize_Y; j++) {
+				this.map[i][j] = Node.getNodeByPosition(i,j);
+							
 			}
 			
 		}
