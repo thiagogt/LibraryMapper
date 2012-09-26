@@ -5,10 +5,10 @@ var velocidade = 0.01;
 $(function(){
 	$(".createButton").click( function() {
 		
-		$("#DrawArea").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
+		$("body").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
 		actualX=$("#bloco-"+idBloco).width();
 		actualY=$("#bloco-"+idBloco).height();
-		$("#bloco-"+idBloco).draggable({ cursor: "crosshair" },
+		$("#bloco-"+idBloco).draggable({ revert: "invalid" },{ cursor: "crosshair" },
 				{ grid: [ 10,10 ] },
 				{ containment: 'parent'},
 				{drag: function(event, ui) {
@@ -22,16 +22,20 @@ $(function(){
 						//cria o codigo dentro do canvas.....mas tava dando delay e pau
 					}
 			    }
-			}).resizable({ containment: 'parent', scroll: false },
-				{ grid: [ 10,10 ] },
-				{resize: function(event, ui) { 
-					$("#status").text( actualX + ", "+actualY);
-					actualY = $(this).height();
-					actualX = $(this).width();
-			
-				}
 			});
-		
+		$("#DrawArea").droppable({
+				drop: function(event,ui){
+					$("#bloco-"+idBloco).resizable({ containment: "#DrawArea", scroll: false },
+							{ grid: [ 10,10 ] },
+							{resize: function(event, ui) { 
+								$("#status").text( actualX + ", "+actualY);
+								actualY = $(this).height();
+								actualX = $(this).width();
+						
+							}
+						});
+					}
+				});
 		idBloco++;
 	});
 });
