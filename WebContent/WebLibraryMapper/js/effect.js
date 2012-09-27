@@ -18,49 +18,53 @@ $(function(){
 	        
 	    });
 		$("#DrawArea").droppable({
-
+			
             drop: function (e, ui) {
 
                 if ($(ui.draggable)[0].id != "") {
                     x = ui.helper.clone();
-                ui.helper.remove();
-                x.draggable({
-                    helper: 'original',
-                    containment: '#DrawArea',
-                    tolerance: 'fit',
-                    grid: [ 10,10 ],
-                    drag: function(event, ui) {
-    			        // Show the current dragged position of image
-    			        var currentPos = $(this).position();
-    			        $(".label").text("Position: \nLeft: " + currentPos.left + "\nTop: " + currentPos.top);
-    			        actualY = $(this).height();
-    					actualX = $(this).width();
-    					
-    					if(currentPos.left == 100){
-    						//cria o codigo dentro do canvas.....mas tava dando delay e pau
-    					}
-    			    }
-                });
-                x.resizable({
-                	containment: "#DrawArea", 
-                	scroll: false,
-                	grid: [ 10,10 ],
-                	resize: function(event, ui) { 
-						$("#status").text( actualX + ", "+actualY);
-						actualY = $(this).height();
-						actualX = $(this).width();
-				
-					}
-                });
-                x.appendTo('#DrawArea');
-            }
-
+                    
+                    var leftPos = parseInt(ui.offset.left - $(this).offset().left) - parseInt(ui.offset.left - $(this).offset().left)%10;
+                    var topPos =  parseInt(ui.offset.top - $(this).offset().top) -  parseInt(ui.offset.top - $(this).offset().top)%10;
+                    $(x).css("top",topPos);
+                    $(x).css("left",leftPos);
+                      
+                    ui.helper.remove();
+                    x.draggable({
+	                    helper: 'original',
+	                    containment: '#DrawArea',
+	                    tolerance: 'fit',
+	                    grid: [ 10,10 ],
+	                    drag: function(event, ui) {
+	    			        // Show the current dragged position of image
+	    			        var currentPos = $(this).position();
+	    			        $(".label").text("Position: \nLeft: " + currentPos.left + "\nTop: " + currentPos.top);
+	    			        actualY = $(this).height();
+	    					actualX = $(this).width();
+	                    }
+                    });
+                    x.resizable({
+	                	containment: "#DrawArea", 
+	                	scroll: false,
+	                	grid: [ 10,10 ],
+	                	resize: function(event, ui) { 
+							$("#status").text( actualX + ", "+actualY);
+							actualY = $(this).height();
+							actualX = $(this).width();
+					
+						}
+                    });
+                    x.appendTo('#DrawArea');
+                }
             }
         });
 
 
 		idBloco++;
 	});
+	$("#bloco-0").click(function(){
+        alert("#bloco-0 clicado");
+    });
 	
 });
 
