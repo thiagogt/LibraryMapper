@@ -69,8 +69,8 @@
 	/* top: 89px;
 	left: 113px; */
 	border: 2px solid black;
-	left:10px;
-	top:-90px;
+	left:250px;
+	top:-70px;
 	
 }
 
@@ -102,7 +102,28 @@
 #statusObjects h1, p{
 	color:white;
 	position:relative;
+	top:-20px;
+	left:5px;
+	
 	}
+#statusObjects p{
+	top:-30px;
+	left:5px;
+	
+	
+}
+
+#SaveButton{
+	width: 60px;
+	height: 26px;
+	background-color:white;
+	position: relative;
+	/* top: 89px;
+	left: 113px; */
+	border: 2px solid black;
+	left:10px;
+	top:10px;
+}
 .ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
 .ui-resizable { position: absolute;}
 .ui-resizable-handle { position: absolute;font-size: 0.1px; display: block; }

@@ -6,27 +6,34 @@ var VALOR_LEFT_MAXIMO_DO_GRID = 1160;
 var VALOR_TOP_MAXIMO_DO_GRID = 560;
 var VALOR_DE_CADA_QUADRADO = 10;
 
-$(function(){
-	$(".createBackgroundButton").click( function() {
+$(document).ready(function(){
+	
+	$(".bloco").draggable({
+        helper: 'clone',scroll:false,
+        cursor: 'move',
+        tolerance: 'fit',
+        revert: "invalid"
+        
+    });
+//	$(".createBackgroundButton").click( function() {
+//		
+//		$(".menu").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
+//		actualX=$("#bloco-"+idBloco).width();
+//		actualY=$("#bloco-"+idBloco).height();
+//		
 		
-		$(".menu").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
-		actualX=$("#bloco-"+idBloco).width();
-		actualY=$("#bloco-"+idBloco).height();
 		
-		
-		$("#bloco-"+idBloco).draggable({
-	        helper: 'clone',scroll:false,
-	        cursor: 'move',
-	        tolerance: 'fit',
-	        revert: "invalid"
-	        
-	    });
 		$("#DrawArea").droppable({
 			
             drop: function (e, ui) {
-
-                if ($(ui.draggable)[0].id != "") {
-                    x = ui.helper.clone();
+            	
+                if ($(ui.draggable)[0].id == "") {
+                	x = ui.helper.clone();
+                                      
+                    if($(x).attr("id") == undefined){
+                		$(x).attr("id","Map"+idBloco);
+                		idBloco++;
+                	}
                     
                     var leftPos = parseInt(ui.offset.left - $(this).offset().left) - parseInt(ui.offset.left - $(this).offset().left)%10;
                     var topPos =  parseInt(ui.offset.top - $(this).offset().top) -  parseInt(ui.offset.top - $(this).offset().top)%10;
@@ -47,6 +54,8 @@ $(function(){
 	                    grid: [ 10,10 ],
 	                    drag: function(event, ui) {
 	    			        // Show the current dragged position of image
+	                    	
+	                    	
 	    			        var currentPos = $(this).position();
 	    			        $(".label").text("Position: \nLeft: " + currentPos.left + "\nTop: " + currentPos.top);
 	    			        actualY = $(this).height();
@@ -54,10 +63,12 @@ $(function(){
 	                    }
                     });
                     x.resizable({
+                    	
 	                	containment: "#DrawArea", 
 	                	scroll: false,
 	                	grid: [ 10,10 ],
-	                	resize: function(event, ui) { 
+	                	resize: function(event, ui) {
+	                		
 							$("#status").text( actualX + ", "+actualY);
 							actualY = $(this).height();
 							actualX = $(this).width();
@@ -69,14 +80,21 @@ $(function(){
             }
         });
 
-
-		idBloco++;
-	});
-	$("#bloco-0").click(function(){
-        alert("#bloco-0 clicado");
-    });
-	
+		$("#SaveButton").click( function(){
+			
+			for ( i=0;i<idBloco ;i++) {
+				alert(	"Object: "+$(".bloco").eq(i).attr("id")+"\n"+
+						"top: "+$(".bloco").eq(i).position().top+"\n"+
+						"left: "+$(".bloco").eq(i).position().left+"\n"+
+						"height: "+$(".bloco").eq(i).height()+"\n"+
+						"width: "+$(".bloco").eq(i).width()+"\n");
+			}
+		});
+		
 });
+	
+	
+//});
 
 
 // Zoom in and out method by scrolling
@@ -115,6 +133,9 @@ $(function(){
 //		   	}
 //	   });
 //});
+
+
+
 
 function getTransformProperty(element) {
     // Note that in some versions of IE9 it is critical that
