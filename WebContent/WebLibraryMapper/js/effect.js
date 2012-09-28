@@ -2,16 +2,20 @@ var idBloco = 0;
 var actualX=0,actualY=0;
 var escala = 1;
 var velocidade = 0.01;
+var VALOR_LEFT_MAXIMO_DO_GRID = 1160;
+var VALOR_TOP_MAXIMO_DO_GRID = 560;
+var VALOR_DE_CADA_QUADRADO = 10;
+
 $(function(){
-	$(".createButton").click( function() {
+	$(".createBackgroundButton").click( function() {
 		
-		$("body").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
+		$(".menu").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
 		actualX=$("#bloco-"+idBloco).width();
 		actualY=$("#bloco-"+idBloco).height();
 		
 		
 		$("#bloco-"+idBloco).draggable({
-	        helper: 'clone',
+	        helper: 'clone',scroll:false,
 	        cursor: 'move',
 	        tolerance: 'fit',
 	        revert: "invalid"
@@ -26,6 +30,12 @@ $(function(){
                     
                     var leftPos = parseInt(ui.offset.left - $(this).offset().left) - parseInt(ui.offset.left - $(this).offset().left)%10;
                     var topPos =  parseInt(ui.offset.top - $(this).offset().top) -  parseInt(ui.offset.top - $(this).offset().top)%10;
+                    if(leftPos < 0)
+                    	leftPos +=VALOR_DE_CADA_QUADRADO;
+                    if(leftPos > VALOR_LEFT_MAXIMO_DO_GRID)
+                    	leftPos -=VALOR_DE_CADA_QUADRADO;
+                    if(topPos > VALOR_TOP_MAXIMO_DO_GRID)
+                    	topPos -=VALOR_DE_CADA_QUADRADO;
                     $(x).css("top",topPos);
                     $(x).css("left",leftPos);
                       
