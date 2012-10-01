@@ -121,8 +121,8 @@ public class Node extends Thread{
     }
 
 	public boolean estaEmUsoParaleloAgora(Node adjNode) {
-		if(adjNode.getIsInUse() == 2){
-			adjNode.semaphore.release();
+		if(adjNode.getIsInUse() >= 2){
+			
 			return true;
 		}
 		adjNode.semaphore.release();
@@ -147,7 +147,7 @@ public class Node extends Thread{
 		
 		try {
 			Node brotherNode  = getNodeByPosition(brotherPositionX,brotherPositionY);
-			System.out.println(brotherNode.getContentType());
+			
 			if(brotherNode.getContentType().equals("Empty"))
 				try{
 					if(brotherNode.getColor().equals("BLACK"))
@@ -166,7 +166,7 @@ public class Node extends Thread{
 			
 				
 		} catch (Exception e) {
-			System.out.println("Nao existe");
+//			System.out.println("Nao existe");
 			return null;
 		}
 	}

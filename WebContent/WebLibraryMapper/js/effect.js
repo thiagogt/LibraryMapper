@@ -5,6 +5,7 @@ var velocidade = 0.01;
 var VALOR_LEFT_MAXIMO_DO_GRID = 1160;
 var VALOR_TOP_MAXIMO_DO_GRID = 560;
 var VALOR_DE_CADA_QUADRADO = 10;
+var allMapItens = [];
 
 $(document).ready(function(){
 	
@@ -81,13 +82,21 @@ $(document).ready(function(){
         });
 
 		$("#SaveButton").click( function(){
-			
+			var mapObject;	
 			for ( i=0;i<idBloco ;i++) {
-				alert(	"Object: "+$(".bloco").eq(i).attr("id")+"\n"+
-						"top: "+$(".bloco").eq(i).position().top+"\n"+
-						"left: "+$(".bloco").eq(i).position().left+"\n"+
-						"height: "+$(".bloco").eq(i).height()+"\n"+
-						"width: "+$(".bloco").eq(i).width()+"\n");
+				mapObject = new Object();
+				mapObject.id = $(".bloco").eq(i).attr("id");
+				mapObject.top = $(".bloco").eq(i).position().top;
+				mapObject.left = $(".bloco").eq(i).position().left;
+				mapObject.height = $(".bloco").eq(i).height();
+				mapObject.width = $(".bloco").eq(i).width();
+				
+				allMapItens.push(mapObject);
+				alert(	"Object.4: "+allMapItens[i].id+"\n"+
+						"top.4: "+allMapItens[i].top+"\n"+
+						"left.4: "+allMapItens[i].left+"\n"+
+						"height.4: "+allMapItens[i].height+"\n"+
+						"width.4: "+allMapItens[i].width+"\n");
 			}
 		});
 		

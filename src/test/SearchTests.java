@@ -10,6 +10,7 @@ import javax.management.Query;
 
 import library.domain.Node;
 import library.mapper.NodeMapper;
+import library.search.MonitorSearch;
 import library.search.SearchGrid;
 import library.utils.GlobalUtils;
 import library.utils.SQLFactory;
@@ -53,65 +54,60 @@ public class SearchTests {
 //		}
 //	}
 	
-	@Test
-	public void testfindReachablesBrothers(){
-		Queue<Node> queue = SearchGrid.findReachablesBrothers(principalNode);
-		System.out.println("Esses sao os irmaos: ");
-		for (Node node : queue) {
-			System.out.println(node.getContentType() + ", at position : " + node.getPositionX()+","+node.getPositionY() );
-		}
-	}
-	@Test
-	public void testBuidPath(){
-		Node s = new Node();
-		Node node13 = new Node(); 
-		Node node23 = new Node();
-		Node node33 = new Node();
-		Node c = new Node();
-		
-		s = nodeMapper.selectByPositionXAndY(s.getIdLibrary(),0,3);
-		
-		c = nodeMapper.selectByPositionXAndY(c.getIdLibrary(),3,2);
-		
-		node13 = nodeMapper.selectByPositionXAndY(node13.getIdLibrary(),1,3);
-		node13.setParentFromBeginNode(s);
-		
-		node33 = nodeMapper.selectByPositionXAndY(node33.getIdLibrary(),3,3);
-		node33.setParentFromEndNode(c);
-		
-		
-		node23 = nodeMapper.selectByPositionXAndY(node23.getIdLibrary(),2,3);
-		node23.setParentFromBeginNode(node13);
-		node23.setParentFromEndNode(node33);
-		
-		
-		
-		
-		Node middleNode = node23;
-		ArrayList<Node> pathMap = SearchGrid.buildBFSPath(middleNode);
-		for (Node node : pathMap) {
-			System.out.print(node.getPositionX()+","+node.getPositionY() +" - ");
-		}
-	}
+//	@Test
+//	public void testfindReachablesBrothers(){
+//		Queue<Node> queue = SearchGrid.findReachablesBrothers(principalNode);
+//		System.out.println("Esses sao os irmaos: ");
+//		for (Node node : queue) {
+//			System.out.println(node.getContentType() + ", at position : " + node.getPositionX()+","+node.getPositionY() );
+//		}
+//	}
+//	@Test
+//	public void testBuidPath(){
+//		Node s = new Node();
+//		Node node13 = new Node(); 
+//		Node node23 = new Node();
+//		Node node33 = new Node();
+//		Node c = new Node();
+//		
+//		s = nodeMapper.selectByPositionXAndY(s.getIdLibrary(),0,3);
+//		
+//		c = nodeMapper.selectByPositionXAndY(c.getIdLibrary(),3,2);
+//		
+//		node13 = nodeMapper.selectByPositionXAndY(node13.getIdLibrary(),1,3);
+//		node13.setParentFromBeginNode(s);
+//		
+//		node33 = nodeMapper.selectByPositionXAndY(node33.getIdLibrary(),3,3);
+//		node33.setParentFromEndNode(c);
+//		
+//		
+//		node23 = nodeMapper.selectByPositionXAndY(node23.getIdLibrary(),2,3);
+//		node23.setParentFromBeginNode(node13);
+//		node23.setParentFromEndNode(node33);
+//		
+//		
+//		
+//		
+//		Node middleNode = node23;
+//		ArrayList<Node> pathMap = SearchGrid.buildBFSPath(middleNode);
+//		for (Node node : pathMap) {
+//			System.out.print(node.getPositionX()+","+node.getPositionY() +" - ");
+//		}
+//	}
 	@Test
 	public void testBfs() throws Throwable{
 		
-		SearchGrid inicialSearch = new SearchGrid("BEGIN", 1, 3);
-		SearchGrid finalSearch = new SearchGrid("END", 1, 0);
-		
-		inicialSearch.start();
-		finalSearch.start();
-		
-		while(!GlobalUtils.stopAllOtherTasks);
-		inicialSearch.interrupt();
-		finalSearch.interrupt();
-		
-		for (Node node : GlobalUtils.pathMap) {
+		MonitorSearch monitorSearch = new MonitorSearch();
+		monitorSearch.startSearch(0, 0, 1, 3);
+		if(GlobalUtils.pathMap != null){
 			
-			System.out.println("("+node.getPositionX()+","+node.getPositionY()+")"+" | ");
+		
+			for (Node node : GlobalUtils.pathMap) {
+				
+				System.out.print("("+node.getPositionX()+","+node.getPositionY()+")"+" | ");
+			}
+			System.out.println("\nacabou com mapa de tamanho: "+GlobalUtils.pathMap.size());
 		}
-		
-		
 	}
 
 	

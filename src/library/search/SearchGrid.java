@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.apache.commons.digester.xmlrules.FromXmlRuleSet;
 import org.apache.tomcat.jni.Global;
 
 import library.domain.Node;
@@ -60,6 +61,7 @@ public class SearchGrid extends Thread{
 		while(!queueSearch.isEmpty()){
 			try {
 				Node principalNode = queueSearch.remove();
+				
 				Queue<Node> brothersPrincipalNode = findReachablesBrothers(principalNode);
 				
 				for (Node adjNode : brothersPrincipalNode) {
@@ -70,6 +72,7 @@ public class SearchGrid extends Thread{
 					adjNode.isInUse++;
 					if(adjNode.estaEmUsoParaleloAgora(adjNode)){//V(adjNode)
 						Node middleNode = adjNode;
+						System.out.println(fromWhoInicialNodeComes);
 						return buildBFSPath(middleNode);
 						
 						//TODO: resolver  o problema do broadcast de fim
@@ -99,12 +102,24 @@ public class SearchGrid extends Thread{
 		return null;
 	}
 
-	public static ArrayList<Node> buildBFSPath(Node middleNode) {
+	public ArrayList<Node> buildBFSPath(Node middleNode) {
 		GlobalUtils.stopAllOtherTasks = true;
 		ArrayList<Node> firstHalfList = CreateListFromBeginToMidle(middleNode);
+		System.out.println("Comecou a primeira metade.");
+		for (Node principalNodes : firstHalfList) {
+			System.out.print(principalNodes.getPositionX()+" , "+principalNodes.getPositionY()+" - ");
+	}
 		ArrayList<Node> secondHalfList = CreateListFromMiddleToEnd(middleNode);
+	System.out.println("Comecou a segunda metade.");
+		for (Node principalNode : secondHalfList) {
+			System.out.print(principalNode.getPositionX()+" , "+principalNode.getPositionY()+" - ");
+	}
 		firstHalfList.addAll(secondHalfList);
-
+		
+//		for (Node principalNode : firstHalfList) {
+//			System.out.print(principalNode.getPositionX()+" , "+principalNode.getPositionY()+" - ");
+//		}
+		System.out.println("terminou");
 		return firstHalfList;
 	}
 
@@ -171,9 +186,11 @@ public class SearchGrid extends Thread{
 	}
 	
 	public void run(){
-		Node node = Node.getNodeByPosition(this.nodeIndexX, this.nodeIndexY);
-		queueSearch.add(node);
-		GlobalUtils.pathMap = this.BreadthFirstSearch(node);
+		Node firstNode = Node.getNodeByPosition(this.nodeIndexX, this.nodeIndexY);
+		queueSearch.add(firstNode);
+		GlobalUtils.pathMap = new ArrayList<Node> (); 
+		GlobalUtils.pathMap = this.BreadthFirstSearch(firstNode);
+			
 		GlobalUtils.stopAllOtherTasks = true;
 	}
 }
