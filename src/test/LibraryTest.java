@@ -12,13 +12,13 @@ public class LibraryTest {
 
 	@Test
 	public void testLibraryConstructor() {
-		Library library = new Library(5,4);
-		Node[][] map = library.getMap();
+		Library.Mapping(5,4);
+		
 		String type;
 		for (int i = 0; i < 5; i++) {
 				System.out.println("");
 			for (int j = 0; j < 4; j++) {
-				type = map[i][j].getContentType();
+				type = Library.map[i][j].getContentType();
 				
 				if(type.equals("Empty"))
 					System.out.print("0"+" | ");

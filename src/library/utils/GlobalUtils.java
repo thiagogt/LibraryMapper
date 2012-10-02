@@ -2,6 +2,7 @@ package library.utils;
 
 import java.util.ArrayList;
 
+import library.domain.Library;
 import library.domain.Node;
 
 
@@ -14,4 +15,5 @@ public class GlobalUtils {
 	public static Integer idLibrary = 1;
 	public static boolean stopAllOtherTasks = false;
 	public static ArrayList<Node> pathMap;
+	
 }

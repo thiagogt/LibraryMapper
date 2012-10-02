@@ -21,6 +21,15 @@ public class Node extends Thread{
 	public int isInUse;
 	private Semaphore semaphore;
 	private String color;
+	private String whoMarkedThisNode;
+	public String getWhoMarkedThisNode() {
+		return whoMarkedThisNode;
+	}
+
+	public void setWhoMarkedThisNode(String whoMarkedThisNode) {
+		this.whoMarkedThisNode = whoMarkedThisNode;
+	}
+
 	private int pathCost;
 
 	public Node(){
@@ -182,7 +191,9 @@ public class Node extends Thread{
 	public static Node getNodeByPosition( int positionX, int positionY) {
 		
 		NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
-		return nodeMapper.selectByPositionXAndY(GlobalUtils.idLibrary, positionX, positionY);
+		Node node = new Node();
+		node = nodeMapper.selectByPositionXAndY(GlobalUtils.idLibrary, positionX, positionY);
+		return node;
 		
 	}
 
