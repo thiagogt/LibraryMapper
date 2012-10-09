@@ -7,9 +7,19 @@ var VALOR_TOP_MAXIMO_DO_GRID = 560;
 var VALOR_DE_CADA_QUADRADO = 10;
 var allMapItens = [];
 
+blocoNumbers =1;
+qrCodesNumbers = 1;
+
 $(document).ready(function(){
 	
 	$(".bloco").draggable({
+        helper: 'clone',scroll:false,
+        cursor: 'move',
+        tolerance: 'fit',
+        revert: "invalid"
+        
+    });
+	$(".qrCode").draggable({
         helper: 'clone',scroll:false,
         cursor: 'move',
         tolerance: 'fit',
@@ -85,14 +95,35 @@ $(document).ready(function(){
 			var mapObject;	
 			for ( i=0;i<idBloco ;i++) {
 				mapObject = new Object();
-				mapObject.id = $(".bloco").eq(i).attr("id");
-				mapObject.top = $(".bloco").eq(i).position().top;
-				mapObject.left = $(".bloco").eq(i).position().left;
-				mapObject.height = $(".bloco").eq(i).height();
-				mapObject.width = $(".bloco").eq(i).width();
-				
+				if($(".bloco").length > blocoNumbers){
+					
+					var tempType = $(".bloco").eq(i).attr("class").split(' ');
+					mapObject.type = tempType[0]; 
+					mapObject.id = $(".bloco").eq(i).attr("id");
+					mapObject.top = $(".bloco").eq(i).position().top;
+					mapObject.left = $(".bloco").eq(i).position().left;
+					mapObject.height = $(".bloco").eq(i).height();
+					mapObject.width = $(".bloco").eq(i).width();
+					blocoNumbers++;
+					alert(blocoNumbers+" bn and lentgh "+$(".bloco").length );
+				}
+				else{
+					if($(".qrCode").length > qrCodesNumbers){
+						
+						var tempType = $(".qrCode").eq(i).attr("class").split(' ');
+						mapObject.type = tempType[0]; 
+						mapObject.id = $(".qrCode").eq(i).attr("id");
+						mapObject.top = $(".qrCode").eq(i).position().top;
+						mapObject.left = $(".qrCode").eq(i).position().left;
+						mapObject.height = $(".qrCode").eq(i).height();
+						mapObject.width = $(".qrCode").eq(i).width();
+						qrCodesNumbers++;
+						alert(qrCodesNumbers+" qr and lentgh "+$(".qrCode").length );
+					}
+				}
 				allMapItens.push(mapObject);
 				alert(	"Object.4: "+allMapItens[i].id+"\n"+
+						"type.4: "+allMapItens[i].type+"\n"+
 						"top.4: "+allMapItens[i].top+"\n"+
 						"left.4: "+allMapItens[i].left+"\n"+
 						"height.4: "+allMapItens[i].height+"\n"+

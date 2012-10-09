@@ -73,7 +73,18 @@
 	top:-70px;
 	
 }
-
+.qrCode{
+	width: 26px;
+	height: 26px;
+	background-color:white;
+	position: relative;
+	/* top: 89px;
+	left: 113px; */
+	border: 4px groove black;
+	left:280px;
+	top:-70px;
+		
+}
 .label{
 	position: relative;
 	top: 1px;
