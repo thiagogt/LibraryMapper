@@ -7,8 +7,8 @@ var VALOR_TOP_MAXIMO_DO_GRID = 560;
 var VALOR_DE_CADA_QUADRADO = 10;
 var allMapItens = [];
 
-blocoNumbers =1;
-qrCodesNumbers = 1;
+blocoNumbers =0;
+qrCodesNumbers = 0;
 
 $(document).ready(function(){
 	
@@ -92,48 +92,66 @@ $(document).ready(function(){
         });
 
 		$("#SaveButton").click( function(){
-			var mapObject;	
-			for ( i=0;i<idBloco ;i++) {
-				mapObject = new Object();
-				if($(".bloco").length > blocoNumbers){
-					
-					var tempType = $(".bloco").eq(i).attr("class").split(' ');
-					mapObject.type = tempType[0]; 
-					mapObject.id = $(".bloco").eq(i).attr("id");
-					mapObject.top = $(".bloco").eq(i).position().top;
-					mapObject.left = $(".bloco").eq(i).position().left;
-					mapObject.height = $(".bloco").eq(i).height();
-					mapObject.width = $(".bloco").eq(i).width();
-					blocoNumbers++;
-					alert(blocoNumbers+" bn and lentgh "+$(".bloco").length );
-				}
-				else{
-					if($(".qrCode").length > qrCodesNumbers){
-						
-						var tempType = $(".qrCode").eq(i).attr("class").split(' ');
-						mapObject.type = tempType[0]; 
-						mapObject.id = $(".qrCode").eq(i).attr("id");
-						mapObject.top = $(".qrCode").eq(i).position().top;
-						mapObject.left = $(".qrCode").eq(i).position().left;
-						mapObject.height = $(".qrCode").eq(i).height();
-						mapObject.width = $(".qrCode").eq(i).width();
-						qrCodesNumbers++;
-						alert(qrCodesNumbers+" qr and lentgh "+$(".qrCode").length );
-					}
-				}
-				allMapItens.push(mapObject);
-				alert(	"Object.4: "+allMapItens[i].id+"\n"+
-						"type.4: "+allMapItens[i].type+"\n"+
-						"top.4: "+allMapItens[i].top+"\n"+
-						"left.4: "+allMapItens[i].left+"\n"+
-						"height.4: "+allMapItens[i].height+"\n"+
-						"width.4: "+allMapItens[i].width+"\n");
-			}
+			var mapObject;
+			
+			putBlocoOnQuery();
+			putQrCodeOnQuery();
+			printAllMapItens();
 		});
 		
 });
+function printAllMapItens(){
+
+	for ( var i=0;i<idBloco ;i++) {
+	alert(	"Object.id: "+allMapItens[i].id+"\n"+
+			"type: "+allMapItens[i].type+"\n"+
+			"top: "+allMapItens[i].top+"\n"+
+			"left: "+allMapItens[i].left+"\n"+
+			"height: "+allMapItens[i].height+"\n"+
+			"width: "+allMapItens[i].width+"\n");
+	
+	}
+}
+function putBlocoOnQuery(){
+	var mapObject;
 	
 	
+	if($(".bloco").length-1 > blocoNumbers){
+	for ( var i=blocoNumbers;i<$(".bloco").length-1 ;i++) {
+			
+			mapObject = new Object();
+			var tempType = $(".bloco").eq(i).attr("class").split(' ');
+			mapObject.type = tempType[0]; 
+			mapObject.id = $(".bloco").eq(i).attr("id");
+			mapObject.top = $(".bloco").eq(i).position().top;
+			mapObject.left = $(".bloco").eq(i).position().left;
+			mapObject.height = $(".bloco").eq(i).height();
+			mapObject.width = $(".bloco").eq(i).width();
+			blocoNumbers++;
+			allMapItens.push(mapObject);
+		}
+	}
+	
+}
+	
+function putQrCodeOnQuery(){
+	var mapObject;
+	if($(".qrCode").length -1 > qrCodesNumbers){
+		for ( var i=qrCodesNumbers;i<$(".qrCode").length -1 ;i++) {
+			mapObject = new Object();
+			var tempType = $(".qrCode").eq(i).attr("class").split(' ');
+			mapObject.type = tempType[0]; 
+			mapObject.id = $(".qrCode").eq(i).attr("id");
+			mapObject.top = $(".qrCode").eq(i).position().top;
+			mapObject.left = $(".qrCode").eq(i).position().left;
+			mapObject.height = $(".qrCode").eq(i).height();
+			mapObject.width = $(".qrCode").eq(i).width();
+			qrCodesNumbers++;
+			allMapItens.push(mapObject);
+		}
+	}
+	
+}
 //});
 
 
