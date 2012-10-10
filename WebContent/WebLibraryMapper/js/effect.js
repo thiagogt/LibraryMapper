@@ -92,14 +92,20 @@ $(document).ready(function(){
         });
 
 		$("#SaveButton").click( function(){
-			var mapObject;
-			
+						
 			putBlocoOnQuery();
 			putQrCodeOnQuery();
 			printAllMapItens();
+			
+			sendQueryToBean();
+			
 		});
 		
 });
+function sendQueryToBean(){
+	document.getElementById('MapForm:hiddenInput').value = JSON.stringify(allMapItens);
+}
+
 function printAllMapItens(){
 
 	for ( var i=0;i<idBloco ;i++) {
@@ -128,6 +134,7 @@ function putBlocoOnQuery(){
 			mapObject.height = $(".bloco").eq(i).height();
 			mapObject.width = $(".bloco").eq(i).width();
 			blocoNumbers++;
+			
 			allMapItens.push(mapObject);
 		}
 	}
@@ -139,9 +146,10 @@ function putQrCodeOnQuery(){
 	if($(".qrCode").length -1 > qrCodesNumbers){
 		for ( var i=qrCodesNumbers;i<$(".qrCode").length -1 ;i++) {
 			mapObject = new Object();
+			mapObject.id = $(".qrCode").eq(i).attr("id");
 			var tempType = $(".qrCode").eq(i).attr("class").split(' ');
 			mapObject.type = tempType[0]; 
-			mapObject.id = $(".qrCode").eq(i).attr("id");
+			
 			mapObject.top = $(".qrCode").eq(i).position().top;
 			mapObject.left = $(".qrCode").eq(i).position().left;
 			mapObject.height = $(".qrCode").eq(i).height();
