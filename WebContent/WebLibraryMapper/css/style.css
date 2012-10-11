@@ -80,7 +80,8 @@
 	position: relative;
 	/* top: 89px;
 	left: 113px; */
-	border: 4px groove black;
+	/*Caso resolva trocar a largura da borda, arrumar o effect tb, pq ficara errado no mapa*/
+	border: 2px solid black;
 	left:380px;
 	top:-110px;
 		
@@ -92,7 +93,8 @@
 	position: relative;
 	/* top: 89px;
 	left: 113px; */
-	border: 4px groove black;
+	/*Caso resolva trocar a largura da borda, arrumar o effect tb, pq ficara errado no mapa*/
+	border: 2px groove black;
 	left:480px;
 	top:-145px;
 		
@@ -110,6 +112,7 @@
 	width:1186px;
 	position: relative;
 	top: 0px;
+	/*Caso resolva trocar a largura da borda, arrumar o effect tb, pq ficara errado no mapa*/
 	border: 2px solid black;
 	float:left;
 }

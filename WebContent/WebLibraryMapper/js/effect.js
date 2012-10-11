@@ -2,8 +2,8 @@ var idBloco = 0;
 var actualX=0,actualY=0;
 var escala = 1;
 var velocidade = 0.01;
-var VALOR_LEFT_MAXIMO_DO_GRID = 1160;
-var VALOR_TOP_MAXIMO_DO_GRID = 560;
+var VALOR_LEFT_MAXIMO_DO_GRID = 1170;
+var VALOR_TOP_MAXIMO_DO_GRID = 590;
 var VALOR_DE_CADA_QUADRADO = 10;
 var allMapItens = [];
 
@@ -55,19 +55,25 @@ $(document).ready(function(){
                     
                     var leftPos = parseInt(ui.offset.left - $(this).offset().left) - parseInt(ui.offset.left - $(this).offset().left)%10;
                     var topPos =  parseInt(ui.offset.top - $(this).offset().top) -  parseInt(ui.offset.top - $(this).offset().top)%10;
-                    $(".label").text("Left: " + leftPos + "\nTop: " + topPos);
-			        actualizeSize(x);
+                    
                    
-			        if(leftPos < 0)
+			        while(leftPos < 0)
                     	leftPos +=VALOR_DE_CADA_QUADRADO;
-                    if(leftPos > VALOR_LEFT_MAXIMO_DO_GRID)
+                    while(topPos < 0 )
+                    	topPos +=VALOR_DE_CADA_QUADRADO;
+                    while(leftPos + x.width() >VALOR_LEFT_MAXIMO_DO_GRID)
                     	leftPos -=VALOR_DE_CADA_QUADRADO;
-                    if(topPos > VALOR_TOP_MAXIMO_DO_GRID)
+                    while(topPos + x.height() > VALOR_TOP_MAXIMO_DO_GRID)
                     	topPos -=VALOR_DE_CADA_QUADRADO;
+                    
                     $(x).css("top",topPos);
                     $(x).css("left",leftPos);
-                      
-                    ui.helper.remove();
+                    
+                    $(".label").text("Left: " + leftPos + "\nTop: " + topPos);
+			        actualizeSize(x);
+                    
+			        ui.helper.remove();
+                    
                     x.draggable({
 	                    helper: 'original',
 	                    containment: '#DrawArea',
