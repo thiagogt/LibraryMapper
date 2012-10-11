@@ -26,6 +26,13 @@ $(document).ready(function(){
         revert: "invalid"
         
     });
+	$(".shelf").draggable({
+        helper: 'clone',scroll:false,
+        cursor: 'move',
+        tolerance: 'fit',
+        revert: "invalid"
+        
+    });
 //	$(".createBackgroundButton").click( function() {
 //		
 //		$(".menu").append( "<div class='bloco' id='bloco-"+idBloco+"'></div>");
@@ -37,10 +44,10 @@ $(document).ready(function(){
 		$("#DrawArea").droppable({
 			
             drop: function (e, ui) {
-            	
+            	            	
                 if ($(ui.draggable)[0].id == "") {
                 	x = ui.helper.clone();
-                                      
+                	
                     if($(x).attr("id") == undefined){
                 		$(x).attr("id","Map"+idBloco);
                 		idBloco++;
@@ -48,7 +55,10 @@ $(document).ready(function(){
                     
                     var leftPos = parseInt(ui.offset.left - $(this).offset().left) - parseInt(ui.offset.left - $(this).offset().left)%10;
                     var topPos =  parseInt(ui.offset.top - $(this).offset().top) -  parseInt(ui.offset.top - $(this).offset().top)%10;
-                    if(leftPos < 0)
+                    $(".label").text("Left: " + leftPos + "\nTop: " + topPos);
+			        actualizeSize(x);
+                   
+			        if(leftPos < 0)
                     	leftPos +=VALOR_DE_CADA_QUADRADO;
                     if(leftPos > VALOR_LEFT_MAXIMO_DO_GRID)
                     	leftPos -=VALOR_DE_CADA_QUADRADO;
@@ -65,12 +75,10 @@ $(document).ready(function(){
 	                    grid: [ 10,10 ],
 	                    drag: function(event, ui) {
 	    			        // Show the current dragged position of image
-	                    	
-	                    	
+	                    		                    	
 	    			        var currentPos = $(this).position();
-	    			        $(".label").text("Position: \nLeft: " + currentPos.left + "\nTop: " + currentPos.top);
-	    			        actualY = $(this).height();
-	    					actualX = $(this).width();
+	    			        $(".label").text("Left: " + currentPos.left + "\nTop: " + currentPos.top);
+	    			        actualizeSize(this);
 	                    }
                     });
                     x.resizable({
@@ -79,11 +87,8 @@ $(document).ready(function(){
 	                	scroll: false,
 	                	grid: [ 10,10 ],
 	                	resize: function(event, ui) {
-	                		
-							$("#status").text( actualX + ", "+actualY);
-							actualY = $(this).height();
-							actualX = $(this).width();
-					
+	                		actualizeSize(this);
+												
 						}
                     });
                     x.appendTo('#DrawArea');
@@ -92,16 +97,24 @@ $(document).ready(function(){
         });
 
 		$("#SaveButton").click( function(){
-						
-			putBlocoOnQuery();
-			putQrCodeOnQuery();
-			printAllMapItens();
 			
-			sendQueryToBean();
+			
+				putBlocoOnQuery();
+				putQrCodeOnQuery();
+				printAllMapItens();
+				
+				sendQueryToBean();
+			
 			
 		});
 		
 });
+function actualizeSize(x){
+	actualY = $(x).height();
+	actualX = $(x).width();
+	$("#status").text( actualX + ", "+actualY);
+}
+
 function sendQueryToBean(){
 	document.getElementById('MapForm:hiddenInput').value = JSON.stringify(allMapItens);
 }

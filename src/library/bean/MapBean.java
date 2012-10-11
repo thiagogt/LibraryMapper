@@ -34,7 +34,7 @@ public class MapBean extends HttpServlet{
 	int left;
 	int heigth;
 	int width;
-	String ListenConection;
+	String mapItens;
 	
 	public MapBean() {
 		
@@ -47,7 +47,7 @@ public class MapBean extends HttpServlet{
 		this.left = left2;
 		this.heigth = heigth2;
 		this.width = width2;
-		this.ListenConection = null;
+		this.mapItens = null;
 	}
 	
 	public String getId() {
@@ -81,13 +81,14 @@ public class MapBean extends HttpServlet{
 		this.width = width;
 	}
 	
-	public String getListenConection(){
+	public String getMapItens(){
 		System.out.println("olaaaaa get");
 		return null;
 	}
 	
-	public void setListenConection(String in) throws IOException{
-					Reader readerString = new StringReader(in);
+	public void setMapItens(String in) throws IOException{
+				  
+				 Reader readerString = new StringReader(in);
 			      JsonReader reader = new JsonReader(readerString);
 			      List<MapBean> list= readMessagesArray(reader);
 			      for (MapBean mapBean : list) {

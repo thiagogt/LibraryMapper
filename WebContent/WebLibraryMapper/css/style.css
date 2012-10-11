@@ -1,11 +1,11 @@
 .bodyMap{
-	width: 1208px;
+	width: 1190px;
 	height: 608px;	
 	background-color: gray;
 	border: 2px solid black;
 	position: relative;
 	top: 50px;
-	left: 10px;
+	
 	
 }
 
@@ -31,14 +31,14 @@
 }
 
 .canvas{
-	width: 1206px;
+	width: 1188px;
 	height: 600px;
 	position: relative;
 	
 }
 
 #map.canvas{
-	width: 1204px;
+	width: 1185px;
 	height: 604px;
 	background-color:black;
 	/* background-image:url('../images/grade.png') ; */ 
@@ -47,7 +47,7 @@
 	border: 2px solid gray;
 }
 #DrawArea.canvas{
-	width: 1190px;
+	width: 1170px;
 	height: 590px;
 	background-image:url('../images/grade.png');
 	top: 7px;
@@ -85,6 +85,18 @@
 	top:-110px;
 		
 }
+.shelf{
+	width: 26px;
+	height: 26px;
+	background-color:red;
+	position: relative;
+	/* top: 89px;
+	left: 113px; */
+	border: 4px groove black;
+	left:480px;
+	top:-145px;
+		
+}
 .label{
 	position: relative;
 	top: 1px;
@@ -95,7 +107,7 @@
 .menu{
 	background-color:gray; 
 	height: 100px;
-	width:1204px;
+	width:1186px;
 	position: relative;
 	top: 0px;
 	border: 2px solid black;
@@ -118,7 +130,7 @@
 	
 	}
 #statusObjects p{
-	top:-30px;
+	top:-40px;
 	left:5px;
 	
 	
