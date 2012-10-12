@@ -8,6 +8,8 @@ var VALOR_DE_CADA_QUADRADO = 10;
 var allMapItens = [];
 
 blocoNumbers =0;
+forbiddenNumbers = 0;
+shelfNumbers = 0;
 qrCodesNumbers = 0;
 
 $(document).ready(function(){
@@ -27,6 +29,13 @@ $(document).ready(function(){
         
     });
 	$(".shelf").draggable({
+        helper: 'clone',scroll:false,
+        cursor: 'move',
+        tolerance: 'fit',
+        revert: "invalid"
+        
+    });
+	$(".forbidden").draggable({
         helper: 'clone',scroll:false,
         cursor: 'move',
         tolerance: 'fit',
@@ -107,6 +116,8 @@ $(document).ready(function(){
 			
 				putBlocoOnQuery();
 				putQrCodeOnQuery();
+				putShelfOnQuery();
+				putForbiddenOnQuery();
 				printAllMapItens();
 				
 				sendQueryToBean();
@@ -136,6 +147,45 @@ function printAllMapItens(){
 			"width: "+allMapItens[i].width+"\n");
 	
 	}
+}
+function putForbiddenOnQuery(){
+	if($(".forbidden").length-1 > forbiddenNumbers){
+		for ( var i=forbiddenNumbers;i<$(".forbidden").length-1 ;i++) {
+				
+				mapObject = new Object();
+				var tempType = $(".forbidden").eq(i).attr("class").split(' ');
+				mapObject.type = tempType[0]; 
+				mapObject.id = $(".forbidden").eq(i).attr("id");
+				mapObject.top = $(".forbidden").eq(i).position().top;
+				mapObject.left = $(".forbidden").eq(i).position().left;
+				mapObject.height = $(".forbidden").eq(i).height();
+				mapObject.width = $(".forbidden").eq(i).width();
+				forbiddenNumbers++;
+				
+				allMapItens.push(mapObject);
+		}
+	}
+	
+}
+
+function putShelfOnQuery(){
+	if($(".shelf").length-1 > shelfNumbers){
+		for ( var i=shelfNumbers;i<$(".shelf").length-1 ;i++) {
+				
+				mapObject = new Object();
+				var tempType = $(".shelf").eq(i).attr("class").split(' ');
+				mapObject.type = tempType[0]; 
+				mapObject.id = $(".shelf").eq(i).attr("id");
+				mapObject.top = $(".shelf").eq(i).position().top;
+				mapObject.left = $(".shelf").eq(i).position().left;
+				mapObject.height = $(".shelf").eq(i).height();
+				mapObject.width = $(".shelf").eq(i).width();
+				shelfNumbers++;
+				
+				allMapItens.push(mapObject);
+		}
+	}
+	
 }
 function putBlocoOnQuery(){
 	var mapObject;

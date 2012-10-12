@@ -1,10 +1,13 @@
 package test;
 
 import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 import library.utils.GlobalUtils;
 import library.utils.ServiceWeb;
 
-import org.junit.Test;
+
 
 public class ServiceWebTest {
 
