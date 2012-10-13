@@ -1,0 +1,19 @@
+#searchForm{
+	position: relative;
+	
+	text-align: center;
+}
+#searchForm h2{
+	font-size: 80px;
+}
+
+.searchField{
+	width:650px;
+	height: 50px;
+	font-size: 40px;
+}
+.buttonClass{
+	width:150px;
+	height: 50px;
+	
+}
