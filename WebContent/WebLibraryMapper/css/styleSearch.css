@@ -1,6 +1,6 @@
 #searchForm{
 	position: relative;
-	
+	top:100px;
 	text-align: center;
 }
 #searchForm h2{
@@ -8,12 +8,25 @@
 }
 
 .searchField{
-	width:650px;
-	height: 50px;
-	font-size: 40px;
+	width:750px;
+	height: 100px;
+	font-size: 60px;
 }
-.buttonClass{
-	width:150px;
-	height: 50px;
+#searchButton{
+	width:270px;
+	height: 150px;
+	font-size: 60px;
+	left:100px;
+	font-family:Roman;
+	color:  #481925;
+	position:relative;
+	left:300px;
 	
+}
+.footer ,.push {
+position:relative;	
+height: 4em;
+top:-130px;
+left:80px;
+
 }
