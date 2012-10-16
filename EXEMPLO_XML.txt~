@@ -1,0 +1,233 @@
+<response>
+   <resultados>
+     <obras>
+      <total>8</total>
+         <livro>
+            <id_obra>22007</id_obra>
+            <titulo>Proyecto de una matriz de componentes</titulo>
+            <subtitulos/>
+            <autores>
+                  <autor>Diaz, Pedro Cuervo</autor>
+                  <autor>Lopez, Alvaro Gustavo</autor>
+                  <autor>Kestelboim, Augusto Gabariel</autor>
+            </autores>
+            <editoras>
+                  <editora>EBAI</editora>
+            </editoras>
+            <volume></volume>
+            <assuntos>
+                  <assunto>QA732.2 - Arquitetura e Organiza��o de Computadores &gt; Componentes e Circuitos</assunto>
+            </assuntos>
+            <ano_edicao>1993</ano_edicao>
+            <eventos>
+                  <evento>Escola Brasileiro-Argentina de Inform�tica, 6�, Cordoba, AR, 1993</evento>
+            </eventos>
+            <exemplares>
+                  <exemplar>
+                       <numero>1</numero>
+                       <chamada>QA732.2 D542p e.1</chamada>
+                  </exemplar>
+                  <exemplar>
+                       <numero>2</numero>
+                       <chamada>QA732.2 D542p e.2</chamada>
+                  </exemplar>
+            </exemplares>
+            <status>
+                  <id_status>2</id_status>
+            </status>
+          </livro>
+
+
+
+
+
+		<livro>
+			<id_obra>8963</id_obra>
+			<titulo>Matriz de green para sistemas uniformemente hiperbolicos</titulo>
+			<subtitulos/>
+			<autores>
+				<autor>Avila, Geraldo Severo de Souza</autor>
+			</autores>
+			<editoras>
+				<editora>IPM-USP</editora>
+			</editoras>
+			<volume></volume>
+			<assuntos>
+				<assunto>QA340 - Equa��es Diferenciais Parciais</assunto>
+			</assuntos>
+			<ano_edicao>1966</ano_edicao>
+			<eventos/>
+			<exemplares>
+				<exemplar>
+					<numero>1</numero>
+					<chamada>QA340 A958m</chamada>
+				</exemplar>
+			</exemplares>
+			<status>
+				<id_status>2</id_status>
+			</status>
+		</livro>
+
+
+
+		<livro>
+			<id_obra>42367</id_obra>
+			<titulo>Estudo da matriz de Hasse-Witt por m�todos locais</titulo>
+			<subtitulos>
+				<subtitulo>Paulo Viana</subtitulo>
+			</subtitulos>
+			<autores>
+				<autor>Viana, Paulo</autor>
+			</autores>	
+			<editoras>
+				<editora>IMPA</editora>
+			</editoras>
+			<volume></volume>
+			<assuntos/>
+			<ano_edicao>1986</ano_edicao>
+			<eventos/>
+			<exemplares>
+				<exemplar>
+					<numero>1</numero>
+					<chamada>S I43f v.13</chamada>
+				</exemplar>
+			</exemplares>
+			<status>
+				<id_status>2</id_status>
+			</status>
+		</livro>
+
+
+		<livro>
+			<id_obra>45368</id_obra>
+			<titulo>Novas t�cnicas para analisadores sint�ticos tipo matriz de transi��o</titulo>
+			<subtitulos/>
+			<autores>
+				<autor>Simone, Estevam Gilberto de</autor>
+			</autores>	
+			<editoras>
+				<editora>s.n.</editora>
+			</editoras>
+			<volume></volume>
+			<assuntos>
+				<assunto>QA764 - Montadores e Compiladores &gt; An�lise Sint�tica de Linguagens Determin�sticas</assunto>
+			</assuntos>
+			<ano_edicao>1980</ano_edicao>
+			<eventos/>
+			<exemplares>
+				<exemplar>
+					<numero>1</numero>
+					<chamada>QA764.T S598n</chamada>
+				</exemplar>
+			</exemplares>
+			<status>
+				<id_status>2</id_status>
+			</status>
+		</livro>
+
+
+
+
+		<livro>
+			<id_obra>52462</id_obra>
+			<titulo>Logicomix</titulo>
+			<subtitulos>
+				<subtitulo>uma jornada  �pica em busca da verdade</subtitulo>
+			</subtitulos>
+			<autores>
+				<autor>Doxiadis, Apostolos</autor>
+				<autor>Papadimitriou, Christos H.</autor>
+				<autor>Santos, Alexandre Boide dos</autor>
+				<autor>Cuter, Jo�o Virg�lio Gallerani</autor>
+			</autores>
+			<editoras>
+				<editora>WMF Martins Fontes</editora>
+			</editoras>
+			<volume></volume>
+			<assuntos>
+				<assunto>QA27.L - HIST�RIA DA MATEM�TICA &gt; Por Especialidades &gt; L�gica Matem�tica</assunto>
+			</assuntos>
+			<ano_edicao>2011</ano_edicao>
+			<eventos/>
+			<exemplares>
+				<exemplar>
+					<numero>1</numero>
+					<chamada>REF. QA27.L D752LP</chamada>
+				</exemplar>
+			</exemplares>
+			<status>
+				<id_status>2</id_status>
+			</status>
+		</livro>
+
+
+
+	<livro>
+		<id_obra>41252</id_obra>
+		<titulo>Regionaliza��o da matriz de insumo-produto para o estado de S�o Paulo</titulo>
+		<subtitulos/>
+		<autores>
+			<autor>Stern, Julio Michael</autor>
+		</autores>
+		<editoras>
+			<editora>IME-USP</editora>
+		</editoras>
+		<volume></volume>
+		<assuntos>
+			<assunto>QA700 - Computa��o</assunto>
+		</assuntos>
+		<ano_edicao>1992</ano_edicao>
+		<eventos/>
+		<exemplares>
+			<exemplar>
+				<numero>1</numero>
+				<chamada>QA700.RT I59c 1992 v.05 e.1</chamada>
+			</exemplar>
+			<exemplar>
+				<numero>2</numero>
+				<chamada>QA700.RT I59c 1992 v.05 e.2</chamada>
+			</exemplar>
+		</exemplares>
+		<status>
+			<id_status>2</id_status>
+		</status>
+	</livro>
+
+
+
+	<livro>	
+		<id_obra>48931</id_obra>
+		<titulo>To infinity and beyond!</titulo>
+		<subtitulos>
+			<subtitulo>the story of pixar animation studios</subtitulo>
+		</subtitulos>
+		<autores>
+			<autor>Paik, Karen</autor><autor>Iwerks, Leslie</autor>
+			<autor>Lasseter, John</autor>
+			<autor>Jobs, Steve</autor>	
+			<autor>Catmull, Ed</autor>
+		</autores>
+		<editoras>
+			<editora>Chronicle Books</editora>
+		</editoras>
+		<volume></volume>
+		<assuntos>
+			<assunto>QA862 - Processamento Gr�fico &gt; Computa��o Gr�fica</assunto>
+		</assuntos>
+		<ano_copyright>c2007</ano_copyright>
+		<eventos/>
+		<exemplares>
+			<exemplar>
+				<numero>1</numero>
+				<chamada>REF. QA862 P142i</chamada>
+			</exemplar>
+		</exemplares>
+		<status>
+			<id_status>2</id_status>
+		</status>
+	</livro>
+
+
+
+
+<livro><id_obra>51702</id_obra><titulo>Matriz de covari�ncias de segunda ordem do estimador de m�xima verossimilhan�a corrigido pelo vi�s em modelos n�o lineares da fam�lia exponencial</titulo><subtitulos/><autores><autor>Magalh�es, Tiago Maia</autor><autor>Botter, Denise Aparecida</autor></autores><editoras><editora>s.n.</editora></editoras><volume></volume><assuntos><assunto>QA277.24 - Infer�ncia Estat�stica &gt; Infer�ncia Param�trica</assunto></assuntos><ano_edicao>2011</ano_edicao><eventos/><exemplares><exemplar><numero>1</numero><chamada>IME-T QA277.24.T M188m e.1</chamada></exemplar><exemplar><numero>2</numero><chamada>QA277.24.T M188m e.2</chamada></exemplar></exemplares><status><id_status>2</id_status></status></livro></obras></resultados></response>

@@ -74,6 +74,16 @@ public class ServiceWeb {
 		return sb.toString();
 	}
 	
+	public static String querySearchOnColmeia(String query) throws Exception{
+		String urlParametros = "buscaObraExtjs="+query+"&" +
+				"fieldId=1&" +
+				"limit=10&" +
+				"start=0";
+		String response = chamaPost(GlobalUtils.COLMEIA_SERVICE, urlParametros);
+		System.out.println(response);
+		return response;
+	}
+	
 	
 	
 //	public static void registraLog(String descricao){
