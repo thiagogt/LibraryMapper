@@ -24,6 +24,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
+import library.domain.Book;
 import library.parser.ParseColmeiaXML;
 import library.utils.*;
 
@@ -56,52 +57,25 @@ public class SearchBean {
 		
 	}
 	public String initSearch(){
-		System.out.println("esse eh a query requisitada: "+this.query);
+		
 		try {
 			String xml = ServiceWeb.querySearchOnColmeia(this.query);
-			ParseColmeiaXML.extractBookList(xml);
+			ArrayList<Book> books = ParseColmeiaXML.extractBookList(xml);
+			for (Book book : books) {
+				System.out.println(book.getNomeLivro());	
+				System.out.println(book.getAutorLivro());
+				System.out.println(book.getBookShelf());
+				System.out.println(book.getCopiasNessaBiblioteca());
+				System.out.println(book.getPublisher());
+				System.out.println();
+			}
 		} catch (Exception e) {
-			System.out.println("ERRO: Nao foi possivel carregar a busca! : "+e);
+			System.out.println("ERRO: Nao foi possivel carregar toda a busca! : "+e);
 		}
 		
 		
 		
 		return "mapCreation.xhtml";
 	}
-//	
-//	public void parserLibraryXML(String xml) throws ParserConfigurationException, UnsupportedEncodingException, SAXException, IOException{  
-//	
-//	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//	    DocumentBuilder db = dbf.newDocumentBuilder();
-//	    Document doc = db.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
-//	
-//	    print(doc.getDocumentElement(), "");
-//	}
-//	
-//	private static void print(Node e, String tab) {
-//	
-//	    if (e.getNodeType() == Node.TEXT_NODE) {
-//	        System.out.println(tab + e.getNodeValue());
-//	        return;
-//	    }
-//	
-//	
-//	    System.out.print(tab + e.getNodeName());
-//	
-//	    NamedNodeMap as = e.getAttributes();
-//	    if (as != null && as.getLength() > 0) {
-//	        System.out.print(" attributes=[");
-//	        for (int i = 0; i < as.getLength(); i++) 
-//	            System.out.print((i == 0 ? "" : ", ") + as.item(i));
-//	        System.out.print("]");
-//	    }
-//	    System.out.println();
-//	
-//	    if (e.getNodeValue() != null)
-//	        System.out.println(tab + " " + e.getNodeValue());
-//	
-//	    NodeList childs = e.getChildNodes();
-//	    for (int i = 0; i < childs.getLength(); i++)
-//	        print(childs.item(i), tab + " ");
-//	}
+
 }

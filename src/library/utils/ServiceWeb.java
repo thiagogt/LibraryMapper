@@ -80,7 +80,7 @@ public class ServiceWeb {
 				"limit=10&" +
 				"start=0";
 		String response = chamaPost(GlobalUtils.COLMEIA_SERVICE, urlParametros);
-		System.out.println(response);
+		
 		return response;
 	}
 	

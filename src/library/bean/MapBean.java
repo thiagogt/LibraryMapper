@@ -82,7 +82,7 @@ public class MapBean extends HttpServlet{
 	}
 	
 	public String getMapItens(){
-		System.out.println("olaaaaa get");
+		
 		return null;
 	}
 	
