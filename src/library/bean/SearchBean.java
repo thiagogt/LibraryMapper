@@ -47,6 +47,15 @@ import org.xml.sax.SAXException;
 public class SearchBean {
 	
 	String query;
+	ArrayList<Book> books;
+	
+	public ArrayList<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(ArrayList<Book> books) {
+		this.books = books;
+	}
 
 	public String getQuery() {
 		return query;
@@ -60,7 +69,7 @@ public class SearchBean {
 		
 		try {
 			String xml = ServiceWeb.querySearchOnColmeia(this.query);
-			ArrayList<Book> books = ParseColmeiaXML.extractBookList(xml);
+			books = ParseColmeiaXML.extractBookList(xml);
 			for (Book book : books) {
 				System.out.println(book.getNomeLivro());	
 				System.out.println(book.getAutorLivro());
@@ -75,7 +84,7 @@ public class SearchBean {
 		
 		
 		
-		return "mapCreation.xhtml";
+		return "bookSelection.xhtml";
 	}
 
 }
