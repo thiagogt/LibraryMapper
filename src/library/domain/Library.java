@@ -20,8 +20,11 @@ public class Library {
 		
 		for (int i = 0; i < sizeX; i++) {
 			for (int j = 0; j < sizeY; j++) {
-				map[i][j] = Node.getNodeByPosition(i,j);
-							
+				Node node = Node.getNodeByPosition(i,j);
+				if(node!=null)
+					map[i][j] = node;
+				else
+					map[i][j].setContentType("Forbidden");
 			}
 			
 		}

@@ -30,5 +30,15 @@ public class ParseColmeiaTest {
 
 		ParseColmeiaXML.extractBookList(xml);
 	}
-
+	@Test
+	public void testCatchShelfId(){
+		String testeA = ParseColmeiaXML.catchShelfId("IME-T QA277.24.T M188m e.1");
+		String testeB = ParseColmeiaXML.catchShelfId("QA277.24.T M188m e.1");
+		String testeC = ParseColmeiaXML.catchShelfId("QA277.24.T");
+		
+		System.out.println("Esse eh resultado dos testes:");
+		System.out.println("A:"+ testeA);
+		System.out.println("B:"+ testeB);
+		System.out.println("C:"+ testeC);
+	}
 }

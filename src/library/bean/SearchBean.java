@@ -46,10 +46,19 @@ import org.xml.sax.SAXException;
 
 public class SearchBean {
 	
+	
+	
 	String query;
 	ArrayList<Book> books;
 	String selectedIten;
 	Book selectedBook;
+	
+	
+	
+	
+
+	
+	
 	
 	public String getSelectedIten() {
 		return selectedIten;
@@ -116,6 +125,10 @@ public class SearchBean {
 		
 		
 		return "bookSelection.xhtml";
+	}
+	
+	public String createMap() {
+		return "index.xhtml";
 	}
 
 }

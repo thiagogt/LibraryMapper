@@ -32,7 +32,7 @@ public class ParseColmeiaXML extends DefaultHandler{
     return parseBookListFromRoot(nodes);
     
 
-}
+ }
 
 
 
@@ -75,17 +75,17 @@ public class ParseColmeiaXML extends DefaultHandler{
 
 	      NodeList shelfId = element.getElementsByTagName("chamada");
 	      line = (Element) shelfId.item(0);
-	      book.setBookShelf(getCharacterDataFromElement(line));
+	      book.setBookShelf(catchShelfId(getCharacterDataFromElement(line)));
 	      
 	      
 	      books .add(book);
 	    }
 	    return books;
-}
+  }
 
 
 
-public static String getCharacterDataFromElement(Element e) {
+  public static String getCharacterDataFromElement(Element e) {
     Node child = e.getFirstChild();
     if (child instanceof CharacterData) {
       CharacterData cd = (CharacterData) child;
@@ -93,4 +93,32 @@ public static String getCharacterDataFromElement(Element e) {
     }
     return "";
   }
+
+
+	public static String catchShelfId(String xml){
+		int firstSpace = xml.indexOf(' ');
+		String subString =null;
+		if(firstSpace>0){
+			int firstDigit = -1;
+			
+			for (int i = 0; i < xml.length(); i++) {
+				Character character = xml.charAt(i);
+				if(Character.isDigit(character)){
+					firstDigit = i;
+					break;
+				}	
+			}
+			if(firstDigit > firstSpace){
+				int endSpace = xml.indexOf(' ', firstSpace+1);
+				subString = xml.substring(firstSpace+1, endSpace);
+				
+			}
+			else{
+				subString = xml.substring(0, firstSpace);
+			}
+		}
+		else
+			subString = xml;
+		return subString;
+}
 }
