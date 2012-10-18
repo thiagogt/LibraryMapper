@@ -45,7 +45,7 @@ public class ParseColmeiaXML extends DefaultHandler{
 	      Element element = (Element) nodes.item(i);
 	      Book book = new Book();
 	      
-	      
+	      book.setIdLivro(i);
 	      NodeList title = element.getElementsByTagName("titulo");
 	      Element line = (Element) title.item(0);
 	      book.setNomeLivro(getCharacterDataFromElement(line));

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Book {
 
+	int idLivro;
 	
 	String nomeLivro;
 	ArrayList<String> autorLivro;
@@ -13,7 +14,12 @@ public class Book {
 	
 	
 	
-	
+	public int getIdLivro() {
+		return idLivro;
+	}
+	public void setIdLivro(int idLivro) {
+		this.idLivro = idLivro;
+	}
 	public String getBookShelf() {
 		return bookShelf;
 	}

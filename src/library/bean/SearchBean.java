@@ -48,7 +48,36 @@ public class SearchBean {
 	
 	String query;
 	ArrayList<Book> books;
+	String selectedIten;
+	Book selectedBook;
 	
+	public String getSelectedIten() {
+		return selectedIten;
+	}
+
+	public void setSelectedIten(String selectedIten) {
+		System.out.println(selectedIten);
+		
+		int inicialOfIten = selectedIten.indexOf("\"");
+		int finalOfIten = selectedIten.lastIndexOf("\"");
+		String iten = selectedIten.substring(inicialOfIten+1, finalOfIten);
+		System.out.println("Esse eh o iten cortado "+iten);
+		
+		this.selectedIten = iten;
+		int position =Integer.parseInt(this.selectedIten);
+		
+		System.out.println("Position: "+position);
+		this.selectedBook = books.get(position);
+	}
+
+	public Book getSelectedBook() {
+		return selectedBook;
+	}
+
+	public void setSelectedBook(Book selectedBook) {
+		this.selectedBook = selectedBook;
+	}
+
 	public ArrayList<Book> getBooks() {
 		return books;
 	}
@@ -69,7 +98,7 @@ public class SearchBean {
 		
 		try {
 			String xml = ServiceWeb.querySearchOnColmeia(this.query);
-			books = ParseColmeiaXML.extractBookList(xml);
+			this.books = 	ParseColmeiaXML.extractBookList(xml);
 			for (Book book : books) {
 				System.out.println(book.getNomeLivro());	
 				System.out.println(book.getAutorLivro());
