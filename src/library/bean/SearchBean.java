@@ -60,14 +60,16 @@ public class SearchBean {
 		
 		int inicialOfIten = selectedIten.indexOf("\"");
 		int finalOfIten = selectedIten.lastIndexOf("\"");
-		String iten = selectedIten.substring(inicialOfIten+1, finalOfIten);
-		System.out.println("Esse eh o iten cortado "+iten);
-		
-		this.selectedIten = iten;
-		int position =Integer.parseInt(this.selectedIten);
-		
-		System.out.println("Position: "+position);
-		this.selectedBook = books.get(position);
+		if(inicialOfIten>=0 && finalOfIten>=0){
+			String iten = selectedIten.substring(inicialOfIten+1, finalOfIten);
+			System.out.println("Esse eh o iten cortado "+iten);
+			
+			this.selectedIten = iten;
+			int position =Integer.parseInt(this.selectedIten);
+			
+			System.out.println("Position: "+position);
+			this.selectedBook = books.get(position);
+		}
 	}
 
 	public Book getSelectedBook() {
