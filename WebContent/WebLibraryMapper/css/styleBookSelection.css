@@ -1,6 +1,16 @@
 @CHARSET "UTF-8";
 
 #tableSelected{
-	background-color: yellow;
+	font-size:82px;
+	color:#481925;
+	border: 15px;
+	padding: 20px;
+	border-color: red;
 	
+}
+
+#tableSelected td{
+	
+	padding:20px;
+		
 }

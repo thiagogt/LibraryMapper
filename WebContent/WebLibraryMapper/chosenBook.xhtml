@@ -26,23 +26,23 @@
 			<table id="tableChosen" width="100%" border="1" cellpadding="0" cellspacing="0">
   					
   					<tr>
-   						<td>#{search.selectedBook.nomeLivro}</td>
+   						<td>Nome: #{search.selectedBook.nomeLivro}</td>
     				</tr>
     				<tr>
-    					<td>
+    					<td>Autor(es): 
     						<ui:repeat var="autor" value="#{search.selectedBook.autorLivro}">
     							#{autor} <br/>
     						</ui:repeat>
     					</td>
      				</tr>
     				<tr>	
-    					<td>#{search.selectedBook.publisher}</td>
+    					<td>Editora: #{search.selectedBook.publisher}</td>
     				</tr>
     				<tr>
-    				 	<td>#{search.selectedBook.bookShelf}</td>
+    				 	<td>Estante: #{search.selectedBook.bookShelf}</td>
     				</tr>
     				<tr>
-    				 	<td>#{search.selectedBook.copiasNessaBiblioteca}</td>
+    				 	<td>N. de cópias: #{search.selectedBook.copiasNessaBiblioteca}</td>
 			 		</tr>
 		 		
 		 	</table>

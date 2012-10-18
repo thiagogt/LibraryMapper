@@ -3,14 +3,11 @@
 		
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	 xmlns:ui="http://java.sun.com/jsf/facelets"
-	 xmlns:p="http://primefaces.org/ui"
-        xmlns:pm="http://primefaces.org/mobile">
+	 xmlns:ui="http://java.sun.com/jsf/facelets">
 	
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		
-		<link type="text/css" href="css/styleBookSelection.css" rel="stylesheet" />
 		<link type="text/css" href="css/styleButton.css" rel="stylesheet" />
 		<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.22/themes/base/jquery-ui.css" type="text/css" media="all" /> -->
 		<!-- <link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all" /> -->
@@ -19,28 +16,17 @@
 		<!-- <link type="text/css" href="css/overcast/jquery-ui-1.8.21.custom.css" rel="stylesheet" /> -->
 		<script type="text/javascript" src="../jquery-ui-1.8.21.custom/js/jquery-1.7.2.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.8.22/jquery-ui.min.js" type="text/javascript"></script>
-		<script type="text/javascript" src="js/bookSelect.js"></script>
+		<script type="text/javascript" src="js/searcEffect.js"></script>
 		<script type="text/javascript" src="../jquery-ui-1.8.21.custom/jquery-mousewheel-3.0.6/jquery.mousewheel.js"></script>
 		<script type="text/javascript" src="../jquery-ui-1.8.21.custom/jquery-mousewheel-3.0.6/jquery.mousewheel.min.js"></script>
 		
 	</h:head>
 	<h:body>
-		 <h:form id="selectForm">
-		 	 <table id="tableSelected" width="100%" border="1" cellpadding="0" cellspacing="0">
-  					<ui:repeat var="book" value="#{search.books}">
-  					<tr onmouseover="ChangeColor(this, true);" 
-              			onmouseout="ChangeColor(this, false);" 
-             			 onclick="goToTheBook('#{book.idLivro}');">
-		 				
-    						<td>#{book.nomeLivro}</td>
-    				 	
-		 		</tr>
-		 		</ui:repeat>
-		 	</table>
-		 	<h:inputHidden id="hiddenInput" value="#{search.selectedIten}" />
-		 	<h:commandButton id="hiddenButton" action="chosenBook.xhtml" style="display: none"/> 
-		 	<h:commandButton  styleClass="searchButton" value="Voltar" action="bookSearch.xhtml"></h:commandButton>
-		 </h:form>
+		<h:form>
+			
+		 	<h:commandButton  styleClass="searchButton" value="Criar Mapa" action="mapCreation.xhtml"></h:commandButton>
+		 	<h:commandButton styleClass="searchButton" value="Fazer busca" action="bookSearch.xhtml"></h:commandButton>
+		</h:form>
 	</h:body>
-</html>
 	
+</html>
