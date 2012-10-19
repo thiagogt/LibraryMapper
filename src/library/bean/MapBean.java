@@ -34,13 +34,14 @@ public class MapBean extends HttpServlet{
 	int left;
 	int heigth;
 	int width;
+	String idShelf;
 	String mapItens;
 	
 	public MapBean() {
 		
 	}
 	
-	public MapBean(String id2, String type2, int top2, int left2, int heigth2,int width2) {
+	public MapBean(String id2, String type2, int top2, int left2, int heigth2,int width2,String idShelf) {
 		this.id = id2;
 		this.type = type2;
 		this.top = top2;
@@ -48,6 +49,7 @@ public class MapBean extends HttpServlet{
 		this.heigth = heigth2;
 		this.width = width2;
 		this.mapItens = null;
+		this.idShelf = idShelf;
 	}
 	
 	public String getId() {
@@ -93,6 +95,7 @@ public class MapBean extends HttpServlet{
 			      List<MapBean> list= readMessagesArray(reader);
 			      for (MapBean mapBean : list) {
 					System.out.println("Esse eh o tipo: "+mapBean.type);
+					System.out.println("esse eh o id se for estante: "+ mapBean.idShelf);
 				}
    }
 			  
@@ -110,6 +113,7 @@ public class MapBean extends HttpServlet{
 	public MapBean readMessage(JsonReader reader) throws IOException {
 		   String id = null;
 		   String type = null;
+		   String idShelf = null;
 		   int top = 0;
 		   int left = 0;
 		   int heigth = 0;
@@ -131,12 +135,18 @@ public class MapBean extends HttpServlet{
 				   	  heigth = reader.nextInt();
 			   }else if (name.equals("width") ) {
 				   	  width = reader.nextInt();
-			   }else {
+			   }else if(name.equals("shelfId")){	 
+				   if(type.equals("shelf")){
+					   
+				   	 idShelf = reader.nextString();
+				   }	
+			   }else{
 			           reader.skipValue();
 			   }
+			   
 		   }
 		  reader.endObject();
-		  return new MapBean(id, type,top,left,heigth,width);
+		  return new MapBean(id, type,top,left,heigth,width,idShelf);
 	   }
 //		JsonParser parser = new JsonParser();
 //		JsonElement element = parser.parse(mapa);

@@ -6,6 +6,8 @@ var VALOR_LEFT_MAXIMO_DO_GRID = 1170;
 var VALOR_TOP_MAXIMO_DO_GRID = 590;
 var VALOR_DE_CADA_QUADRADO = 10;
 var allMapItens = [];
+var IdEstantes = [];
+var idPosition = 0;
 
 blocoNumbers =0;
 forbiddenNumbers = 0;
@@ -60,7 +62,15 @@ $(document).ready(function(){
                     if($(x).attr("id") == undefined){
                 		$(x).attr("id","Map"+idBloco);
                 		idBloco++;
-                	}
+                		var tempType = $(x).attr("class").split(' ');
+        				if(tempType[0] == "shelf"){
+        					nome = prompt ("Qual o id dessa estante?");
+        					while (nome == null || nome == "");
+        					alert ("Id: "+nome);
+        					IdEstantes[idPosition] = nome;
+        					idPosition++;
+        				}
+                    }
                     
                     var leftPos = parseInt(ui.offset.left - $(this).offset().left) - parseInt(ui.offset.left - $(this).offset().left)%10;
                     var topPos =  parseInt(ui.offset.top - $(this).offset().top) -  parseInt(ui.offset.top - $(this).offset().top)%10;
@@ -137,15 +147,26 @@ function sendQueryToBean(){
 }
 
 function printAllMapItens(){
-
+	
 	for ( var i=0;i<idBloco ;i++) {
-	alert(	"Object.id: "+allMapItens[i].id+"\n"+
+		if(allMapItens[i].type == "shelf"){
+			alert("Object.id: "+allMapItens[i].id+"\n"+
 			"type: "+allMapItens[i].type+"\n"+
 			"top: "+allMapItens[i].top+"\n"+
 			"left: "+allMapItens[i].left+"\n"+
 			"height: "+allMapItens[i].height+"\n"+
+			"shelf: "+allMapItens[i].shelfId+"\n"+
 			"width: "+allMapItens[i].width+"\n");
-	
+			
+		}
+		else{
+			alert(	"Object.id: "+allMapItens[i].id+"\n"+
+					"type: "+allMapItens[i].type+"\n"+
+					"top: "+allMapItens[i].top+"\n"+
+					"left: "+allMapItens[i].left+"\n"+
+					"height: "+allMapItens[i].height+"\n"+
+					"width: "+allMapItens[i].width+"\n");
+		}			
 	}
 }
 function putForbiddenOnQuery(){
@@ -170,7 +191,7 @@ function putForbiddenOnQuery(){
 
 function putShelfOnQuery(){
 	if($(".shelf").length-1 > shelfNumbers){
-		for ( var i=shelfNumbers;i<$(".shelf").length-1 ;i++) {
+		for (var shelf=0,i=shelfNumbers;i<$(".shelf").length-1 ;i++,shelf++) {
 				
 				mapObject = new Object();
 				var tempType = $(".shelf").eq(i).attr("class").split(' ');
@@ -180,6 +201,7 @@ function putShelfOnQuery(){
 				mapObject.left = $(".shelf").eq(i).position().left;
 				mapObject.height = $(".shelf").eq(i).height();
 				mapObject.width = $(".shelf").eq(i).width();
+				mapObject.shelfId = IdEstantes[shelf]; 
 				shelfNumbers++;
 				
 				allMapItens.push(mapObject);
