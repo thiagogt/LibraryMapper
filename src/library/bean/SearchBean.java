@@ -52,7 +52,7 @@ public class SearchBean {
 	ArrayList<Book> books;
 	String selectedIten;
 	Book selectedBook;
-	
+	String printMapNode;
 	
 	
 	
@@ -105,6 +105,15 @@ public class SearchBean {
 		this.query = query;
 		
 	}
+	public String getPrintMapNode() {
+		return printMapNode;
+	}
+
+	public void setPrintMapNode(String printMapNode) {
+		this.printMapNode = printMapNode;
+	}
+
+	
 	public String initSearch(){
 		
 		try {
@@ -128,7 +137,15 @@ public class SearchBean {
 	}
 	
 	public String createMap() {
+		this.printMapNode = loadNodesFromBD();
 		return "index.xhtml";
 	}
 
+	private String loadNodesFromBD() {
+		String allNodes = null;
+		
+		return allNodes;
+	}
+
+	
 }
