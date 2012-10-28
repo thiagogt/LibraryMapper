@@ -2,7 +2,7 @@
     {
     if (highLight)
     {
-      tableRow.style.backgroundColor = '#dcfac9';
+      tableRow.style.backgroundColor = '#575757';
     }
     else
     {

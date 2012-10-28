@@ -1,9 +1,11 @@
+@CHARSET "UTF-8";
+
 #tableChosen{
 	font-size:82px;
 	color:#481925;
 	border: 15px;
 	padding: 20px;
-	border-color: red;
+	border-color: #481925;
 	
 }
 
@@ -11,4 +13,14 @@
 	
 	padding:20px;
 		
+}
+
+#tableChosen tr{
+	
+	background-color:white; 
+		
+}
+#titulos{
+	font: bold;
+	color: green;
 }

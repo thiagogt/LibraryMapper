@@ -5,12 +5,24 @@
 	color:#481925;
 	border: 15px;
 	padding: 20px;
-	border-color: red;
+	border-color: #481925;
+	
 	
 }
 
 #tableSelected td{
 	
 	padding:20px;
+		
+}
+#tableSelected tr{
+	
+	background-color:white; 
+		
+}
+#tableSelected tr:hover{
+	
+	background-color:#474747;
+	 
 		
 }
