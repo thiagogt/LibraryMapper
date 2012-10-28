@@ -1,0 +1,34 @@
+-criar projeto no xcode 
+
+-adicionar a biblioteca que reconhece qrCode no projeto do Xcode 
+
+-criar metodo q reconhece o id do qrcode visto e guarda na sessao.
+
+-criar metodo q pega desse id e chama a busca com o id da estante selecionada
+
+-Criar metodo para buscar o qrCode no bd pelo id dado e o id da biblioteca
+
+-Criar metodo para buscar a estante no bd pelo id dado e o id da biblioteca
+
+-criar metodo q imprime essa busca em cima do arquivo html criado
+
+-criar metodo q recebe a matriz criada e joga pro BD.
+		obs: lembrar de jogar as estantes para o banco das estantes, pq eh de la
+		q irei buscar o id delas qdo procurarem um livro e os qrCodes com seus id tb.
+
+-criar arquivo printErro.xhtml.
+
+-concertar as palavras q chegam do bd com codificacao diferente
+
+-fazer o tomcat dar refresh na pagina printMap criada  : +-
+
+- fazer um metodo q sempre cria arquivos diferentes, para nao haver confusao
+
+- fazer um metodo para ir apagando os arquivos criados.
+
+	
+-monografia
+
+-poster
+
+-apresentacao

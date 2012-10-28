@@ -1,44 +1,20 @@
 package library.bean;
 
-import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.servlet.http.HttpServlet;
-
-import test.ServiceWebTest;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 
 import library.domain.Book;
+import library.domain.CanvasMap;
+import library.domain.Library;
+import library.domain.Node;
 import library.parser.ParseColmeiaXML;
 import library.utils.*;
 
 import java.io.File;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 
 @ManagedBean(name="search")
@@ -46,19 +22,11 @@ import org.xml.sax.SAXException;
 
 public class SearchBean {
 	
-	
-	
 	String query;
 	ArrayList<Book> books;
 	String selectedIten;
 	Book selectedBook;
 	String printMapNode;
-	
-	
-	
-
-	
-	
 	
 	public String getSelectedIten() {
 		return selectedIten;
@@ -106,8 +74,10 @@ public class SearchBean {
 		
 	}
 	public String getPrintMapNode() {
+			
 		return printMapNode;
 	}
+
 
 	public void setPrintMapNode(String printMapNode) {
 		this.printMapNode = printMapNode;
@@ -115,7 +85,6 @@ public class SearchBean {
 
 	
 	public String initSearch(){
-		
 		try {
 			String xml = ServiceWeb.querySearchOnColmeia(this.query);
 			this.books = 	ParseColmeiaXML.extractBookList(xml);
@@ -130,22 +99,37 @@ public class SearchBean {
 		} catch (Exception e) {
 			System.out.println("ERRO: Nao foi possivel carregar toda a busca! : "+e);
 		}
-		
-		
-		
 		return "bookSelection.xhtml";
 	}
 	
-	public String createMap() {
-		this.printMapNode = loadNodesFromBD();
-		return "index.xhtml";
+	public String createMap() throws IOException {
+		try {
+			criaArquivoPrintMapHTML();
+			setPrintMapNode(GlobalUtils.PRINT_MAP_FILE);
+		} catch (Exception e) {
+			System.out.println("ERRO: "+e);
+			setPrintMapNode(GlobalUtils.PRINT_ERRO_FILE);
+		}
+		System.out.println(printMapNode);
+		return printMapNode;
 	}
 
-	private String loadNodesFromBD() {
-		String allNodes = null;
-		
-		return allNodes;
+	private void criaArquivoPrintMapHTML() throws IOException {
+		  
+		StringBuilder out = new StringBuilder();  
+		CanvasMap.init(out);  
+				  
+		String path = GlobalUtils.ROOT_PATH + GlobalUtils.WEB_CONTENT_PATH + GlobalUtils.WEB_LIBRARY_PATH + GlobalUtils.PRINT_MAP_FILE;  
+		File f = new File(path);
+		System.out.println(f.getAbsoluteFile());
+		try {
+			FileWriter fw = new FileWriter(f);  
+			fw.write(out.toString());  
+			fw.close();	
+		} catch (Exception e) {
+			System.out.println("Erro ao carregar arquivo para impressao da Biblioteca:ERRO "+e);
+		}  
+		  
 	}
-
 	
 }

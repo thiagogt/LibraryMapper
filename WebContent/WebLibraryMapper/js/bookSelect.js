@@ -11,7 +11,7 @@
 	
 }
 function goToTheBook(element){
-	alert(element);
+	
 	document.getElementById('selectForm:hiddenInput').value = JSON.stringify(element);
 	document.getElementById('selectForm:hiddenButton').click();
 	

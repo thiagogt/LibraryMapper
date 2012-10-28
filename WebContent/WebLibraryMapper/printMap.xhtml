@@ -1,19 +1,90 @@
- <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	 xmlns:ui="http://java.sun.com/jsf/facelets">
- <h:head>
- <script type="text/javascript" src="js/printMap.js"></script>
- </h:head>
-	<h:body onload="init();">
-		<h:form>
-			<canvas id="canvas" width="900" height="900"></canvas><br/>
-			<h:outputText  value="#{search.printMapNode}"></h:outputText>
-			<h:outputText  value="#{search.printMapNode}"></h:outputText>
-			<h:outputText  value="#{search.printMapNode}"></h:outputText>
-			<h:outputText  value="#{search.printMapNode}"></h:outputText>
-			<h:outputText  value="#{search.printMapNode}"></h:outputText>
-			<h:outputText  value="#{search.printMapNode}"></h:outputText>
-		</h:form>
-	</h:body>
+<html>
+<head><title>Map</title></head>
+<body onload="init();">
+<canvas id="canvas" width="900" height="900"></canvas><br/>
+<script type="text/javascript">function init() {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.fillRect(0,0,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.fillRect(50,0,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.fillRect(100,0,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(150,0,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(0,50,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.fillRect(50,50,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.fillRect(100,50,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(150,50,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(0,100,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.fillRect(50,100,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.fillRect(100,100,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(150,100,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(0,150,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "red";
+		ctx.fillRect(50,150,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(100,150,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(150,150,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(0,200,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(50,200,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(100,200,50,50);
+	ctx.closePath();
+	ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.fillRect(150,200,50,50);
+	ctx.closePath();
+}</script>
+</body>
 </html>
-
