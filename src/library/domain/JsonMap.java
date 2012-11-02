@@ -6,7 +6,7 @@ public class JsonMap {
 	String type;
 	int top;
 	int left;
-	int heigth;
+	int height;
 	
 	int width;
 	String idShelf;
@@ -21,7 +21,8 @@ public class JsonMap {
 		this.type = type2;
 		this.top = top2;
 		this.left = left2;
-		this.heigth = heigth2;
+		this.height = heigth2;
+		System.out.println("ola aii  "+heigth2);
 		this.width = width2;
 		this.idShelf = idShelf;
 	}
@@ -61,11 +62,11 @@ public class JsonMap {
 	public void setLeft(int left) {
 		this.left = left;
 	}
-	public int getHeigth() {
-		return heigth;
+	public int getHeight() {
+		return height;
 	}
-	public void setHeigth(int heigth) {
-		this.heigth = heigth;
+	public void setHeight(int heigth) {
+		this.height = heigth;
 	}
 	public int getWidth() {
 		return width;

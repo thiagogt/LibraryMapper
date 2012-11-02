@@ -15,7 +15,7 @@ public class GlobalUtils {
 	public static final String WEB_LIBRARY_PATH = "WebLibraryMapper/";
 	public static final String PRINT_MAP_FILE = "printMap.xhtml";
 	public static final String PRINT_ERRO_FILE = "printErro.xhtml";
-	
+	public static final String PRINT_MATRIX_FILE = "printMatrix.txt";
 	public static final String DEFAULT_HOST = null;
 	public static final String DEFAULT_PORT = null;
 	public static final String APPLICATION_NAME = null;
@@ -31,5 +31,10 @@ public class GlobalUtils {
 	
 	public static int LIBRARY_HEIGHT = 5;
 	public static int LIBRARY_WIDTH = 4;
+	
+	public	static int MAP_HTML_ROWS = 58;
+	public	static int MAP_HTML_COLUMNS = 116;
+	public	static int SIZE_EQUIVALENT_ONE_POINT_HTML_MAP_CREATION = 10;
 	public static final int NODE_SIZE = 50;
+	public static final int CASA_DE_GRANDEZA_X_QRCODE = 100;
 }
