@@ -1,9 +1,11 @@
 package library.domain;
 
 
+import library.mapper.LibraryMapper;
 import library.mapper.NodeMapper;
 import library.mapper.BookshelfMapper;
 
+import library.utils.GlobalUtils;
 import library.utils.SQLFactory;
 
 public class Bookshelf {
@@ -79,5 +81,16 @@ public class Bookshelf {
 		shelf.setCodeId(node.getCodeIdShelf());
 		shelf.setIdLibrary(node.getIdLibrary());
 		return shelf;
+	}
+	public static int returnTheLastBookShelfID() {
+		int lastBookShelfId =-1; 
+		BookshelfMapper libraryMapper = SQLFactory.section.getMapper(BookshelfMapper.class);
+		lastBookShelfId = libraryMapper.selectBiggestId();
+		
+		return lastBookShelfId;
+	}
+	
+	public static void setNewLibraryId(){
+		GlobalUtils.idLibrary = returnTheLastBookShelfID() +1;
 	}
 }

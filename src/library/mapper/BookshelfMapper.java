@@ -17,7 +17,9 @@ public interface BookshelfMapper {
     int insert(Bookshelf record);
 
     int insertSelective(Bookshelf record);
-
+    
+    int selectBiggestId();
+    
     List<Bookshelf> selectByExample(BookshelfExample example);
 
     Bookshelf selectByPrimaryKey(Integer idBookshelf);

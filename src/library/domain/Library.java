@@ -17,6 +17,16 @@ public class Library {
 	
     public static Node[][] map;
 	
+    public Library(Integer idLibrary2, int lIBRARY_WIDTH, int lIBRARY_HEIGHT) {
+		idLibrary = idLibrary2;
+		sizeX = lIBRARY_WIDTH;
+		sizeY = lIBRARY_HEIGHT;
+	}
+
+	public void Libray(){
+    	
+    }
+    
 	public static void Mapping(int newSize_X, int newSize_Y){
 		
 		sizeX = newSize_X;
@@ -25,6 +35,7 @@ public class Library {
 		
 		for (int i = 0; i < sizeX; i++) {
 			for (int j = 0; j < sizeY; j++) {
+				
 				Node node = Node.getNodeByPosition(i,j);
 				if(node!=null)
 					map[i][j] = node;
@@ -45,8 +56,10 @@ public class Library {
 		SQLFactory.section.commit();
 		
 	}
+	
 	public static void insertNodesToLibrary(Node node) {
-		node.setIdLibrary(idLibrary);
+		
+		
 		Node.insertNodesToBD(node);
 		if (node.getContentType().equals("Shelf")) {
 			Bookshelf.insertShelfToBD(node);
@@ -57,6 +70,12 @@ public class Library {
 			
 		}
 	}
+	private static void insertLibraryToBD(Integer idLibrary2) {
+		Library library = new Library(idLibrary2,GlobalUtils.MAP_HTML_COLUMNS,GlobalUtils.MAP_HTML_ROWS);
+		LibraryMapper libraryMapper = SQLFactory.section.getMapper(LibraryMapper.class);
+		libraryMapper.insert(library);
+		
+	}
 	public static int returnTheLastLibraryID() {
 		int lastIdLibrary =-1; 
 		LibraryMapper libraryMapper = SQLFactory.section.getMapper(LibraryMapper.class);
@@ -65,13 +84,14 @@ public class Library {
 		return lastIdLibrary;
 	}
 	
-	public static void setLatestLibraryId(){
+	public static void setNewLibrary(){
 		GlobalUtils.idLibrary = returnTheLastLibraryID() +1;
+		insertLibraryToBD(GlobalUtils.idLibrary); 
 	}
 	
 	public static void deleteLibrary(int idLibrary2){
 		LibraryMapper library = SQLFactory.section.getMapper(LibraryMapper.class);
 		library.deleteByPrimaryKey(idLibrary2);
-		SQLFactory.section.commit();
+		
 	}
  }

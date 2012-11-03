@@ -87,6 +87,9 @@
     from public.qr_code_mark
     where id_qr_mark = #{idQrMark,jdbcType=INTEGER}
   </select>
+  <select id="selectBiggestId"  resultType="java.lang.Integer" >
+    select max(id_qr_mark) from public.qr_code_mark
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from public.qr_code_mark
     where id_qr_mark = #{idQrMark,jdbcType=INTEGER}

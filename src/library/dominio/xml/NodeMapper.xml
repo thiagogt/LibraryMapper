@@ -96,7 +96,10 @@
     position_x = #{positionX,jdbcType=INTEGER} AND
     position_y = #{positionY,jdbcType=INTEGER}
   </select>
-  
+   <select id="selectBiggestId"  resultType="java.lang.Integer" >
+    select max(id_node) from public.node
+  </select>
+ 
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

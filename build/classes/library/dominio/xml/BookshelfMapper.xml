@@ -87,6 +87,10 @@
     from public.bookshelf
     where id_bookshelf = #{idBookshelf,jdbcType=INTEGER}
   </select>
+   <select id="selectBiggestId"  resultType="java.lang.Integer" >
+    select max(id_bookshelf) from public.bookshelf
+  </select>
+ 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from public.bookshelf
     where id_bookshelf = #{idBookshelf,jdbcType=INTEGER}

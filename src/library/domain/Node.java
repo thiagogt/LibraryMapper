@@ -2,6 +2,7 @@ package library.domain;
 
 import java.util.concurrent.Semaphore;
 
+import library.mapper.LibraryMapper;
 import library.mapper.NodeMapper;
 import library.utils.GlobalUtils;
 import library.utils.SQLFactory;
@@ -219,6 +220,19 @@ public class Node extends Thread {
 		SQLFactory.section.commit();
 		
 	}
+
+	public static int returnTheLastNodeID() {
+		int lastNodeId =-1; 
+		NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
+		lastNodeId = nodeMapper.selectBiggestId();
+		
+		return lastNodeId;
+	}
+	
+	public static void setNewLibraryId(){
+		GlobalUtils.idLibrary = returnTheLastNodeID() +1;
+	}
+	
 
 	
 }

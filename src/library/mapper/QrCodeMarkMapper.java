@@ -18,6 +18,8 @@ public interface QrCodeMarkMapper {
 
     int insertSelective(QrCodeMark record);
 
+    int selectBiggestId();
+    
     List<QrCodeMark> selectByExample(QrCodeMarkExample example);
 
     QrCodeMark selectByPrimaryKey(Integer idQrMark);

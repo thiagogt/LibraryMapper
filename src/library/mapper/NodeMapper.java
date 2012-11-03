@@ -19,6 +19,8 @@ public interface NodeMapper {
     int insert(Node shelf);
 
     int insertSelective(Node record);
+    
+    int selectBiggestId();
 
     List<Node> selectByExample(NodeExample example);
 

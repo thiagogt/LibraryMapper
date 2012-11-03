@@ -38,4 +38,10 @@ public class NodeTest {
 		
 	}
 	
+	@Test
+	public void testReturnBiggestNode(){
+		int i  =Node.returnTheLastNodeID();
+		System.out.println(i);
+	}
+	
 }

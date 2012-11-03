@@ -2,6 +2,7 @@ package library.domain;
 
 
 
+import library.mapper.BookshelfMapper;
 import library.mapper.QrCodeMarkMapper;
 import library.utils.GlobalUtils;
 import library.utils.SQLFactory;
@@ -66,6 +67,18 @@ public class QrCodeMark {
  		String paramID = "?valueID="+idQrMark;
  		qrCode.setUrl(GlobalUtils.DOMAIN_NAME+GlobalUtils.PATH_BOOKSEARCH+paramID);
 		return qrCode;
+	}
+
+	public static int returnTheLastQrNodeID() {
+		int lastQrCodeId =-1; 
+		QrCodeMarkMapper qrCodeMapper = SQLFactory.section.getMapper(QrCodeMarkMapper.class);
+		lastQrCodeId = qrCodeMapper.selectBiggestId();
+		
+		return lastQrCodeId;
+	}
+	
+	public static void setNewLibraryId(){
+		GlobalUtils.idLibrary = returnTheLastQrNodeID() +1;
 	}
 
 }

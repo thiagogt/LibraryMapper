@@ -34,7 +34,8 @@ public class LibraryTest {
 	}
 	@Test
 	public void testDeleteLibrary() {
-		Library.deleteAllLibrary(2);
+		Library.deleteAllLibrary(3);
+		
 	}
 	@Test
 	public void testSelectLastId(){

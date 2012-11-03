@@ -26,12 +26,12 @@ public class GlobalUtils {
 	public static int QRMARK_VALUE = 2;
 	public static int BOOKSHELf_VALUE = 1;
 	public static int EMPTY_VALUE = 0;
-	public static Integer idLibrary = 1;
+	public static Integer idLibrary = 2;
 	public static boolean stopAllOtherTasks = false;
 	public static ArrayList<Node> pathMap;
 	
-	public static int LIBRARY_HEIGHT = 5;
-	public static int LIBRARY_WIDTH = 4;
+	public static int LIBRARY_HEIGHT = 116;
+	public static int LIBRARY_WIDTH = 58;
 	
 	public	static int MAP_HTML_ROWS = 58;
 	public	static int MAP_HTML_COLUMNS = 116;
