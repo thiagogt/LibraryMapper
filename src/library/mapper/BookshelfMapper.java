@@ -11,6 +11,8 @@ public interface BookshelfMapper {
     int deleteByExample(BookshelfExample example);
 
     int deleteByPrimaryKey(Integer idBookshelf);
+    
+    int deleteByLibraryId(Integer idLibrary);
 
     int insert(Bookshelf record);
 

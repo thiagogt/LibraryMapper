@@ -87,6 +87,9 @@
     from public.library
     where id_library = #{idLibrary,jdbcType=INTEGER}
   </select>
+  <select id="selectBiggestId"  resultType="java.lang.Integer" >
+    select max(id_library) from public.library
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from public.library
     where id_library = #{idLibrary,jdbcType=INTEGER}

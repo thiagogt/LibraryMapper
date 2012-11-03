@@ -19,7 +19,8 @@ public class GlobalUtils {
 	public static final String DEFAULT_HOST = null;
 	public static final String DEFAULT_PORT = null;
 	public static final String APPLICATION_NAME = null;
-	
+	public static final String DOMAIN_NAME = "http://localhost:8080";
+	public static final String PATH_BOOKSEARCH = "/LibraryMapper/faces/WebLibraryMapper/bookSearch.xhtml";
 	
 	
 	public static int QRMARK_VALUE = 2;

@@ -91,6 +91,11 @@
     delete from public.qr_code_mark
     where id_qr_mark = #{idQrMark,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByLibraryId" parameterType="java.lang.Integer" >
+    delete from public.qr_code_mark
+    where id_library = #{idLibrary,jdbcType=INTEGER}
+  </delete>
+  
   <delete id="deleteByExample" parameterType="library.domain.QrCodeMarkExample" >
     delete from public.qr_code_mark
     <if test="_parameter != null" >

@@ -11,6 +11,8 @@ public interface QrCodeMarkMapper {
     int deleteByExample(QrCodeMarkExample example);
 
     int deleteByPrimaryKey(Integer idQrMark);
+    
+    int deleteByLibraryId(Integer idLibrary);
 
     int insert(QrCodeMark record);
 

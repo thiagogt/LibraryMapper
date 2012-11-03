@@ -32,5 +32,14 @@ public class LibraryTest {
 			
 		}
 	}
-
+	@Test
+	public void testDeleteLibrary() {
+		Library.deleteAllLibrary(2);
+	}
+	@Test
+	public void testSelectLastId(){
+		int id = Library.returnTheLastLibraryID();
+		System.out.println("Esse ehe o id: "+id);
+	}
+	
 }

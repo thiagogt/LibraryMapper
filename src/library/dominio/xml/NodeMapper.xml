@@ -108,6 +108,10 @@
     delete from public.node
     where id_node = #{idNode,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByLibraryId" parameterType="java.lang.Integer" >
+    delete from public.node
+    where id_library = #{idLibrary,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="library.domain.NodeExample" >
     delete from public.node
     <if test="_parameter != null" >

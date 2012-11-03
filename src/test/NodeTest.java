@@ -24,12 +24,18 @@ public class NodeTest {
 		node = realBookShelf.IsLeftBrotherReachable(realBookShelf);
 		node = realBookShelf.IsRightBrotherReachable(realBookShelf);
 		
-		SQLFactory.section.close();
+		
+		
+	}
+
+	@Test
+	public void testDeleteAllNodesFromLibrary() {
+		Integer idLibrary = 2;
+		
+		Node.deleteAllNodesFromLibrary(idLibrary);
+		
+		//SQLFactory.section.close();
 		
 	}
 	
-	@Test
-	public void testEstaemUsoParalelo() {
-	
-	}
 }

@@ -1,6 +1,8 @@
 package library.mapper;
 
 import java.util.List;
+
+import library.domain.Bookshelf;
 import library.domain.Node;
 import library.domain.NodeExample;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +14,9 @@ public interface NodeMapper {
 
     int deleteByPrimaryKey(Integer idNode);
 
-    int insert(Node record);
+    int deleteByLibraryId(Integer idLibrary);	
+    
+    int insert(Node shelf);
 
     int insertSelective(Node record);
 

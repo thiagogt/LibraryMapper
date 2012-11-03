@@ -1,5 +1,11 @@
 package library.domain;
 
+
+import library.mapper.NodeMapper;
+import library.mapper.BookshelfMapper;
+
+import library.utils.SQLFactory;
+
 public class Bookshelf {
     private Integer idBookshelf;
 
@@ -50,4 +56,28 @@ public class Bookshelf {
     public void setCodeId(String codeId) {
         this.codeId = codeId;
     }
+
+	public static void deleteAllShelvesFromLibrary(int idLibrary) {
+		BookshelfMapper shelfMapper = SQLFactory.section.getMapper(BookshelfMapper.class);
+		shelfMapper.deleteByLibraryId(idLibrary);
+			
+		
+	}
+
+	public static void insertShelfToBD(Node node) {
+		Bookshelf shelf = changeNodeToBookShelf(node);
+		
+		BookshelfMapper shelfMapper = SQLFactory.section.getMapper(BookshelfMapper.class);
+		shelfMapper.insert(shelf);
+		SQLFactory.section.commit();
+		
+	}
+
+	private static Bookshelf changeNodeToBookShelf(Node node) {
+		Bookshelf shelf = new Bookshelf();
+		shelf.setIdBookshelf(node.getContentId());
+		shelf.setCodeId(node.getCodeIdShelf());
+		shelf.setIdLibrary(node.getIdLibrary());
+		return shelf;
+	}
 }

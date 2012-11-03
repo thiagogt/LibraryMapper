@@ -115,7 +115,7 @@ public class MapBean extends HttpServlet implements Serializable{
 		if (!f.exists()) {
 			f.createNewFile();
 		}
-		System.out.println(f.getAbsoluteFile());
+		
 		try {
 			FileWriter fw = new FileWriter(f);  
 			fw.write(out.toString());  
@@ -159,7 +159,7 @@ public class MapBean extends HttpServlet implements Serializable{
 			 
 			if (mapBean.getType().equals("bloco") ) {
 	    		  listFree.addAll(typeOfNode(mapBean,"Free"));
-	    		  System.out.println("tamanho da crinaca "+listFree.size());
+	    		  
 	    	  }
 	    	  if (mapBean.getType().equals("forbidden")) {
 	    		  listForbidden.addAll(typeOfNode(mapBean,"Forbidden"));
@@ -170,7 +170,6 @@ public class MapBean extends HttpServlet implements Serializable{
 	    	  }
 	    	  //Free,QrCode,Forbidden,Shelf
 	    	  if(mapBean.getType().equals("qrCode")){
-	    		   buildQrCode(mapBean);
 	    		   listQrCode.addAll(typeOfNode(mapBean,"QrCode"));
 	    		   
 	    	  }
@@ -206,30 +205,21 @@ public class MapBean extends HttpServlet implements Serializable{
 				for (int j = 0; j <= limitY ;j++) {
 					node = new Node();
 					node.setContentType(nodeType);
-					System.out.println("na criacao: "+node.getContentType());
 					node.setContentId(contId);
+					contId++;
+					if(nodeType.equals("Shelf")){
+						node.setCodeIdShelf(mapBean.getIdShelf());
+						
+					}
 					node.setPositionX(positionX+i);
 					node.setPositionY(positionY+j);
 					list.add(node);
-					contId++;
+					
 				}
 			}
 			return list;
 	}
 		  
-	
-	private void buildQrCode(JsonMap mapBean) {
-		QrCodeMark qrCode = new QrCodeMark();
-
- 		int positionX = mapBean.getLeft();
- 		int positionY = mapBean.getTop();
- 		//como no maximo o vcalor de x tem 3 casas, e o de y tem 2, posso agrupar ambos os numeros em um numero de 5 digitos no maximo 
- 		//ou 3 no minimo, onde sempre o x comecara na 3 casa.
- 		int idQrMark = GlobalUtils.CASA_DE_GRANDEZA_X_QRCODE*positionX + positionY;
- 		qrCode.setIdQrMark(idQrMark);
- 		qrCode.setUrl("por enquanto nada");
-		
-	}
 
 	private void CreateNodesInMapNode() {
 		int cont = 0;
@@ -248,14 +238,15 @@ public class MapBean extends HttpServlet implements Serializable{
 			
 		}
 		
-		System.out.println("Esse foi o numero q foi pro mapa"+cont);
+		
 	}
 
 	private void buildBookShelf(JsonMap mapBean) {
 		Bookshelf shelf = new Bookshelf();
  		
- 		int positionX = mapBean.getLeft();
- 		int positionY = mapBean.getTop();
+		int positionX = mapBean.getLeft()/GlobalUtils.SIZE_EQUIVALENT_ONE_POINT_HTML_MAP_CREATION;
+		int positionY = mapBean.getTop()/GlobalUtils.SIZE_EQUIVALENT_ONE_POINT_HTML_MAP_CREATION;
+ 		
  		
  		shelf.setCodeId(mapBean.getIdShelf());
  		shelf.setPosition_X(positionX);

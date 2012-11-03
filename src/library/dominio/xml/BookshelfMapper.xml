@@ -91,6 +91,11 @@
     delete from public.bookshelf
     where id_bookshelf = #{idBookshelf,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByLibraryId" parameterType="java.lang.Integer" >
+    delete from public.bookshelf
+    where id_library = #{idLibrary,jdbcType=INTEGER}
+  </delete>
+  
   <delete id="deleteByExample" parameterType="library.domain.BookshelfExample" >
     delete from public.bookshelf
     <if test="_parameter != null" >

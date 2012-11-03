@@ -8,14 +8,15 @@ import library.utils.SQLFactory;
 
 import org.apache.ibatis.session.SqlSession;
 
-public class Node extends Thread{
+public class Node extends Thread {
     
 	private Integer idNode;
     private Integer positionX;
     private Integer positionY;
     private Integer contentId;
     private Integer idLibrary;
-    private String contentType;//Free,QrCode,Forbidden,Shelf
+    private String codeIdShelf;
+   	private String contentType;//Free,QrCode,Forbidden,Shelf
     private Node parentFromBeginNode;
     private Node parentFromEndNode;
 	public int isInUse;
@@ -53,7 +54,14 @@ public class Node extends Thread{
 	public void setColor(String color) {
 		this.color = color;
 	}
-    
+	 public String getCodeIdShelf() {
+		return codeIdShelf;
+	}
+
+	public void setCodeIdShelf(String codeIdShelf) {
+		this.codeIdShelf = codeIdShelf;
+	}
+ 
     public int getIsInUse() {
 		return isInUse;
 	}
@@ -194,6 +202,21 @@ public class Node extends Thread{
 		Node node = new Node();
 		node = nodeMapper.selectByPositionXAndY(GlobalUtils.idLibrary, positionX, positionY);
 		return node;
+		
+	}
+	public static void deleteAllNodesFromLibrary(int idLibrary) {
+		
+		NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
+		nodeMapper.deleteByLibraryId(idLibrary);
+		
+		
+	}
+	
+	public static void insertNodesToBD(Node node) {
+		
+		NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
+		nodeMapper.insert(node);
+		SQLFactory.section.commit();
 		
 	}
 

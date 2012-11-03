@@ -2,6 +2,7 @@ package library.bean;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
@@ -20,7 +21,7 @@ import java.io.File;
 @ManagedBean(name="search")
 @SessionScoped
 
-public class SearchBean {
+public class SearchBean implements Serializable{
 	
 	String query;
 	ArrayList<Book> books;

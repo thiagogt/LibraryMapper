@@ -19,6 +19,8 @@ public interface LibraryMapper {
     List<Library> selectByExample(LibraryExample example);
 
     Library selectByPrimaryKey(Integer idLibrary);
+    
+    int selectBiggestId();
 
     int updateByExampleSelective(@Param("record") Library record, @Param("example") LibraryExample example);
 
