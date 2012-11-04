@@ -10,7 +10,7 @@ import library.domain.Node;
 public class GlobalUtils {
 
 	public static final String COLMEIA_SERVICE = 	"http://biblioteca.ime.usp.br/colmeia/buscaObra.do";
-	public static final String ROOT_PATH = "/home/thiago/workspace/";
+	public static final String ROOT_PATH = "/home/thiago-alien/workspace/";
 	public static final String WEB_CONTENT_PATH ="LibraryMapper/WebContent/";
 	public static final String WEB_LIBRARY_PATH = "WebLibraryMapper/";
 	public static final String PRINT_MAP_FILE = "printMap.xhtml";
@@ -26,16 +26,16 @@ public class GlobalUtils {
 	public static int QRMARK_VALUE = 2;
 	public static int BOOKSHELf_VALUE = 1;
 	public static int EMPTY_VALUE = 0;
-	public static Integer idLibrary = 2;
+	public static Integer idLibrary = 4;
 	public static boolean stopAllOtherTasks = false;
 	public static ArrayList<Node> pathMap;
 	
-	public static int LIBRARY_HEIGHT = 116;
-	public static int LIBRARY_WIDTH = 58;
+	public static int LIBRARY_HEIGHT = 117;
+	public static int LIBRARY_WIDTH = 59;
 	
-	public	static int MAP_HTML_ROWS = 58;
-	public	static int MAP_HTML_COLUMNS = 116;
+	public	static int MAP_HTML_ROWS = 59;
+	public	static int MAP_HTML_COLUMNS = 117;
 	public	static int SIZE_EQUIVALENT_ONE_POINT_HTML_MAP_CREATION = 10;
-	public static final int NODE_SIZE = 50;
+	public static final int NODE_SIZE = 10;
 	public static final int CASA_DE_GRANDEZA_X_QRCODE = 100;
 }

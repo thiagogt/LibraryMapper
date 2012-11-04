@@ -20,7 +20,7 @@ public class LibraryTest {
 			for (int j = 0; j < 4; j++) {
 				type = Library.map[i][j].getContentType();
 				
-				if(type.equals("Empty"))
+				if(type.equals("Free"))
 					System.out.print("0"+" | ");
 				if(type.equals("Forbidden"))
 					System.out.print("x"+" | ");
@@ -34,7 +34,7 @@ public class LibraryTest {
 	}
 	@Test
 	public void testDeleteLibrary() {
-		Library.deleteAllLibrary(3);
+		Library.deleteAllLibrary(7);
 		
 	}
 	@Test

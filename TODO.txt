@@ -12,10 +12,6 @@
 
 -criar metodo q imprime essa busca em cima do arquivo html criado
 
--criar metodo q recebe a matriz criada e joga pro BD.
-		obs: lembrar de jogar as estantes para o banco das estantes, pq eh de la
-		q irei buscar o id delas qdo procurarem um livro e os qrCodes com seus id tb.
-
 -criar arquivo printErro.xhtml.
 
 -concertar as palavras q chegam do bd com codificacao diferente

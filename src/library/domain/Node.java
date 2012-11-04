@@ -166,7 +166,7 @@ public class Node extends Thread {
 		try {
 			Node brotherNode  = getNodeByPosition(brotherPositionX,brotherPositionY);
 			
-			if(brotherNode.getContentType().equals("Empty"))
+			if(brotherNode.getContentType().equals("Free"))
 				try{
 					if(brotherNode.getColor().equals("BLACK"))
 						brotherNode = null;

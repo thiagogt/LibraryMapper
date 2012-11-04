@@ -8,7 +8,7 @@ public class CanvasMap {
 		out.append("<html>\n");  
 		out.append("<head><title>Map</title></head>\n");  
 		out.append("<body onload=\"init();\">\n"+
-					"<canvas id=\"canvas\" width=\"900\" height=\"900\"></canvas><br/>\n");  
+					"<canvas id=\"canvas\" width=\"1200\" height=\"600\"></canvas><br/>\n");  
 		out.append("<script type=\"text/javascript\">function init() {\n"+
 				"\tvar canvas = document.getElementById(\"canvas\");\n"+
 				"\tvar ctx = canvas.getContext(\"2d\");\n");
@@ -47,16 +47,18 @@ public class CanvasMap {
 	public static void drawPositionFromMap(Node node, StringBuilder out,int i,int j) {
 		// TODO Auto-generated method stub
 		System.out.println(node.getContentType()+i+j);
-		if(node.getContentType().equals("Empty")){
+		if(node.getContentType().equals("Free")){
 			System.out.println("entro");
-			out.append("\t\tctx.fillStyle = \"black\";\n");
+			out.append("\t\tctx.fillStyle = \"white\";\n");
 		}
-		else{
-			out.append("\t\tctx.fillStyle = \"red\";\n");
+		else if(node.getContentType().equals("Shelf")){
+			out.append("\t\tctx.fillStyle = \"brown\";\n");
+		}else{
+			out.append("\t\tctx.fillStyle = \"black\";\n");
 		}
 		int size = GlobalUtils.NODE_SIZE;
 		//A matriz impressa eh transposta por causa do esquema top left do html
-		out.append("\t\tctx.fillRect("+j*size+","+i*size+","+size+","+size+");\n");
+		out.append("\t\tctx.fillRect("+i*size+","+j*size+","+size+","+size+");\n");
 		
 
 	}

@@ -42,6 +42,8 @@ public class MapBean extends HttpServlet implements Serializable{
 	//todo : fazer um listener para envios html 
 	String mapItens;
 	Node[][] mapNode;
+	int lastShelfId;
+	int lastQrCodeId;
 	ArrayList<Node> listFree;
 	ArrayList<Node> listForbidden;
 	ArrayList<Node> listShelf;
@@ -82,14 +84,30 @@ public class MapBean extends HttpServlet implements Serializable{
 	public String getMapItens() {
 		return null;
 	}
+	public int getLastShelfId() {
+		return lastShelfId;
+	}
 
+	public void setLastShelfId(int lastShelfId) {
+		this.lastShelfId = lastShelfId;
+	}
+
+	public int getLastQrCodeId() {
+		return lastQrCodeId;
+	}
+
+	public void setLastQrCodeId(int lastQrCodeId) {
+		this.lastQrCodeId = lastQrCodeId;
+	}
 	public void setMapItens(String in) throws IOException{
 		
 				listFree = new ArrayList<Node>();
 				listShelf = new ArrayList<Node>();
 				listQrCode = new ArrayList<Node>();
 				listForbidden = new ArrayList<Node>();
-
+				
+				lastQrCodeId = QrCodeMark.returnTheLastQrNodeID()+1;
+				lastShelfId = Bookshelf.returnTheLastBookShelfID()+1;
 				
 				  Reader readerString = new StringReader(in);
 			      JsonReader reader = new JsonReader(readerString);
@@ -107,6 +125,8 @@ public class MapBean extends HttpServlet implements Serializable{
 			      putMapNodeOnBD();
 ////			      
    }
+	
+
 	public List<JsonMap> readMessagesArray(JsonReader reader) throws IOException {
 		ArrayList<JsonMap> messages = new ArrayList<JsonMap>();
 		 
@@ -211,20 +231,25 @@ public class MapBean extends HttpServlet implements Serializable{
 			int limitX = mapBean.getWidth()/GlobalUtils.SIZE_EQUIVALENT_ONE_POINT_HTML_MAP_CREATION;
 			int limitY = mapBean.getHeight()/GlobalUtils.SIZE_EQUIVALENT_ONE_POINT_HTML_MAP_CREATION;
 			int contId = 1;
-			if(nodeType.equals("QrCode"))
-				contId = QrCodeMark.returnTheLastQrNodeID()+1;
-			if(nodeType.equals("Shelf"))
-				contId = Bookshelf.returnTheLastBookShelfID()+1;
 			Node node;
+			if(nodeType.equals("QrCode"))
+				contId = ++lastQrCodeId;
+			if(nodeType.equals("Shelf"))
+				contId = ++lastShelfId;
 			
 			for (int i = 0; i <= limitY; i++) {
 				for (int j = 0; j <= limitX ;j++) {
 					node = new Node();
 					node.setContentType(nodeType);
 					node.setContentId(contId);
-					
+					System.out.println("Esse eh o id : "+contId);
+					if(nodeType.equals("QrCode"))
+						 lastQrCodeId =contId;
+					if(nodeType.equals("Shelf"))
+						lastShelfId = contId;
 					
 					contId++;
+					
 					if(nodeType.equals("Shelf")){
 						node.setCodeIdShelf(mapBean.getIdShelf());
 						
