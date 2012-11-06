@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 import library.domain.Library;
 import library.domain.Node;
+import library.utils.GlobalUtils;
 
 import org.junit.Test;
 
@@ -12,12 +13,12 @@ public class LibraryTest {
 
 	@Test
 	public void testLibraryConstructor() {
-		Library.Mapping(5,4);
+		Library.Mapping(GlobalUtils.LIBRARY_WIDTH,GlobalUtils.LIBRARY_HEIGHT);
 		
 		String type;
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++) {
 				System.out.println("");
-			for (int j = 0; j < 4; j++) {
+			for (int j = 0; j < GlobalUtils.LIBRARY_WIDTH; j++) {
 				type = Library.map[i][j].getContentType();
 				
 				if(type.equals("Free"))

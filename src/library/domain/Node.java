@@ -148,23 +148,23 @@ public class Node extends Thread {
 	}
 
 	public Node IsUpBrotherReachable(Node principalNode) {
-		return brotherReachable(principalNode,principalNode.getPositionX() -1,principalNode.getPositionY());
+		return brotherReachable(principalNode,principalNode.getPositionY() -1,principalNode.getPositionX());
 	}
 
 	public Node IsLeftBrotherReachable(Node principalNode) {
-		 return brotherReachable(principalNode,principalNode.getPositionX(),principalNode.getPositionY() -1);
+		 return brotherReachable(principalNode,principalNode.getPositionY(),principalNode.getPositionX() -1);
 	}
 	public Node IsRightBrotherReachable(Node principalNode) {
-		return brotherReachable(principalNode,principalNode.getPositionX(),principalNode.getPositionY()+1);
+		return brotherReachable(principalNode,principalNode.getPositionY(),principalNode.getPositionX()+1);
 	}
 	public Node IsDownBrotherReachable(Node principalNode) {
-		return brotherReachable(principalNode,principalNode.getPositionX()+1,principalNode.getPositionY());
+		return brotherReachable(principalNode,principalNode.getPositionY()+1,principalNode.getPositionX());
 	}
-	private Node brotherReachable(Node principalNode, Integer brotherPositionX, Integer brotherPositionY) {
+	private Node brotherReachable(Node principalNode, Integer brotherPositionY, Integer brotherPositionX) {
 		
 		
 		try {
-			Node brotherNode  = getNodeByPosition(brotherPositionX,brotherPositionY);
+			Node brotherNode  = getNodeByPosition(brotherPositionY,brotherPositionX);
 			
 			if(brotherNode.getContentType().equals("Free"))
 				try{
@@ -197,11 +197,11 @@ public class Node extends Thread {
 		this.semaphore = semaphore;
 	}
 
-	public static Node getNodeByPosition( int positionX, int positionY) {
+	public static Node getNodeByPosition( int positionY, int positionX) {
 		
 		NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
 		Node node = new Node();
-		node = nodeMapper.selectByPositionXAndY(GlobalUtils.idLibrary, positionX, positionY);
+		node = nodeMapper.selectByPositionXAndY(GlobalUtils.idLibrary, positionY, positionX);
 		return node;
 		
 	}

@@ -26,11 +26,11 @@ public class SearchTests {
 	static NodeMapper nodeMapper;
 	
 	static{
-		Library.Mapping(5, 4);
-		nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
-		queueNode = new LinkedList<Node>();
-		principalNode = new Node(); 
-		principalNode = nodeMapper.selectByPositionXAndY(principalNode.getIdLibrary(),3,2);
+		Library.Mapping(GlobalUtils.LIBRARY_WIDTH,GlobalUtils.LIBRARY_HEIGHT);
+//		nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
+//		queueNode = new LinkedList<Node>();
+//		principalNode = new Node(); 
+//		principalNode = nodeMapper.selectByPositionXAndY(principalNode.getIdLibrary(),3,2);
 	}
 //Para testar esse metodo mudar o retorno do metodo Node.ReachablesBrothers para nao null	
 //	@Test
@@ -98,15 +98,19 @@ public class SearchTests {
 	public void testBfs() throws Throwable{
 		
 		MonitorSearch monitorSearch = new MonitorSearch();
-		monitorSearch.startSearch(1, 0, 1, 3);
+		monitorSearch.startSearch(14, 1, 14, 50);
+		System.out.println("ola");
 		if(GlobalUtils.pathMap != null){
-			
+			System.out.println("ola");
 		
 			for (Node node : GlobalUtils.pathMap) {
 				
-				System.out.print("("+node.getPositionX()+","+node.getPositionY()+")"+" | ");
+				System.out.print("("+node.getPositionY()+","+node.getPositionX()+")"+" | ");
 			}
 			System.out.println("\nacabou com mapa de tamanho: "+GlobalUtils.pathMap.size());
+		}
+		else{
+			System.out.println("O globalUtil veio NULL");
 		}
 		
 	}

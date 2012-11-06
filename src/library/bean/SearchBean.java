@@ -108,17 +108,17 @@ public class SearchBean implements Serializable{
 			criaArquivoPrintMapHTML();
 			setPrintMapNode(GlobalUtils.PRINT_MAP_FILE);
 		} catch (Exception e) {
-			System.out.println("ERRO: "+e);
+			System.out.println("\nCreate Map ERROR : "+e);
 			setPrintMapNode(GlobalUtils.PRINT_ERRO_FILE);
 		}
 		System.out.println(printMapNode);
 		return printMapNode;
 	}
 
-	private void criaArquivoPrintMapHTML() throws IOException {
+	private void criaArquivoPrintMapHTML() throws IOException, InterruptedException {
 		  
 		StringBuilder out = new StringBuilder();  
-		CanvasMap.init(out);  
+		CanvasMap.init(out, selectedBook);  
 				  
 		String path = GlobalUtils.ROOT_PATH + GlobalUtils.WEB_CONTENT_PATH + GlobalUtils.WEB_LIBRARY_PATH + GlobalUtils.PRINT_MAP_FILE;  
 		File f = new File(path);

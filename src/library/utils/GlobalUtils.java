@@ -13,7 +13,7 @@ public class GlobalUtils {
 	public static final String ROOT_PATH = "/home/thiago-alien/workspace/";
 	public static final String WEB_CONTENT_PATH ="LibraryMapper/WebContent/";
 	public static final String WEB_LIBRARY_PATH = "WebLibraryMapper/";
-	public static final String PRINT_MAP_FILE = "printMap.xhtml";
+	public static final String PRINT_MAP_FILE = "printMap2.xhtml";
 	public static final String PRINT_ERRO_FILE = "printErro.xhtml";
 	public static final String PRINT_MATRIX_FILE = "printMatrix.txt";
 	public static final String DEFAULT_HOST = null;
@@ -27,11 +27,11 @@ public class GlobalUtils {
 	public static int BOOKSHELf_VALUE = 1;
 	public static int EMPTY_VALUE = 0;
 	public static Integer idLibrary = 4;
-	public static boolean stopAllOtherTasks = false;
+	public static volatile boolean stopAllOtherTasks = false;
 	public static ArrayList<Node> pathMap;
 	
-	public static int LIBRARY_HEIGHT = 117;
-	public static int LIBRARY_WIDTH = 59;
+	public static int LIBRARY_HEIGHT = 59;
+	public static int LIBRARY_WIDTH = 117;
 	
 	public	static int MAP_HTML_ROWS = 59;
 	public	static int MAP_HTML_COLUMNS = 117;

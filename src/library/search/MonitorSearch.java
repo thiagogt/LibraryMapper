@@ -11,18 +11,22 @@ public class MonitorSearch {
 		public static SearchGrid inicialSearch;
 		public static SearchGrid finalSearch;
 	
-	public void startSearch(int inicialPositionX,int inicialPositionY, int finalPositionX,int finalPositionY){
-		inicialSearch = new SearchGrid("BEGIN", inicialPositionX, inicialPositionY, finalPositionX, finalPositionY);
-		finalSearch = new SearchGrid("END", finalPositionX, finalPositionY, inicialPositionX, inicialPositionY);
+	public void startSearch(int inicialPositionY,int inicialPositionX, int finalPositionY,int finalPositionX) throws InterruptedException{
+		inicialSearch = new SearchGrid("BEGIN", inicialPositionY, inicialPositionX, finalPositionY, finalPositionX);
+		finalSearch = new SearchGrid("END", finalPositionY, finalPositionX, inicialPositionY, inicialPositionX);
 		
 		inicialSearch.start();
 		finalSearch.start();
-		
+////		
 		while(!GlobalUtils.stopAllOtherTasks);
+//		{
+//			System.out.println("to Aqui");
+//			
+//		}
+//		
+//		System.out.println("Acabou  o monitor");
 		
-		if(inicialSearch.isAlive()){System.out.println("teve q matar a BEGIN");inicialSearch.interrupt();}
-		if(finalSearch.isAlive()){System.out.println("teve q matar a END");finalSearch.interrupt();}
-		
+//		
 
 	}
 	public static void stopAllTasks(){

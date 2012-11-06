@@ -26,7 +26,7 @@ public interface NodeMapper {
 
     Node selectByPrimaryKey(Integer idNode);
 
-    Node selectByPositionXAndY(@Param("idLibrary") Integer idNode,@Param("positionX") Integer positionX,@Param("positionY") Integer positionY);
+    Node selectByPositionXAndY(@Param("idLibrary") Integer idNode,@Param("positionY") Integer positionY,@Param("positionX") Integer positionX);
     
     int updateByExampleSelective(@Param("record") Node record, @Param("example") NodeExample example);
 

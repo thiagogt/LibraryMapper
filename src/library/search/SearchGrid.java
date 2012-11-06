@@ -19,9 +19,9 @@ public class SearchGrid extends Thread{
 	private String fromWhoInicialNodeComes;
 	private Queue<Node> queueSearch;
 	
-	public SearchGrid(String fromNode, int positionX, int posittionY, int finalPositionX, int finalPositionY){
-		this.setNodeIndexX(positionX);
-		this.setNodeIndexY(posittionY);
+	public SearchGrid(String fromNode, int positionY, int posittionX, int finalPositionY, int finalPositionX){
+		this.setNodeIndexX(posittionX);
+		this.setNodeIndexY(positionY);
 		this.setFinalIndexX(finalPositionX);
 		this.setFinalIndexY(finalPositionY);
 		this.setFromWhoInicialNodeComes(fromNode);
@@ -76,9 +76,9 @@ public class SearchGrid extends Thread{
 		this.queueSearch = queueSearch;
 	}
 
-	public  ArrayList<Node> BreadthFirstSearch( Node finalNode){
+	public  void BreadthFirstSearch( Node finalNode){
 	
-		while(!queueSearch.isEmpty()){
+		while(!queueSearch.isEmpty() && GlobalUtils.stopAllOtherTasks == false){
 			try {
 	 
 				Node principalNode = queueSearch.remove();
@@ -87,16 +87,23 @@ public class SearchGrid extends Thread{
 				
 				for (Node adjNode : brothersPrincipalNode) {
 					whoIsYourDaddy(adjNode,principalNode);
-				
+					if( GlobalUtils.stopAllOtherTasks == true){
+						break;
+					}
 					//P(adjNode)
 					adjNode.getSemaphore().acquire();
 					if(adjNode.getWhoMarkedThisNode() != fromWhoInicialNodeComes)
 						adjNode.isInUse++;
-					System.out.println(fromWhoInicialNodeComes+" On the node: "+adjNode.getPositionX()+","+ adjNode.getPositionY());
+					System.out.println(fromWhoInicialNodeComes+" On the node: "+adjNode.getPositionY()+","+ adjNode.getPositionX());
 					if(adjNode.estaEmUsoParaleloAgora(adjNode)){//V(adjNode)
 						Node middleNode = adjNode;
 						System.out.println("No final: "+fromWhoInicialNodeComes);
-						return buildBFSPath(middleNode);
+						if( GlobalUtils.stopAllOtherTasks == true){
+							break;
+						}
+						GlobalUtils.stopAllOtherTasks = true;
+						buildBFSPath(middleNode);
+						
 						
 						//TODO: resolver  o problema do broadcast de fim
 						
@@ -107,13 +114,20 @@ public class SearchGrid extends Thread{
 							adjNode.setColor("GRAY");
 							adjNode.setWhoMarkedThisNode(fromWhoInicialNodeComes);
 							adjNode.setPathCost(principalNode.getPathCost()+1);
+							if( GlobalUtils.stopAllOtherTasks == true){
+								break;
+							}
 							queueSearch.add(adjNode);
 						}
 						else{
 							if(adjNode.getColor().equals("GRAY")){
 								if(adjNode.getWhoMarkedThisNode() != fromWhoInicialNodeComes){
 									Node middleNode = adjNode;
-									return buildBFSPath(middleNode);
+									if( GlobalUtils.stopAllOtherTasks == true){
+										break;
+									}
+									buildBFSPath(middleNode);
+									
 								}
 							}
 						}
@@ -125,29 +139,34 @@ public class SearchGrid extends Thread{
 			}
 			
 		}
-		return null;
+		
 	}
 
-	public ArrayList<Node> buildBFSPath(Node middleNode) {
+	public void buildBFSPath(Node middleNode) {
 		
 		ArrayList<Node> firstHalfList = CreateListFromBeginToMidle(middleNode);
 		System.out.println("Comecou a primeira metade.");
 		for (Node principalNodes : firstHalfList) {
-			System.out.print(principalNodes.getPositionX()+" , "+principalNodes.getPositionY()+" - ");
+			System.out.print(principalNodes.getPositionY()+" , "+principalNodes.getPositionX()+" - ");
 	}
 		ArrayList<Node> secondHalfList = CreateListFromMiddleToEnd(middleNode);
 	System.out.println("Comecou a segunda metade.");
 		for (Node principalNode : secondHalfList) {
-			System.out.print(principalNode.getPositionX()+" , "+principalNode.getPositionY()+" - ");
+			System.out.print(principalNode.getPositionY()+" , "+principalNode.getPositionX()+" - ");
 	}
 		firstHalfList.addAll(secondHalfList);
 		
 //		for (Node principalNode : firstHalfList) {
 //			System.out.print(principalNode.getPositionX()+" , "+principalNode.getPositionY()+" - ");
 //		}
-		System.out.println("terminou");
-		GlobalUtils.stopAllOtherTasks = true;
-		return firstHalfList;
+		System.out.println();
+		System.out.println("iniciando Impressao no GlobalUtils");
+		GlobalUtils.pathMap=new ArrayList<Node>();
+		GlobalUtils.pathMap.addAll(firstHalfList);
+		
+		System.out.println("terminada a Impressao no GlobalUtils");
+		
+		
 	}
 
 	public static ArrayList<Node> CreateListFromMiddleToEnd(Node middleNode) {
@@ -182,13 +201,13 @@ public class SearchGrid extends Thread{
 
 	public  void whoIsYourDaddy(Node adjNode, Node principalNode) {
 
-		Node parentNode = Library.map[principalNode.getPositionX()][principalNode.getPositionY()];
+		Node parentNode = Library.map[principalNode.getPositionY()][principalNode.getPositionX()];
 		if(this.fromWhoInicialNodeComes.equals("BEGIN")){
-			Library.map[adjNode.getPositionX()][adjNode.getPositionY()].setParentFromBeginNode(parentNode);
+			Library.map[adjNode.getPositionY()][adjNode.getPositionX()].setParentFromBeginNode(parentNode);
 			
 		}
 		else{
-			Library.map[adjNode.getPositionX()][adjNode.getPositionY()].setParentFromEndNode(parentNode);
+			Library.map[adjNode.getPositionY()][adjNode.getPositionX()].setParentFromEndNode(parentNode);
 		}
 	}
 
@@ -217,12 +236,12 @@ public class SearchGrid extends Thread{
 	
 	public void run(){
 		Node firstNode = new Node();
-		firstNode = Library.map[this.nodeIndexX][this.nodeIndexY];
+		firstNode = Library.map[this.nodeIndexY][this.nodeIndexX];
 		queueSearch.add(firstNode);
-		GlobalUtils.pathMap = new ArrayList<Node> (); 
-		GlobalUtils.pathMap = this.BreadthFirstSearch(firstNode);
-			
-		GlobalUtils.stopAllOtherTasks = true;
+		
+		this.BreadthFirstSearch(firstNode);
+		GlobalUtils.stopAllOtherTasks = true;	
+		
 	}
 }
 

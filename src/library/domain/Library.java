@@ -31,10 +31,10 @@ public class Library {
 		
 		sizeX = newSize_X;
 		sizeY = newSize_Y;
-		map = new Node[sizeX][sizeY];
+		map = new Node[sizeY][sizeX];
 		
-		for (int i = 0; i < sizeX; i++) {
-			for (int j = 0; j < sizeY; j++) {
+		for (int i = 0; i < sizeY; i++) {
+			for (int j = 0; j < sizeX; j++) {
 				
 				Node node = Node.getNodeByPosition(i,j);
 				if(node!=null)

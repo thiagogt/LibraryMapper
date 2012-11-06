@@ -20,8 +20,8 @@ public class LibraryMain {
 
 	public static void main(String[] args) throws SQLException {
 		try {
-			System.out.println("Carregando a biblioteca");
-			Library.Mapping(GlobalUtils.LIBRARY_HEIGHT, GlobalUtils.LIBRARY_WIDTH);
+			System.out.println("Carregando a biblioteca de id: "+GlobalUtils.idLibrary);
+			Library.Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
 			System.out.println("Pronto");
 			
 		} catch (Exception e) {
