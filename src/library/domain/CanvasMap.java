@@ -1,51 +1,75 @@
 package library.domain;
 
+import java.util.ArrayList;
+
+import javax.faces.bean.ManagedProperty;
+
+import library.bean.SearchBean;
 import library.search.MonitorSearch;
 import library.utils.GlobalUtils;
 
 public class CanvasMap {
 	
-	public static void init(StringBuilder out, Book selectedBook) throws InterruptedException {
-		out.append("<html>\n");  
-		out.append("<head><title>Map</title></head>\n");  
-		out.append("<body onload=\"init();\">\n"+
-					"<canvas id=\"canvas\" width=\"1200\" height=\"600\"></canvas><br/>\n");  
-		out.append("<script type=\"text/javascript\">function init() {\n"+
-				"\tvar canvas = document.getElementById(\"canvas\");\n"+
-				"\tvar ctx = canvas.getContext(\"2d\");\n");
-
+	private SearchBean searchBean;
+	private ArrayList<Node> pathNodeSearch;
+	
+	public SearchBean getSearchBean() {
+		return searchBean;
+	}
+	public void setSearchBean(SearchBean searchBean) {
+		this.searchBean = searchBean;
+	}
+	
+	public  void init(StringBuilder out, Book selectedBook, SearchBean searchBean2) throws InterruptedException {
+//		out.append("<html>\n");  
+//		out.append("<head><title>Map</title></head>\n");  
+//		out.append("<body onload=\"init();\">\n"+
+//					"<canvas id=\"canvas\" width=\"1200\" height=\"600\"></canvas><br/>\n");  
+//		out.append("<script type=\"text/javascript\">function init() {\n"+
+//				"\tvar canvas = document.getElementById(\"canvas\");\n"+
+//				"\tvar ctx = canvas.getContext(\"2d\");\n");
+		searchBean = searchBean2;
 		loadNodesFromBD(out);		
 		loadSearch(out,selectedBook);
-		out.append(	"}</script>\n");
-		out.append("</body>\n</html>");  
+//		out.append(	"}</script>\n");
+//		out.append("</body>\n</html>");  
 
 		
 	}
-	private static void loadSearch(StringBuilder out, Book selectedBook) throws InterruptedException {
-		MonitorSearch monitorSearch = new MonitorSearch();
+	private  void loadSearch(StringBuilder out, Book selectedBook) throws InterruptedException {
+		MonitorSearch monitorSearch = new MonitorSearch(searchBean);
 		
 		//Fazer METODO Q BUSCA POR UM INTERVALO DE ESTANTES
 		
+		ArrayList<Node> pathMap;
+		monitorSearch.startSearch(1,1 , 14, 50);
 		
-		monitorSearch.startSearch(1,1 , 42, 91);
 		int i,j;
 		try{
+			this.pathNodeSearch = this.searchBean.getPathNodeSearch();
 			
-			
-			for (Node node : GlobalUtils.pathMap) {
+			for (Node node : this.pathNodeSearch) {
 				System.out.println("imprimiu globalutils");
 				i = node.getPositionY();
 				j = node.getPositionX();
 				System.out.print("("+i+","+j+")"+" | ");
-				CanvasMap.createJavaScriptForSearchImpression(node,out,i,j);
+				createJavaScriptForSearchImpression(node,out,i,j);
 			}
-			System.out.println("\nacabou com mapa de tamanho: "+GlobalUtils.pathMap.size());
+			System.out.println("\nacabou com mapa de tamanho: "+this.pathNodeSearch.size());
 		}
 		catch(Exception e){
 			System.out.println("Load Search book on html ERROR: "+e);
+			e.printStackTrace();
 		}
 	}
-	private static void createJavaScriptForSearchImpression(Node node,
+	
+	public ArrayList<Node> getPathNodeSearch() {
+		return pathNodeSearch;
+	}
+	public void setPathNodeSearch(ArrayList<Node> pathNodeSearch) {
+		this.pathNodeSearch = pathNodeSearch;
+	}
+	private  void createJavaScriptForSearchImpression(Node node,
 			StringBuilder out, int i, int j) {
 		beginPath(out);
 		drawSearchOnMap(node,out,i,j);
@@ -53,7 +77,7 @@ public class CanvasMap {
 		closePath(out);
 		
 	}
-	private static void drawSearchOnMap(Node node, StringBuilder out, int i,
+	private  void drawSearchOnMap(Node node, StringBuilder out, int i,
 			int j) {
 		if(node.getContentType().equals("QrCode")){
 			out.append("\t\tctx.fillStyle = \"yellow\";\n");
@@ -65,14 +89,15 @@ public class CanvasMap {
 		out.append("\t\tctx.fillRect("+j*size+","+i*size+","+size+","+size+");\n");
 				
 	}
-	private static void loadNodesFromBD(StringBuilder out) {
+	private  void loadNodesFromBD(StringBuilder out) {
 		
 		try {
 			if(Library.map == null)
 				Library.Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
 			for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++) {
 				for (int j = 0; j < GlobalUtils.LIBRARY_WIDTH; j++) {
-					CanvasMap.createJavaScriptForImpression(Library.map[i][j],out,i,j);
+					
+					createJavaScriptForImpression(Library.map[i][j],out,i,j);
 					
 				}
 			}
@@ -82,14 +107,14 @@ public class CanvasMap {
 		
 		
 	}
-	public static void createJavaScriptForImpression(Node node,StringBuilder out,int i,int j) {
+	public  void createJavaScriptForImpression(Node node,StringBuilder out,int i,int j) {
 		beginPath(out);
 		drawPositionFromMap(node,out,i,j);
 
 		closePath(out);
 	}
 
-	public static void drawPositionFromMap(Node node, StringBuilder out,int i,int j) {
+	public  void drawPositionFromMap(Node node, StringBuilder out,int i,int j) {
 		// TODO Auto-generated method stub
 		System.out.println(node.getContentType()+i+j);
 		if(node.getContentType().equals("Free")){
@@ -108,7 +133,7 @@ public class CanvasMap {
 
 	}
 
-	public static void closePath(StringBuilder out) {
+	public  void closePath(StringBuilder out) {
 
 		out.append("\tctx.closePath();\n");		
 		

@@ -29,8 +29,17 @@ public class SearchBean implements Serializable{
 	Book selectedBook;
 	String printMapNode;
 	String idDoQr;
+	StringBuilder outPutCanvas;
+	ArrayList<Node> pathNodeSearch;
 	
-	
+
+	public ArrayList<Node> getPathNodeSearch() {
+		return pathNodeSearch;
+	}
+
+	public void setPathNodeSearch(ArrayList<Node> pathNodeSearch) {
+		this.pathNodeSearch = pathNodeSearch;
+	}
 
 	public void setSelectedIten(String selectedIten) {
 		System.out.println(selectedIten);
@@ -47,6 +56,13 @@ public class SearchBean implements Serializable{
 			System.out.println("Position: "+position);
 			this.selectedBook = books.get(position);
 		}
+	}
+
+	public StringBuilder getOutPutCanvas() {
+		return outPutCanvas;
+	}
+	public void setOutPutCanvas(StringBuilder outPutCanvas) {
+		this.outPutCanvas = outPutCanvas;
 	}
 	public String getIdDoQr() {
 		return idDoQr;
@@ -125,20 +141,21 @@ public class SearchBean implements Serializable{
 	}
 
 	private void criaArquivoPrintMapHTML() throws IOException, InterruptedException {
-		  
+		 CanvasMap canvasMap = new CanvasMap(); 
 		StringBuilder out = new StringBuilder();  
-		CanvasMap.init(out, selectedBook);  
-				  
-		String path = GlobalUtils.ROOT_PATH + GlobalUtils.WEB_CONTENT_PATH + GlobalUtils.WEB_LIBRARY_PATH + GlobalUtils.PRINT_MAP_FILE;  
-		File f = new File(path);
-		System.out.println(f.getAbsoluteFile());
-		try {
-			FileWriter fw = new FileWriter(f);  
-			fw.write(out.toString());  
-			fw.close();	
-		} catch (Exception e) {
-			System.out.println("Erro ao carregar arquivo para impressao da Biblioteca:ERRO "+e);
-		}  
+		canvasMap.init(out, selectedBook,this); 
+		outPutCanvas= out;
+//				  
+//		String path = GlobalUtils.ROOT_PATH + GlobalUtils.WEB_CONTENT_PATH + GlobalUtils.WEB_LIBRARY_PATH + GlobalUtils.PRINT_MAP_FILE;  
+//		File f = new File(path);
+//		System.out.println(f.getAbsoluteFile());
+//		try {
+//			FileWriter fw = new FileWriter(f);  
+//			fw.write(out.toString());  
+//			fw.close();	
+//		} catch (Exception e) {
+//			System.out.println("Erro ao carregar arquivo para impressao da Biblioteca:ERRO "+e);
+//		}  
 		  
 	}
 	

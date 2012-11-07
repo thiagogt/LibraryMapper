@@ -1,19 +1,29 @@
 package library.search;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.faces.bean.ManagedProperty;
+
+import library.bean.SearchBean;
+import library.domain.Node;
 import library.utils.GlobalUtils;
 
 public class MonitorSearch {
 		public static String wichSearchFoundTheMap;
 		public static SearchGrid inicialSearch;
 		public static SearchGrid finalSearch;
-	
+		
+		private SearchBean searchBean;
+		
+	public MonitorSearch(SearchBean searchBean2) {
+			this.searchBean = searchBean2;
+	}
 	public void startSearch(int inicialPositionY,int inicialPositionX, int finalPositionY,int finalPositionX) throws InterruptedException{
-		inicialSearch = new SearchGrid("BEGIN", inicialPositionY, inicialPositionX, finalPositionY, finalPositionX);
-		finalSearch = new SearchGrid("END", finalPositionY, finalPositionX, inicialPositionY, inicialPositionX);
+		inicialSearch = new SearchGrid("BEGIN", inicialPositionY, inicialPositionX, finalPositionY, finalPositionX,searchBean);
+		finalSearch = new SearchGrid("END", finalPositionY, finalPositionX, inicialPositionY, inicialPositionX,searchBean);
 		
 		inicialSearch.start();
 		finalSearch.start();

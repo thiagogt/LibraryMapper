@@ -8,7 +8,6 @@
 
 -concertar as palavras q chegam do bd com codificacao diferente
 
--fazer o tomcat dar refresh na pagina printMap criada  : +-
 
 	
 -monografia

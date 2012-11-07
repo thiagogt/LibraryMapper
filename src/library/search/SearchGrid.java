@@ -6,6 +6,7 @@ import java.util.Queue;
 
 
 
+import library.bean.SearchBean;
 import library.domain.Library;
 import library.domain.Node;
 import library.utils.GlobalUtils;
@@ -18,14 +19,17 @@ public class SearchGrid extends Thread{
 	private int finalIndexY;
 	private String fromWhoInicialNodeComes;
 	private Queue<Node> queueSearch;
+	private SearchBean searchBean;
 	
-	public SearchGrid(String fromNode, int positionY, int posittionX, int finalPositionY, int finalPositionX){
+	public SearchGrid(String fromNode, int positionY, int posittionX, int finalPositionY, int finalPositionX, SearchBean searchBean2){
 		this.setNodeIndexX(posittionX);
 		this.setNodeIndexY(positionY);
 		this.setFinalIndexX(finalPositionX);
 		this.setFinalIndexY(finalPositionY);
 		this.setFromWhoInicialNodeComes(fromNode);
 		this.setQueueSearch(new LinkedList<Node>());
+		this.searchBean = searchBean2;
+		
 	}
 	
 	public int getFinalIndexX() {
@@ -161,10 +165,11 @@ public class SearchGrid extends Thread{
 //		}
 		System.out.println();
 		System.out.println("iniciando Impressao no GlobalUtils");
-		GlobalUtils.pathMap=new ArrayList<Node>();
-		GlobalUtils.pathMap.addAll(firstHalfList);
 		
-		System.out.println("terminada a Impressao no GlobalUtils");
+			ArrayList<Node> pathMap=new ArrayList<Node>();
+			pathMap.addAll(firstHalfList);
+			this.searchBean.setPathNodeSearch(pathMap);
+			System.out.println("terminada a Impressao no GlobalUtils");
 		
 		
 	}

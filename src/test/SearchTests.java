@@ -94,26 +94,26 @@ public class SearchTests {
 //			System.out.print(node.getPositionX()+","+node.getPositionY() +" - ");
 //		}
 //	}
-	@Test
-	public void testBfs() throws Throwable{
-		
-		MonitorSearch monitorSearch = new MonitorSearch();
-		monitorSearch.startSearch(14, 1, 14, 50);
-		System.out.println("ola");
-		if(GlobalUtils.pathMap != null){
-			System.out.println("ola");
-		
-			for (Node node : GlobalUtils.pathMap) {
-				
-				System.out.print("("+node.getPositionY()+","+node.getPositionX()+")"+" | ");
-			}
-			System.out.println("\nacabou com mapa de tamanho: "+GlobalUtils.pathMap.size());
-		}
-		else{
-			System.out.println("O globalUtil veio NULL");
-		}
-		
-	}
+//	@Test
+//	public void testBfs() throws Throwable{
+//		
+//		MonitorSearch monitorSearch = new MonitorSearch();
+//		monitorSearch.startSearch(14, 1, 14, 50);
+//		System.out.println("ola");
+//		if(GlobalUtils.pathMap != null){
+//			System.out.println("ola");
+//		
+//			for (Node node : GlobalUtils.pathMap) {
+//				
+//				System.out.print("("+node.getPositionY()+","+node.getPositionX()+")"+" | ");
+//			}
+//			System.out.println("\nacabou com mapa de tamanho: "+GlobalUtils.pathMap.size());
+//		}
+//		else{
+//			System.out.println("O globalUtil veio NULL");
+//		}
+//		
+//	}
 
 	
 	
