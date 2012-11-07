@@ -45,21 +45,4 @@ public class SQLFactory {
 		return getSqlSessionFactory().openSession();
 
 	}
-
-
-	
-	
-	
-	
-	
-	
-	
-	//	 public Connection getConnection() {
-//	        try {
-//	            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/libraryMapper","postgres","postgres");
-//	        }
-//	        catch(SQLException excecao) {
-//	            throw new RuntimeException(excecao);
-//	        }
-//	    }
 }

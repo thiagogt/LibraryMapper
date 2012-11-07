@@ -28,10 +28,9 @@ public class SearchBean implements Serializable{
 	String selectedIten;
 	Book selectedBook;
 	String printMapNode;
+	String idDoQr;
 	
-	public String getSelectedIten() {
-		return selectedIten;
-	}
+	
 
 	public void setSelectedIten(String selectedIten) {
 		System.out.println(selectedIten);
@@ -49,7 +48,17 @@ public class SearchBean implements Serializable{
 			this.selectedBook = books.get(position);
 		}
 	}
+	public String getIdDoQr() {
+		return idDoQr;
+	}
 
+	public void setIdDoQr(String idDoQr) {
+		this.idDoQr = idDoQr;
+	}
+
+	public String getSelectedIten() {
+		return selectedIten;
+	}
 	public Book getSelectedBook() {
 		return selectedBook;
 	}

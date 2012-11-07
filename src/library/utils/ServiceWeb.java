@@ -20,7 +20,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import sun.net.www.protocol.http.HttpURLConnection;
 public class ServiceWeb {
 		static Logger log = LoggerFactory.getLogger(ServiceWeb.class);
-		public static String InicioURLServicos() throws Exception {
+		
+	public static String InicioURLServicos() throws Exception {
 			String urlString = "http://" +GlobalUtils.DEFAULT_HOST;
 			urlString += ":" + GlobalUtils.DEFAULT_PORT + "/";
 			urlString += GlobalUtils.APPLICATION_NAME + "/servicos/";

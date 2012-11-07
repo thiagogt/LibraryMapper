@@ -1,0 +1,78 @@
+
+- Baixe e instale um versao do postgresl (preferencia 9.1)
+- Crie  um Banco de dados:
+	.abra um terminal
+	.digite "sudo su postgres -c psql template1"
+	.Aparecerá a interface de usuario postgres:
+		
+   	   template1=# ALTER USER postgres WITH PASSWORD ‘password';
+	   template1=# \q
+		(caso nao apareça template1 e sim postgres nao tem problema)
+	.sudo passwd -d postgres
+	.sudo su postgres -c passwd
+	.sudo gedit /etc/postgresql/9.1/main/postgresql.conf
+		Change the line
+
+		#listen_addresses = ‘localhost'
+
+			to
+
+		listen_addresses = ‘*'
+
+		and also change the line
+
+		#password_encryption = on
+
+			to
+
+		password_encryption = on
+	.sudo gedit /etc/postgresql/9.1/main/pg_hba.conf
+		1.
+		Comment out, or delete the current contents of the file, then add this text to the bottom of the file
+
+		DO NOT DISABLE!
+		# If you change this first entry you will need to make sure that the
+		# database
+		# super user can access the database using some other method.
+		# Noninteractive
+		# access to all databases is required during automatic maintenance
+		# (autovacuum, daily cronjob, replication, and similar tasks).
+		#
+		# Database administrative login by UNIX sockets
+		local all postgres ident sameuser
+		# TYPE DATABASE USER CIDR-ADDRESS METHOD
+
+		# "local" is for Unix domain socket connections only
+		local all all md5
+		# IPv4 local connections:
+		host all all 127.0.0.1/32 md5
+		# IPv6 local connections:
+		host all all ::1/128 md5
+
+		# Connections for all PCs on the subnet
+		#
+		# TYPE DATABASE USER IP-ADDRESS IP-MASK METHOD
+		host all all [ip address] [subnet mask] md5
+
+		and in the last line, add in your subnet mask (i.e. 255.255.255.0)
+		and the IP address of the machine that you would like to access your 
+		server (i.e. 138.250.192.115). However, if you would like to enable
+		access to a range of IP addresses, just substitute the last number for 
+		a zero and all machines within that range will be allowed access 
+		(i.e. 138.250.192.0 would allow all machines with an IP address 138.250.192.x 
+		to use the database server).
+
+		
+	.sudo /etc/init.d/postgresql restart
+
+
+-Instale o pdAdmin3
+-Crie um servidor de bd no pgAdmin3:
+	path = localhost
+	senha = postgres
+	usuario e owner = postgres
+-Crie um BD com o nome libraryMapperDB e owner postgres 
+-Faca um restore do BD exemplo passado(backupLibraryMapper.backup) 
+
+
+- Baixe uma versao do tomcat(preferencia 7.x) e o uso como servidor.	
