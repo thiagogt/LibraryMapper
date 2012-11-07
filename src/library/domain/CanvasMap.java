@@ -42,7 +42,16 @@ public class CanvasMap {
 		//Fazer METODO Q BUSCA POR UM INTERVALO DE ESTANTES
 		
 		ArrayList<Node> pathMap;
-		monitorSearch.startSearch(7,9 , 48, 100);
+		int idQrCode = Integer.parseInt(searchBean.getIdDoQr());
+	    
+		
+		int initialY = returnPositionYFrom(idQrCode);
+		int initialX = returnPositionXFrom(idQrCode);
+		int finalY = 48;
+		int finalX = 100;
+		
+		
+		monitorSearch.startSearch(initialY,initialX , finalY, finalX);
 		
 		int i,j;
 		try{
@@ -63,6 +72,14 @@ public class CanvasMap {
 		}
 	}
 	
+	private int returnPositionXFrom(int idQrCode) {
+		int positionX = idQrCode/GlobalUtils.CASA_DE_GRANDEZA_X_QRCODE;
+		return positionX;
+	}
+	private int returnPositionYFrom(int idQrCode) {
+		int positionY = idQrCode%GlobalUtils.CASA_DE_GRANDEZA_X_QRCODE;
+		return positionY;
+	}
 	public ArrayList<Node> getPathNodeSearch() {
 		return pathNodeSearch;
 	}

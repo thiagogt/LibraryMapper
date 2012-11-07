@@ -7,8 +7,6 @@
 -criar arquivo printErro.xhtml.
 
 -concertar as palavras q chegam do bd com codificacao diferente
-
-
 	
 -monografia
 

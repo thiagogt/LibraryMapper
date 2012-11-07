@@ -64,7 +64,7 @@ public class QrCodeMark {
  		//ou 3 no minimo, onde sempre o x comecara na 3 casa.
  		int idQrMark = GlobalUtils.CASA_DE_GRANDEZA_X_QRCODE*node.getPositionX() + node.getPositionY();
  		qrCode.setIdQrMark(idQrMark);
- 		String paramID = "?valueID="+idQrMark;
+ 		String paramID = "?QRId="+idQrMark;
  		qrCode.setUrl(GlobalUtils.DOMAIN_NAME+GlobalUtils.PATH_BOOKSEARCH+paramID);
 		return qrCode;
 	}
