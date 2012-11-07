@@ -42,14 +42,14 @@ public class CanvasMap {
 		//Fazer METODO Q BUSCA POR UM INTERVALO DE ESTANTES
 		
 		ArrayList<Node> pathMap;
-		monitorSearch.startSearch(1,1 , 14, 50);
+		monitorSearch.startSearch(7,9 , 48, 100);
 		
 		int i,j;
 		try{
 			this.pathNodeSearch = this.searchBean.getPathNodeSearch();
 			
 			for (Node node : this.pathNodeSearch) {
-				System.out.println("imprimiu globalutils");
+				
 				i = node.getPositionY();
 				j = node.getPositionX();
 				System.out.print("("+i+","+j+")"+" | ");

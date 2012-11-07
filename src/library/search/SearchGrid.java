@@ -20,8 +20,9 @@ public class SearchGrid extends Thread{
 	private String fromWhoInicialNodeComes;
 	private Queue<Node> queueSearch;
 	private SearchBean searchBean;
+	public MonitorSearch monitorSearch;
 	
-	public SearchGrid(String fromNode, int positionY, int posittionX, int finalPositionY, int finalPositionX, SearchBean searchBean2){
+	public SearchGrid(MonitorSearch monitorSearch, String fromNode, int positionY, int posittionX, int finalPositionY, int finalPositionX, SearchBean searchBean2){
 		this.setNodeIndexX(posittionX);
 		this.setNodeIndexY(positionY);
 		this.setFinalIndexX(finalPositionX);
@@ -29,8 +30,17 @@ public class SearchGrid extends Thread{
 		this.setFromWhoInicialNodeComes(fromNode);
 		this.setQueueSearch(new LinkedList<Node>());
 		this.searchBean = searchBean2;
-		
+		this.monitorSearch = monitorSearch;
 	}
+	
+	public SearchBean getSearchBean() {
+		return searchBean;
+	}
+
+	public void setSearchBean(SearchBean searchBean) {
+		this.searchBean = searchBean;
+	}
+
 	
 	public int getFinalIndexX() {
 		return finalIndexX;
@@ -82,7 +92,7 @@ public class SearchGrid extends Thread{
 
 	public  void BreadthFirstSearch( Node finalNode){
 	
-		while(!queueSearch.isEmpty() && GlobalUtils.stopAllOtherTasks == false){
+		while(!queueSearch.isEmpty() && monitorSearch.stopAllOtherTasks == false){
 			try {
 	 
 				Node principalNode = queueSearch.remove();
@@ -91,7 +101,7 @@ public class SearchGrid extends Thread{
 				
 				for (Node adjNode : brothersPrincipalNode) {
 					whoIsYourDaddy(adjNode,principalNode);
-					if( GlobalUtils.stopAllOtherTasks == true){
+					if( monitorSearch.stopAllOtherTasks == true){
 						break;
 					}
 					//P(adjNode)
@@ -102,10 +112,10 @@ public class SearchGrid extends Thread{
 					if(adjNode.estaEmUsoParaleloAgora(adjNode)){//V(adjNode)
 						Node middleNode = adjNode;
 						System.out.println("No final: "+fromWhoInicialNodeComes);
-						if( GlobalUtils.stopAllOtherTasks == true){
+						if( monitorSearch.stopAllOtherTasks == true){
 							break;
 						}
-						GlobalUtils.stopAllOtherTasks = true;
+						monitorSearch.stopAllOtherTasks = true;
 						buildBFSPath(middleNode);
 						
 						
@@ -118,7 +128,7 @@ public class SearchGrid extends Thread{
 							adjNode.setColor("GRAY");
 							adjNode.setWhoMarkedThisNode(fromWhoInicialNodeComes);
 							adjNode.setPathCost(principalNode.getPathCost()+1);
-							if( GlobalUtils.stopAllOtherTasks == true){
+							if( monitorSearch.stopAllOtherTasks == true){
 								break;
 							}
 							queueSearch.add(adjNode);
@@ -127,7 +137,7 @@ public class SearchGrid extends Thread{
 							if(adjNode.getColor().equals("GRAY")){
 								if(adjNode.getWhoMarkedThisNode() != fromWhoInicialNodeComes){
 									Node middleNode = adjNode;
-									if( GlobalUtils.stopAllOtherTasks == true){
+									if( monitorSearch.stopAllOtherTasks == true){
 										break;
 									}
 									buildBFSPath(middleNode);
@@ -245,7 +255,7 @@ public class SearchGrid extends Thread{
 		queueSearch.add(firstNode);
 		
 		this.BreadthFirstSearch(firstNode);
-		GlobalUtils.stopAllOtherTasks = true;	
+		monitorSearch.stopAllOtherTasks = true;	
 		
 	}
 }

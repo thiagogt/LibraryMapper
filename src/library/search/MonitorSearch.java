@@ -15,20 +15,22 @@ public class MonitorSearch {
 		public static String wichSearchFoundTheMap;
 		public static SearchGrid inicialSearch;
 		public static SearchGrid finalSearch;
-		
+		public volatile Boolean stopAllOtherTasks = false;
 		private SearchBean searchBean;
 		
 	public MonitorSearch(SearchBean searchBean2) {
 			this.searchBean = searchBean2;
 	}
 	public void startSearch(int inicialPositionY,int inicialPositionX, int finalPositionY,int finalPositionX) throws InterruptedException{
-		inicialSearch = new SearchGrid("BEGIN", inicialPositionY, inicialPositionX, finalPositionY, finalPositionX,searchBean);
-		finalSearch = new SearchGrid("END", finalPositionY, finalPositionX, inicialPositionY, inicialPositionX,searchBean);
+		inicialSearch = new SearchGrid(this,"BEGIN", inicialPositionY, inicialPositionX, finalPositionY, finalPositionX,searchBean);
+		finalSearch = new SearchGrid(this,"END", finalPositionY, finalPositionX, inicialPositionY, inicialPositionX,searchBean);
 		
 		inicialSearch.start();
 		finalSearch.start();
 ////		
-		while(!GlobalUtils.stopAllOtherTasks);
+//		while(!stopAllOtherTasks);
+		inicialSearch.join();
+		finalSearch.join();
 //		{
 //			System.out.println("to Aqui");
 //			

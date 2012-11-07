@@ -23,11 +23,11 @@ public class GlobalUtils {
 	public static final String PATH_BOOKSEARCH = "/LibraryMapper/faces/WebLibraryMapper/bookSearch.xhtml";
 	
 	
-	public static int QRMARK_VALUE = 2;
+	
 	public static int BOOKSHELf_VALUE = 1;
 	public static int EMPTY_VALUE = 0;
-	public static Integer idLibrary = 2;
-	public static volatile boolean stopAllOtherTasks = false;
+	public static Integer idLibrary = 3;
+	
 	
 	
 	public static int LIBRARY_HEIGHT = 59;
