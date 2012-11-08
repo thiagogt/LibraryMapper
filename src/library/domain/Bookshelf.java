@@ -227,16 +227,35 @@ import library.utils.SQLFactory;
 		GlobalUtils.idLibrary = returnTheLastBookShelfID() +1;
 	}
 
-	public Node returnNodeOfShelf() {
-		
+	public ArrayList<Node> returnNodeOfShelf() {
+		ArrayList<Node> nodeList = new ArrayList<Node>();
 		BookshelfMapper bookshelfMapper = SQLFactory.section.getMapper(BookshelfMapper.class);
-		
+		int cont = 1;
 		List<Bookshelf> shelfList = bookshelfMapper.selectByCodeIdShelf(this);
+		Node node = new Node();
+		node.getBookShelfNodeFromBD(shelfList.get(0));
+		Bookshelf lastShelf = shelfList.get(0);
+		nodeList.add(node);
 		for (Bookshelf bookshelf : shelfList) {
-			System.out.println("Esse eh o ID: "+bookshelf.getIdBookshelf());
-			//TODO!!!!!!!
+			if(!theyAreTheSameShelf(lastShelf,bookshelf)){
+				node = new Node();
+				node.getBookShelfNodeFromBD(shelfList.get(cont));
+				lastShelf = shelfList.get(cont);
+				nodeList.add(node);
+				cont++;
+			}
 		}
 		
-		return null;
+		return nodeList;
+	}
+
+	private boolean theyAreTheSameShelf(Bookshelf lastShelf, Bookshelf bookshelf) {
+		if(bookshelf.getCodeIdFinal() == lastShelf.getCodeIdFinal()){
+			if(bookshelf.getCodeIdInitial() == lastShelf.getCodeIdInitial())
+				if(bookshelf.getPrefixCodeIdInitial() == lastShelf.getPrefixCodeIdInitial())
+					if(bookshelf.getPrefixCodeIdFinal() == lastShelf.getPrefixCodeIdFinal())
+						return true;
+		}
+		return false;
 	}
 }
