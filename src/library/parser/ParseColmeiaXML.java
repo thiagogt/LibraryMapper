@@ -75,8 +75,8 @@ public class ParseColmeiaXML extends DefaultHandler{
 
 	      NodeList shelfId = element.getElementsByTagName("chamada");
 	      line = (Element) shelfId.item(0);
-	      book.setBookShelf(catchShelfId(getCharacterDataFromElement(line)));
-	      
+	      //book.setBookShelf(catchShelfId(getCharacterDataFromElement(line)));
+	      book.setBookShelf(getCharacterDataFromElement(line));
 	      
 	      books .add(book);
 	    }

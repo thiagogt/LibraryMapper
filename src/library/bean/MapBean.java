@@ -102,14 +102,14 @@ public class MapBean extends HttpServlet implements Serializable{
 		this.lastQrCodeId = lastQrCodeId;
 	}
 	public void setMapItens(String in) throws IOException{
-		
+				Bookshelf bookshelf = new Bookshelf();
 				listFree = new ArrayList<Node>();
 				listShelf = new ArrayList<Node>();
 				listQrCode = new ArrayList<Node>();
 				listForbidden = new ArrayList<Node>();
 				
 				lastQrCodeId = QrCodeMark.returnTheLastQrNodeID()+1;
-				lastShelfId = Bookshelf.returnTheLastBookShelfID()+1;
+				lastShelfId = bookshelf.returnTheLastBookShelfID()+1;
 				
 				  Reader readerString = new StringReader(in);
 			      JsonReader reader = new JsonReader(readerString);

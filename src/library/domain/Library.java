@@ -50,7 +50,8 @@ public class Library {
 		
 		Node.deleteAllNodesFromLibrary(idLibrary2);
 		QrCodeMark.deleteAllQrCodesFromLibrary(idLibrary2);
-		Bookshelf.deleteAllShelvesFromLibrary(idLibrary2);
+		Bookshelf bookshelf = new Bookshelf();
+		bookshelf.deleteAllShelvesFromLibrary(idLibrary2);
 		deleteLibrary(idLibrary2);
 		
 		SQLFactory.section.commit();
@@ -58,11 +59,11 @@ public class Library {
 	}
 	
 	public static void insertNodesToLibrary(Node node) {
-		
+		Bookshelf bookshelf = new Bookshelf();
 		
 		Node.insertNodesToBD(node);
 		if (node.getContentType().equals("Shelf")) {
-			Bookshelf.insertShelfToBD(node);
+			bookshelf.insertShelfToBD(node);
 			
 		}
 		if (node.getContentType().equals("QrCode")) {

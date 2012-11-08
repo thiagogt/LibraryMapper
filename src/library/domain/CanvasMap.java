@@ -47,30 +47,39 @@ public class CanvasMap {
 		
 		int initialY = returnPositionYFrom(idQrCode);
 		int initialX = returnPositionXFrom(idQrCode);
-		int finalY = 48;
-		int finalX = 100;
+		Bookshelf bookshelf = new Bookshelf();
+		bookshelf.createInitialShelfIndetification(searchBean.getSelectedBook().getBookShelf());
+		Node nodeShelf = bookshelf.returnNodeOfShelf();
+//		int finalY = nodeShelf.getPositionY();
+//		int finalX=nodeShelf.getPositionX();
 		
+//		,finalY,finalX);
+//		System.out.println("Esse eh o finalY: "+finalY+",finalX: "+finalX);
 		
-		monitorSearch.startSearch(initialY,initialX , finalY, finalX);
-		
-		int i,j;
-		try{
-			this.pathNodeSearch = this.searchBean.getPathNodeSearch();
-			
-			for (Node node : this.pathNodeSearch) {
-				
-				i = node.getPositionY();
-				j = node.getPositionX();
-				System.out.print("("+i+","+j+")"+" | ");
-				createJavaScriptForSearchImpression(node,out,i,j);
-			}
-			System.out.println("\nacabou com mapa de tamanho: "+this.pathNodeSearch.size());
-		}
-		catch(Exception e){
-			System.out.println("Load Search book on html ERROR: "+e);
-			e.printStackTrace();
-		}
+//		if(finalY>0 && finalX>0){
+//			monitorSearch.startSearch(initialY,initialX , finalY, finalX);
+//			
+//			int i,j;
+//			try{
+//				this.pathNodeSearch = this.searchBean.getPathNodeSearch();
+//				
+//				for (Node node : this.pathNodeSearch) {
+//					
+//					i = node.getPositionY();
+//					j = node.getPositionX();
+//					System.out.print("("+i+","+j+")"+" | ");
+//					createJavaScriptForSearchImpression(node,out,i,j);
+//				}
+//				System.out.println("\nacabou com mapa de tamanho: "+this.pathNodeSearch.size());
+//			}
+//			catch(Exception e){
+//				System.out.println("Load Search book on html ERROR: "+e);
+//				e.printStackTrace();
+//			}
+//		}
 	}
+	
+	
 	
 	private int returnPositionXFrom(int idQrCode) {
 		int positionX = idQrCode/GlobalUtils.CASA_DE_GRANDEZA_X_QRCODE;

@@ -41,23 +41,6 @@ public class SearchBean implements Serializable{
 		this.pathNodeSearch = pathNodeSearch;
 	}
 
-	public void setSelectedIten(String selectedIten) {
-		System.out.println(selectedIten);
-		
-		int inicialOfIten = selectedIten.indexOf("\"");
-		int finalOfIten = selectedIten.lastIndexOf("\"");
-		if(inicialOfIten>=0 && finalOfIten>=0){
-			String iten = selectedIten.substring(inicialOfIten+1, finalOfIten);
-			System.out.println("Esse eh o iten cortado "+iten);
-			
-			this.selectedIten = iten;
-			int position =Integer.parseInt(this.selectedIten);
-			
-			System.out.println("Position: "+position);
-			this.selectedBook = books.get(position);
-		}
-	}
-
 	public StringBuilder getOutPutCanvas() {
 		return outPutCanvas;
 	}
@@ -108,7 +91,23 @@ public class SearchBean implements Serializable{
 	public void setPrintMapNode(String printMapNode) {
 		this.printMapNode = printMapNode;
 	}
-
+	
+	public void setSelectedIten(String selectedIten) {
+		System.out.println(selectedIten);
+		
+		int inicialOfIten = selectedIten.indexOf("\"");
+		int finalOfIten = selectedIten.lastIndexOf("\"");
+		if(inicialOfIten>=0 && finalOfIten>=0){
+			String iten = selectedIten.substring(inicialOfIten+1, finalOfIten);
+			System.out.println("Esse eh o iten cortado "+iten);
+			
+			this.selectedIten = iten;
+			int position =Integer.parseInt(this.selectedIten);
+			
+			System.out.println("Position: "+position);
+			this.selectedBook = books.get(position);
+		}
+	}
 	
 	public String initSearch(){
 		try {

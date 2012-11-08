@@ -3,6 +3,8 @@ package library.mapper;
 import java.util.List;
 import library.domain.Bookshelf;
 import library.domain.BookshelfExample;
+import library.domain.Node;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface BookshelfMapper {
@@ -19,6 +21,8 @@ public interface BookshelfMapper {
     int insertSelective(Bookshelf record);
     
     int selectBiggestId();
+    Node selectByPositionXAndY(@Param("idLibrary") Integer idNode,@Param("positionY") Integer positionY,@Param("positionX") Integer positionX);
+    List<Bookshelf> selectByCodeIdShelf(Bookshelf bookshelf);
     
     List<Bookshelf> selectByExample(BookshelfExample example);
 

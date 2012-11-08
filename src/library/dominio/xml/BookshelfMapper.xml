@@ -4,8 +4,12 @@
   <resultMap id="BaseResultMap" type="library.domain.Bookshelf" >
     <id column="id_bookshelf" property="idBookshelf" jdbcType="INTEGER" />
     <result column="id_library" property="idLibrary" jdbcType="INTEGER" />
-    <result column="code_id_initial" property="codeIdInitial" jdbcType="VARCHAR" />
-    <result column="code_id_final" property="codeIdFinal" jdbcType="VARCHAR" />
+    <result column="code_id_initial" property="codeIdInitial" jdbcType="INTEGER" />
+    <result column="code_id_final" property="codeIdFinal" jdbcType="INTEGER" />
+    <result column="prefix_code_id_initial" property="prefixCodeIdInitial" jdbcType="VARCHAR" />
+    <result column="prefix_code_id_final" property="prefixCodeIdFinal" jdbcType="VARCHAR" />
+    <result column="version_code_id_initial" property="versionCodeIdInitial" jdbcType="VARCHAR" />
+    <result column="version_code_id_final" property="versionCodeIdFinal" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id_bookshelf, id_library, code_id_initial,code_id_final
+    id_bookshelf, id_library, code_id_initial,code_id_final,prefix_code_id_initial,prefix_code_id_final,version_code_id_initial,version_code_id_final
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="library.domain.BookshelfExample" >
     select
@@ -82,6 +86,22 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  
+  <select id="selectByCodeIdShelf" resultMap="BaseResultMap" >
+  	select 
+    <include refid="Base_Column_List" />
+  	from public.bookshelf
+    where 
+    id_library = #{idLibrary,jdbcType=INTEGER} AND
+  	prefix_code_id_initial = #{prefixCodeIdInitial,jdbcType=VARCHAR} AND
+	prefix_code_id_final = #{prefixCodeIdFinal,jdbcType=VARCHAR} AND
+	code_id_initial &lt;= #{codeIdInitial,jdbcType=INTEGER} AND 
+	code_id_final &gt;= #{codeIdFinal,jdbcType=INTEGER}
+  </select>
+  
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -108,9 +128,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="library.domain.Bookshelf" >
-    insert into public.bookshelf (id_bookshelf, id_library, code_id_initial,code_id_final
+    insert into public.bookshelf (id_bookshelf, id_library, code_id_initial,code_id_final,prefix_code_id_initial,prefix_code_id_final,version_code_id_initial,version_code_id_final
       )
-    values (#{idBookshelf,jdbcType=INTEGER}, #{idLibrary,jdbcType=INTEGER}, #{codeIdInitial,jdbcType=VARCHAR},#{codeIdFinal,jdbcType=VARCHAR}
+    values (#{idBookshelf,jdbcType=INTEGER}, #{idLibrary,jdbcType=INTEGER}, #{codeIdInitial,jdbcType=INTEGER},#{codeIdFinal,jdbcType=INTEGER},#{prefixCodeIdInitial,jdbcType=VARCHAR},#{prefixCodeIdFinal,jdbcType=VARCHAR},#{versionCodeIdInitial,jdbcType=VARCHAR},#{versionCodeIdFinal,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="library.domain.Bookshelf" >
@@ -128,6 +148,18 @@
       <if test="codeIdFinal != null" >
         code_id_final,
       </if>
+      <if test="prefixCodeIdInitial != null" >
+        prefix_code_id_initial,
+      </if>
+      <if test="prefixCodeIdFinal != null" >
+        prefix_code_id_final,
+      </if>
+      <if test="versionCodeIdInitial != null" >
+        version_code_id_initial,
+      </if>
+      <if test="versionCodeIdFinal != null" >
+        version_code_id_final,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="idBookshelf != null" >
@@ -137,10 +169,22 @@
         #{idLibrary,jdbcType=INTEGER},
       </if>
       <if test="codeIdInitial != null" >
-        #{codeIdInitial,jdbcType=VARCHAR},
+        #{codeIdInitial,jdbcType=INTEGER},
       </if>
       <if test="codeIdFinal != null" >
-        #{codeIdFinal,jdbcType=VARCHAR},
+        #{codeIdFinal,jdbcType=INTEGER},
+      </if>
+      <if test="prefixCodeIdInitial != null" >
+        #{prefixCodeIdInitial,jdbcType=VARCHAR},
+      </if>
+      <if test="prefixCodeIdFinal != null" >
+        #{prefixCodeIdFinal,jdbcType=VARCHAR},
+      </if>
+      <if test="versionCodeIdInitial != null" >
+        #{versionCodeIdInitial,jdbcType=VARCHAR},
+      </if>
+      <if test="versionCodeIdFinal != null" >
+        #{versionCodeIdFinal,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -160,10 +204,22 @@
         id_library = #{record.idLibrary,jdbcType=INTEGER},
       </if>
       <if test="record.codeIdInitial != null" >
-        code_id_initial = #{record.codeIdInitial,jdbcType=VARCHAR},
+        code_id_initial = #{record.codeIdInitial,jdbcType=INTEGER},
       </if>
       <if test="record.codeIdFinal != null" >
-        code_id_final = #{record.codeIdFinal,jdbcType=VARCHAR},
+        code_id_final = #{record.codeIdFinal,jdbcType=INTEGER},
+      </if>
+      <if test="record.prefixCodeIdInitial != null" >
+        prefix_code_id_initial = #{record.prefixCodeIdInitial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prefixCodeIdFinal != null" >
+        prefix_code_id_final = #{record.prefixCodeIdFinal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.versionCodeIdInitial != null" >
+        version_code_id_initial = #{record.versionCodeIdInitial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.versionCodeIdFinal != null" >
+        version_code_id_final = #{record.versionCodeIdFinal,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -174,8 +230,12 @@
     update public.bookshelf
     set id_bookshelf = #{record.idBookshelf,jdbcType=INTEGER},
       id_library = #{record.idLibrary,jdbcType=INTEGER},
-      code_id_initial = #{record.codeIdInitial,jdbcType=VARCHAR},
-      code_id_final = #{record.codeIdFinal,jdbcType=VARCHAR}
+      code_id_initial = #{record.codeIdInitial,jdbcType=INTEGER},
+      code_id_final = #{record.codeIdFinal,jdbcType=INTEGER},
+      prefix_code_id_initial = #{record.prefixCodeIdInitial,jdbcType=VARCHAR},
+      prefix_code_id_final = #{record.prefixCodeIdFinal,jdbcType=VARCHAR},
+      version_code_id_initial = #{record.versionCodeIdInitial,jdbcType=VARCHAR},
+      version_code_id_final = #{record.versionCodeIdFinal,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -187,10 +247,22 @@
         id_library = #{idLibrary,jdbcType=INTEGER},
       </if>
       <if test="codeIdInitial != null" >
-        code_id_initial = #{codeIdInitial,jdbcType=VARCHAR},
+        code_id_initial = #{codeIdInitial,jdbcType=INTEGER},
       </if>
       <if test="codeIdFinal != null" >
-        code_id_final = #{codeIdFinal,jdbcType=VARCHAR},
+        code_id_final = #{codeIdFinal,jdbcType=INTEGER},
+      </if>
+      <if test="prefixCodeIdInitial != null" >
+        prefix_code_id_initial = #{prefixCodeIdInitial,jdbcType=VARCHAR},
+      </if>
+      <if test="prefixCodeIdFinal != null" >
+        prefix_code_id_final = #{prefixCodeIdFinal,jdbcType=VARCHAR},
+      </if>
+      <if test="versionCodeIdInitial != null" >
+        version_code_id_initial = #{versionCodeIdInitial,jdbcType=VARCHAR},
+      </if>
+      <if test="versionCodeIdFinal != null" >
+        version_code_id_final = #{versionCodeIdFinal,jdbcType=VARCHAR},
       </if>
     </set>
     where id_bookshelf = #{idBookshelf,jdbcType=INTEGER}
@@ -198,8 +270,12 @@
   <update id="updateByPrimaryKey" parameterType="library.domain.Bookshelf" >
     update public.bookshelf
     set id_library = #{idLibrary,jdbcType=INTEGER},
-      code_id_initial = #{codeIdInitial,jdbcType=VARCHAR},
-      code_id_final = #{codeIdFinal,jdbcType=VARCHAR}
+      code_id_initial = #{codeIdInitial,jdbcType=INTEGER},
+      code_id_final = #{codeIdFinal,jdbcType=INTEGER},
+      prefix_code_id_initial = #{prefixCodeIdInitial,jdbcType=VARCHAR},
+      prefix_code_id_final = #{prefixCodeIdFinal,jdbcType=VARCHAR},
+      version_code_id_initial = #{versionCodeIdInitial,jdbcType=VARCHAR},
+      version_code_id_final = #{versionCodeIdFinal,jdbcType=VARCHAR}
     where id_bookshelf = #{idBookshelf,jdbcType=INTEGER}
   </update>
 </mapper>
