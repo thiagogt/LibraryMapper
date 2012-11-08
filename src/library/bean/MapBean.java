@@ -17,6 +17,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpServlet;
 
+import sun.org.mozilla.javascript.regexp.SubString;
+
 import library.domain.Bookshelf;
 import library.domain.CanvasMap;
 import library.domain.JsonMap;
@@ -142,6 +144,8 @@ public class MapBean extends HttpServlet implements Serializable{
 	   String id = null;
 	   String type = null;
 	   String idShelf = null;
+	   String idShelfInitial = null;
+	   String idShelfFinal = null;
 	   int top = 0;
 	   int left = 0;
 	   int height = 0;
@@ -167,6 +171,8 @@ public class MapBean extends HttpServlet implements Serializable{
 			   if(type.equals("shelf")){
 				   
 			   	 idShelf = reader.nextString();
+			   	 idShelfInitial = cathInitialPart(idShelf);
+			   	 idShelfFinal = catchFinalPart(idShelf);
 			   }	
 		   }else{
 		           reader.skipValue();
@@ -174,10 +180,21 @@ public class MapBean extends HttpServlet implements Serializable{
 		   
 	   }
 	  reader.endObject();
-	  return new JsonMap(id, type,top,left,height,width,idShelf);
+	  return new JsonMap(id, type,top,left,height,width,idShelfInitial,idShelfFinal);
    }
 	
 	
+	public String catchFinalPart(String idShelf) {
+		int charAsterisc = idShelf.indexOf("**");
+		return idShelf.substring(charAsterisc+2,idShelf.length());
+	}
+
+	public String cathInitialPart(String idShelf) {
+		int charAsterisc = idShelf.indexOf("**");
+		return idShelf.substring(0,charAsterisc);
+		
+	}
+
 	private void initMatrizFromHtml() {
 		int id =Node.returnTheLastNodeID()+1;
 		for (int i = 0; i < GlobalUtils.MAP_HTML_ROWS; i++) {
@@ -208,7 +225,7 @@ public class MapBean extends HttpServlet implements Serializable{
 	    		  listForbidden.addAll(typeOfNode(mapBean,"Forbidden"));
 	    	  }
 	    	  if(mapBean.getType().equals("shelf")){
-	    		  buildBookShelf(mapBean);
+
 	    		  listShelf.addAll(typeOfNode(mapBean,"Shelf"));
 	    	  }
 	    	  //Free,QrCode,Forbidden,Shelf
@@ -251,8 +268,8 @@ public class MapBean extends HttpServlet implements Serializable{
 					contId++;
 					
 					if(nodeType.equals("Shelf")){
-						node.setCodeIdShelf(mapBean.getIdShelf());
-						
+						node.setCodeIdInitialShelf(mapBean.getIdInitialShelf());
+						node.setCodeIdFinalShelf(mapBean.getIdFinalShelf());
 					}
 					node.setPositionX(positionX+j);
 					node.setPositionY(positionY+i);
@@ -284,18 +301,6 @@ public class MapBean extends HttpServlet implements Serializable{
 		
 	}
 
-	private void buildBookShelf(JsonMap mapBean) {
-		Bookshelf shelf = new Bookshelf();
- 		
-		int positionY = mapBean.getLeft()/GlobalUtils.SIZE_EQUIVALENT_ONE_POINT_HTML_MAP_CREATION;
-		int positionX = mapBean.getTop()/GlobalUtils.SIZE_EQUIVALENT_ONE_POINT_HTML_MAP_CREATION;
- 		
- 		
- 		shelf.setCodeId(mapBean.getIdShelf());
- 		shelf.setPosition_X(positionX);
- 		shelf.setPosition_Y(positionY);
-		
-	}
 	private void printNodesInFile() throws IOException {
 		StringBuilder out = new StringBuilder();  
 		catchAllTheTypesfrom(out);

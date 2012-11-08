@@ -9,14 +9,15 @@ public class JsonMap {
 	int height;
 	
 	int width;
-	String idShelf;
+	String idInitialShelf;
+	private String idFinalShelf;
 	
 
 	public JsonMap() {
 		
 	}
 
-	public JsonMap(String id2, String type2, int top2, int left2, int heigth2,int width2,String idShelf) {
+	public JsonMap(String id2, String type2, int top2, int left2, int heigth2,int width2,String idShelfInitial,String idShelfFinal) {
 		this.id = id2;
 		this.type = type2;
 		this.top = top2;
@@ -24,7 +25,16 @@ public class JsonMap {
 		this.height = heigth2;
 		System.out.println("ola aii  "+heigth2);
 		this.width = width2;
-		this.idShelf = idShelf;
+		this.idInitialShelf = idShelfInitial;
+		this.idFinalShelf = idShelfFinal;
+	}
+
+	public String getIdFinalShelf() {
+		return idFinalShelf;
+	}
+
+	public void setIdFinalShelf(String idFinalShelf) {
+		this.idFinalShelf = idFinalShelf;
 	}
 
 	public String getId() {
@@ -47,12 +57,12 @@ public class JsonMap {
 		this.type = type;
 	}
 
-	public String getIdShelf() {
-		return idShelf;
+	public String getIdInitialShelf() {
+		return idInitialShelf;
 	}
 
-	public void setIdShelf(String idShelf) {
-		this.idShelf = idShelf;
+	public void setIdInitialShelf(String idInitialShelf) {
+		this.idInitialShelf = idInitialShelf;
 	}
 
 	

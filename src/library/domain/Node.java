@@ -16,8 +16,9 @@ public class Node extends Thread {
     private Integer positionY;
     private Integer contentId;
     private Integer idLibrary;
-    private String codeIdShelf;
-   	private String contentType;//Free,QrCode,Forbidden,Shelf
+    private String codeIdInitialShelf;
+    private String codeIdFinalShelf;
+	private String contentType;//Free,QrCode,Forbidden,Shelf
     private Node parentFromBeginNode;
     private Node parentFromEndNode;
 	public int isInUse;
@@ -39,7 +40,15 @@ public class Node extends Thread {
 		this.color = "WHITE";
 		this.idLibrary = GlobalUtils.idLibrary;
 	}
-	
+
+   	public String getCodeIdFinalShelf() {
+		return codeIdFinalShelf;
+	}
+
+	public void setCodeIdFinalShelf(String codeIdFinalShelf) {
+		this.codeIdFinalShelf = codeIdFinalShelf;
+	}
+
 	public int getPathCost() {
 		return pathCost;
 	}
@@ -55,12 +64,12 @@ public class Node extends Thread {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	 public String getCodeIdShelf() {
-		return codeIdShelf;
+	 public String getCodeIdInitialShelf() {
+		return codeIdInitialShelf;
 	}
 
-	public void setCodeIdShelf(String codeIdShelf) {
-		this.codeIdShelf = codeIdShelf;
+	public void setCodeIdInitialShelf(String codeIdInitialShelf) {
+		this.codeIdInitialShelf = codeIdInitialShelf;
 	}
  
     public int getIsInUse() {

@@ -13,8 +13,9 @@ public class Bookshelf {
 
     private Integer idLibrary;
 
-    private String codeId;
-    int position_X;
+    private String codeIdInitial;
+    private String codeIdFinal;
+	int position_X;
 	
    	int position_Y;
 
@@ -25,6 +26,14 @@ public class Bookshelf {
    	public void setPosition_X(int position_X) {
    		this.position_X = position_X;
    	}
+
+    public String getCodeIdFinal() {
+		return codeIdFinal;
+	}
+
+	public void setCodeIdFinal(String codeIdFinal) {
+		this.codeIdFinal = codeIdFinal;
+	}
 
    	public int getPosition_Y() {
    		return position_Y;
@@ -51,12 +60,12 @@ public class Bookshelf {
         this.idLibrary = idLibrary;
     }
 
-    public String getCodeId() {
-        return codeId;
+    public String getCodeIdInitial() {
+        return codeIdInitial;
     }
 
-    public void setCodeId(String codeId) {
-        this.codeId = codeId;
+    public void setCodeIdInitial(String codeIdInitial) {
+        this.codeIdInitial = codeIdInitial;
     }
 
 	public static void deleteAllShelvesFromLibrary(int idLibrary) {
@@ -78,7 +87,8 @@ public class Bookshelf {
 	private static Bookshelf changeNodeToBookShelf(Node node) {
 		Bookshelf shelf = new Bookshelf();
 		shelf.setIdBookshelf(node.getContentId());
-		shelf.setCodeId(node.getCodeIdShelf());
+		shelf.setCodeIdInitial(node.getCodeIdInitialShelf());
+		shelf.setCodeIdFinal(node.getCodeIdFinalShelf());
 		shelf.setIdLibrary(node.getIdLibrary());
 		return shelf;
 	}

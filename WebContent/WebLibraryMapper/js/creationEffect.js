@@ -64,7 +64,7 @@ $(document).ready(function(){
                 		idBloco++;
                 		var tempType = $(x).attr("class").split(' ');
         				if(tempType[0] == "shelf"){
-        					nome = prompt ("Qual o id dessa estante?");
+        					nome = prompt ("Coloque o Id do livro inicial e o final da estante\n separados por **.");
         					while (nome == null || nome == "");
         					alert ("Id: "+nome);
         					IdEstantes[idPosition] = nome;
