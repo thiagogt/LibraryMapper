@@ -54,10 +54,12 @@ public class CanvasMap {
 		bookshelf.createInitialShelfIndetification(searchBean.getSelectedBook().getBookShelf());
 		bookshelf.createFinalShelfIndetification(searchBean.getSelectedBook().getBookShelf());
 		ArrayList<Node> nodeShelfList = bookshelf.returnNodeOfShelf();
-		for (Node nodeShelf : nodeShelfList) {
+		for (Node node : nodeShelfList) {
+			createJavaScriptForSearchImpression(node, out, node.getPositionY(), node.getPositionX());
+		}
 			monitorSearch =  new MonitorSearch(searchBean);
-			 finalY = nodeShelf.getPositionY();
-			 finalX=nodeShelf.getPositionX();
+			 finalY = nodeShelfList.get(0).getPositionY();
+			 finalX=nodeShelfList.get(0).getPositionX();
 			 monitorSearch.startSearch(initialY,initialX , finalY, finalX);
 				
 				int i,j;
@@ -78,7 +80,7 @@ public class CanvasMap {
 					System.out.println("Load Search book on html ERROR: "+e);
 					e.printStackTrace();
 				}
-		}
+		
 		
 		
 //		,finalY,finalX);
@@ -117,6 +119,8 @@ public class CanvasMap {
 			int j) {
 		if(node.getContentType().equals("QrCode")){
 			out.append("\t\tctx.fillStyle = \"yellow\";\n");
+		}else if(node.getContentType().equals("SelectedShelf")){
+			out.append("\t\tctx.fillStyle = \"blue\";\n");
 		}else
 			out.append("\t\tctx.fillStyle = \"red\";\n");
 		

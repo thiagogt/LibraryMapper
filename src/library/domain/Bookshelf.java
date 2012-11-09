@@ -245,22 +245,18 @@ import library.utils.SQLFactory;
 		
 		ArrayList<Node> nodeList = new ArrayList<Node>();
 		BookshelfMapper bookshelfMapper = SQLFactory.section.getMapper(BookshelfMapper.class);
-		int cont = 0;
+		
 		List<Bookshelf> shelfList = bookshelfMapper.selectByCodeIdShelf(this);
 		System.out.println("Esse eh o tamanho da lista shelf: "+shelfList.size());
-		Node node = new Node();
-		node.getBookShelfNodeFromBD(shelfList.get(0));
-		Bookshelf lastShelf = shelfList.get(0);
-		nodeList.add(node);
+		Node node;
+		
 		for (Bookshelf bookshelf2 : shelfList) {
-			if(!theyAreTheSameShelf(lastShelf,bookshelf2)){
-				node = new Node();
-				node.getBookShelfNodeFromBD(bookshelf2);
-				nodeList.add(node);
-				
-			}
-			lastShelf = shelfList.get(cont);
-			cont++;
+			
+			node = new Node();
+			node.getBookShelfNodeFromBD(bookshelf2);
+			node.setContentType("SelectedShelf");
+			nodeList.add(node);
+			
 		}
 		
 		return nodeList;
