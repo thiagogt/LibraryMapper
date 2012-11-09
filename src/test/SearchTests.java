@@ -26,7 +26,9 @@ public class SearchTests {
 	static NodeMapper nodeMapper;
 	
 	static{
-		Library.Mapping(GlobalUtils.LIBRARY_WIDTH,GlobalUtils.LIBRARY_HEIGHT);
+		Library library = new Library();
+		library.Mapping(GlobalUtils.LIBRARY_WIDTH,GlobalUtils.LIBRARY_HEIGHT);
+		GlobalUtils.mapLibrary = library.map;
 //		nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
 //		queueNode = new LinkedList<Node>();
 //		principalNode = new Node(); 

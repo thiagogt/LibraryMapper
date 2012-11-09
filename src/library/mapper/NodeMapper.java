@@ -35,6 +35,8 @@ public interface NodeMapper {
     int updateByPrimaryKeySelective(Node record);
 
     int updateByPrimaryKey(Node record);
+
+	Node selectNodeByContentIdAndType(@Param("idLibrary") Integer idLibrary,@Param("contentId")Integer contentId, @Param("contentType")String contentType);
     
     
 }

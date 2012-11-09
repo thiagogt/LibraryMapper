@@ -37,8 +37,9 @@ public class CanvasMap {
 		
 	}
 	private  void loadSearch(StringBuilder out, Book selectedBook) throws InterruptedException {
-		MonitorSearch monitorSearch = new MonitorSearch(searchBean);
-		
+		MonitorSearch monitorSearch ;
+		int finalY;
+		int finalX;
 		//Fazer METODO Q BUSCA POR UM INTERVALO DE ESTANTES
 		
 		ArrayList<Node> pathMap;
@@ -48,34 +49,43 @@ public class CanvasMap {
 		int initialY = returnPositionYFrom(idQrCode);
 		int initialX = returnPositionXFrom(idQrCode);
 		Bookshelf bookshelf = new Bookshelf();
+		System.out.println("A busca eh feita por essa Estante:"+ searchBean.getSelectedBook().getBookShelf());
+		
 		bookshelf.createInitialShelfIndetification(searchBean.getSelectedBook().getBookShelf());
-		Node nodeShelf = bookshelf.returnNodeOfShelf();
-//		int finalY = nodeShelf.getPositionY();
-//		int finalX=nodeShelf.getPositionX();
+		bookshelf.createFinalShelfIndetification(searchBean.getSelectedBook().getBookShelf());
+		ArrayList<Node> nodeShelfList = bookshelf.returnNodeOfShelf();
+		for (Node nodeShelf : nodeShelfList) {
+			monitorSearch =  new MonitorSearch(searchBean);
+			 finalY = nodeShelf.getPositionY();
+			 finalX=nodeShelf.getPositionX();
+			 monitorSearch.startSearch(initialY,initialX , finalY, finalX);
+				
+				int i,j;
+				try{
+					
+					this.pathNodeSearch = this.searchBean.getPathNodeSearch();
+					
+					for (Node node : this.pathNodeSearch) {
+						
+						i = node.getPositionY();
+						j = node.getPositionX();
+						System.out.print("("+i+","+j+")"+" | ");
+						createJavaScriptForSearchImpression(node,out,i,j);
+					}
+					System.out.println("\nacabou com mapa de tamanho: "+this.pathNodeSearch.size());
+				}
+				catch(Exception e){
+					System.out.println("Load Search book on html ERROR: "+e);
+					e.printStackTrace();
+				}
+		}
+		
 		
 //		,finalY,finalX);
 //		System.out.println("Esse eh o finalY: "+finalY+",finalX: "+finalX);
 		
 //		if(finalY>0 && finalX>0){
-//			monitorSearch.startSearch(initialY,initialX , finalY, finalX);
-//			
-//			int i,j;
-//			try{
-//				this.pathNodeSearch = this.searchBean.getPathNodeSearch();
-//				
-//				for (Node node : this.pathNodeSearch) {
-//					
-//					i = node.getPositionY();
-//					j = node.getPositionX();
-//					System.out.print("("+i+","+j+")"+" | ");
-//					createJavaScriptForSearchImpression(node,out,i,j);
-//				}
-//				System.out.println("\nacabou com mapa de tamanho: "+this.pathNodeSearch.size());
-//			}
-//			catch(Exception e){
-//				System.out.println("Load Search book on html ERROR: "+e);
-//				e.printStackTrace();
-//			}
+			
 //		}
 	}
 	
@@ -118,17 +128,20 @@ public class CanvasMap {
 	private  void loadNodesFromBD(StringBuilder out) {
 		
 		try {
-			if(Library.map == null)
-				Library.Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
+			Library library = new Library();
+			if(GlobalUtils.mapLibrary == null)
+				library.Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
+				GlobalUtils.mapLibrary = library.map;
 			for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++) {
 				for (int j = 0; j < GlobalUtils.LIBRARY_WIDTH; j++) {
 					
-					createJavaScriptForImpression(Library.map[i][j],out,i,j);
+					createJavaScriptForImpression(GlobalUtils.mapLibrary[i][j],out,i,j);
 					
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("Nao foi possivel carregar a biblioteca: ERRO : "+e);
+			e.printStackTrace();
 		}
 		
 		
@@ -141,7 +154,7 @@ public class CanvasMap {
 	}
 
 	public  void drawPositionFromMap(Node node, StringBuilder out,int i,int j) {
-		// TODO Auto-generated method stub
+		
 		System.out.println(node.getContentType()+i+j);
 		if(node.getContentType().equals("Free")){
 			System.out.println("entro");

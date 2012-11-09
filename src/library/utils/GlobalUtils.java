@@ -26,7 +26,7 @@ public class GlobalUtils {
 	
 	public static int BOOKSHELf_VALUE = 1;
 	public static int EMPTY_VALUE = 0;
-	public static Integer idLibrary = 2;
+	public static Integer idLibrary = 5;
 	
 	
 	
@@ -36,6 +36,7 @@ public class GlobalUtils {
 	public	static int MAP_HTML_ROWS = 59;
 	public	static int MAP_HTML_COLUMNS = 117;
 	public	static int SIZE_EQUIVALENT_ONE_POINT_HTML_MAP_CREATION = 10;
+	public static Node[][] mapLibrary;
 	public static final int NODE_SIZE = 10;
 	public static final int CASA_DE_GRANDEZA_X_QRCODE = 100;
 }

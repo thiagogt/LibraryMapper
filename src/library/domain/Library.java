@@ -9,25 +9,27 @@ import library.utils.SQLFactory;
 public class Library {
     public static Integer idLibrary;
 
-    public static Integer sizeX;
-    public static Integer sizeY;
+    public  Integer sizeX;
+    public  Integer sizeY;
 
-    public static ArrayList<Bookshelf> bookShelves;
-    public static ArrayList<QrCodeMark> qrCodesMarks;
+    public  ArrayList<Bookshelf> bookShelves;
+    public  ArrayList<QrCodeMark> qrCodesMarks;
 	
-    public static Node[][] map;
+    public  Node[][] map;
 	
+    public Library(){
+    	idLibrary = GlobalUtils.idLibrary;
+    }
+    
     public Library(Integer idLibrary2, int lIBRARY_WIDTH, int lIBRARY_HEIGHT) {
 		idLibrary = idLibrary2;
 		sizeX = lIBRARY_WIDTH;
 		sizeY = lIBRARY_HEIGHT;
 	}
 
-	public void Libray(){
-    	
-    }
+	
     
-	public static void Mapping(int newSize_X, int newSize_Y){
+	public  void Mapping(int newSize_X, int newSize_Y){
 		
 		sizeX = newSize_X;
 		sizeY = newSize_Y;

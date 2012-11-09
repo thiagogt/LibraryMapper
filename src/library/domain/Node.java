@@ -241,6 +241,16 @@ public class Node extends Thread {
 	public static void setNewLibraryId(){
 		GlobalUtils.idLibrary = returnTheLastNodeID() +1;
 	}
+
+	public void getBookShelfNodeFromBD(Bookshelf bookshelf) {
+		NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
+		
+		System.out.println(bookshelf.getIdBookshelf());
+		Node node = nodeMapper.selectNodeByContentIdAndType(GlobalUtils.idLibrary,bookshelf.getIdBookshelf(),"Shelf");
+		System.out.println("Sao as posicoes yx da estante: "+node.getPositionY()+","+node.getPositionX());
+		setPositionX(node.getPositionX());
+		setPositionY(node.getPositionY());
+	}
 	
 
 	

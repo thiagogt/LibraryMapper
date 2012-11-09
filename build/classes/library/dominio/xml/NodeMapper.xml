@@ -100,6 +100,17 @@
     select max(id_node) from public.node
   </select>
  
+  <select id="selectNodeByContentIdAndType" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+     
+    
+    from public.node
+    where  id_library = #{idLibrary,jdbcType=INTEGER} AND 
+    content_type = #{contentType,jdbcType=VARCHAR} AND
+    content_id = #{contentId,jdbcType=INTEGER}
+  </select>
+  
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

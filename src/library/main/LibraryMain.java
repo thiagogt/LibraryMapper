@@ -21,7 +21,10 @@ public class LibraryMain {
 	public static void main(String[] args) throws SQLException {
 		try {
 			System.out.println("Carregando a biblioteca de id: "+GlobalUtils.idLibrary);
-			Library.Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
+			Library library = new Library();
+			
+			library.Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
+			GlobalUtils.mapLibrary = library.map;
 			System.out.println("Pronto");
 			
 		} catch (Exception e) {

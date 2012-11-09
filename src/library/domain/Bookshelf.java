@@ -27,6 +27,11 @@ import library.utils.SQLFactory;
 	
 	int position_X;
 	int position_Y;
+	
+	public Bookshelf(){
+		this.idLibrary = GlobalUtils.idLibrary;
+	}
+	
 	public String getPrefixCodeIdInitial() {
 		return prefixCodeIdInitial;
 	}
@@ -140,15 +145,16 @@ import library.utils.SQLFactory;
 
 	public  void createInitialShelfIndetification(
 			String codeIdInitialShelf) {
-		
+		String versionCodeId = null;
 		int sizeOfcodeId = foundDivisionBetweenPrefixAndVersionId(codeIdInitialShelf);
 		
 		String prefixCodeId = codeIdInitialShelf.substring(0, sizeOfcodeId);
 		Integer numberPosition = returnNumberPosition(prefixCodeId) ;
 		setCodeIdInitial(cacthVersionId(prefixCodeId));
 		setPrefixCodeIdInitial(prefixCodeId.substring(0, numberPosition));
-		
-		String versionCodeId = codeIdInitialShelf.substring(sizeOfcodeId+1, codeIdInitialShelf.length());
+		//para o caso de nao haver versao do livro
+		if(sizeOfcodeId < codeIdInitialShelf.length())
+			versionCodeId = codeIdInitialShelf.substring(sizeOfcodeId+1, codeIdInitialShelf.length());
 		setVersionCodeIdInitial(versionCodeId);
 		
 	}
@@ -166,13 +172,15 @@ import library.utils.SQLFactory;
 
 	public  void createFinalShelfIndetification(String codeIdFinalShelf) {
 		int sizeOfcodeId = foundDivisionBetweenPrefixAndVersionId(codeIdFinalShelf);
+		String versionCodeId = null;
 		
 		String prefixCodeId = codeIdFinalShelf.substring(0, sizeOfcodeId);
 		Integer numberPosition = returnNumberPosition(prefixCodeId) ;
 		setCodeIdFinal(cacthVersionId(prefixCodeId));
 		setPrefixCodeIdFinal(prefixCodeId.substring(0, numberPosition));
-		
-		String versionCodeId = codeIdFinalShelf.substring(sizeOfcodeId+1, codeIdFinalShelf.length());
+		//para o caso de nao haver versao do livro
+		if(sizeOfcodeId < codeIdFinalShelf.length())
+			versionCodeId = codeIdFinalShelf.substring(sizeOfcodeId+1, codeIdFinalShelf.length());
 		setVersionCodeIdFinal(versionCodeId);
 		
 	}
@@ -203,9 +211,9 @@ import library.utils.SQLFactory;
 			}
 		}
 		else
-			endSpace = firstSpace;
+			endSpace = xml.length();
 		
-		
+		System.out.println("esse eh o size da separacao: "+endSpace);
 		return endSpace;
 	}
 	public  int cacthVersionId(String codeIdShelf) {
@@ -228,22 +236,31 @@ import library.utils.SQLFactory;
 	}
 
 	public ArrayList<Node> returnNodeOfShelf() {
+		System.out.println("Esse eh o prefixo: "+getPrefixCodeIdInitial());
+		System.out.println("Esse eh code id: "+getCodeIdInitial());
+		System.out.println("Essa eh a versao: "+getVersionCodeIdInitial());
+		System.out.println("Esse eh o prefixo Final: "+getPrefixCodeIdFinal());
+		System.out.println("Esse eh code id Final: "+getCodeIdFinal());
+		System.out.println("Essa eh a versao Final: "+getVersionCodeIdFinal());
+		
 		ArrayList<Node> nodeList = new ArrayList<Node>();
 		BookshelfMapper bookshelfMapper = SQLFactory.section.getMapper(BookshelfMapper.class);
-		int cont = 1;
+		int cont = 0;
 		List<Bookshelf> shelfList = bookshelfMapper.selectByCodeIdShelf(this);
+		System.out.println("Esse eh o tamanho da lista shelf: "+shelfList.size());
 		Node node = new Node();
 		node.getBookShelfNodeFromBD(shelfList.get(0));
 		Bookshelf lastShelf = shelfList.get(0);
 		nodeList.add(node);
-		for (Bookshelf bookshelf : shelfList) {
-			if(!theyAreTheSameShelf(lastShelf,bookshelf)){
+		for (Bookshelf bookshelf2 : shelfList) {
+			if(!theyAreTheSameShelf(lastShelf,bookshelf2)){
 				node = new Node();
-				node.getBookShelfNodeFromBD(shelfList.get(cont));
-				lastShelf = shelfList.get(cont);
+				node.getBookShelfNodeFromBD(bookshelf2);
 				nodeList.add(node);
-				cont++;
+				
 			}
+			lastShelf = shelfList.get(cont);
+			cont++;
 		}
 		
 		return nodeList;
@@ -252,9 +269,11 @@ import library.utils.SQLFactory;
 	private boolean theyAreTheSameShelf(Bookshelf lastShelf, Bookshelf bookshelf) {
 		if(bookshelf.getCodeIdFinal() == lastShelf.getCodeIdFinal()){
 			if(bookshelf.getCodeIdInitial() == lastShelf.getCodeIdInitial())
-				if(bookshelf.getPrefixCodeIdInitial() == lastShelf.getPrefixCodeIdInitial())
-					if(bookshelf.getPrefixCodeIdFinal() == lastShelf.getPrefixCodeIdFinal())
-						return true;
+				if(bookshelf.getPrefixCodeIdInitial().equals(lastShelf.getPrefixCodeIdInitial()))
+					if(bookshelf.getPrefixCodeIdFinal().equals(lastShelf.getPrefixCodeIdFinal()))
+						if(bookshelf.getVersionCodeIdFinal().equals(lastShelf.getVersionCodeIdFinal()))
+							if(bookshelf.getVersionCodeIdInitial().equals(lastShelf.getVersionCodeIdInitial()))
+								return true;
 		}
 		return false;
 	}

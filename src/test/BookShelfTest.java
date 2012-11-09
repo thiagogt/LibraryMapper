@@ -1,7 +1,10 @@
 package test;
 
+import java.util.ArrayList;
+
 import library.domain.Bookshelf;
 import library.domain.Node;
+import library.utils.GlobalUtils;
 
 import org.junit.Test;
 
@@ -66,14 +69,16 @@ public class BookShelfTest {
 	@Test
 	public void returnNodeOfShelfTest(){
 		Bookshelf bookshelf = new Bookshelf();
-		bookshelf.setIdLibrary(2);
+		bookshelf.setIdLibrary(GlobalUtils.idLibrary);
 		
-		String initial = "preI1 verI1";
-		String finaly = "pref1 verf1";
+		String initial = "REF. Q180 F381i";
+		String finaly = "REF. Q180 F381i";
 		bookshelf.createInitialShelfIndetification(initial);
 		bookshelf.createFinalShelfIndetification(finaly);
 		
-		Node node = bookshelf.returnNodeOfShelf();
+		ArrayList<Node> node = bookshelf.returnNodeOfShelf();
+		System.out.println(node.size());
+		
 	}
 //	
 //	<select id="selectByCodeIdShelf" resultMap="BaseResultMap" >

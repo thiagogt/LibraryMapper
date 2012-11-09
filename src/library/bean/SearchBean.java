@@ -133,6 +133,7 @@ public class SearchBean implements Serializable{
 			setPrintMapNode(GlobalUtils.PRINT_MAP_FILE);
 		} catch (Exception e) {
 			System.out.println("\nCreate Map ERROR : "+e);
+			e.printStackTrace();
 			setPrintMapNode(GlobalUtils.PRINT_ERRO_FILE);
 		}
 		System.out.println(printMapNode);

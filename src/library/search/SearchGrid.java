@@ -21,8 +21,9 @@ public class SearchGrid extends Thread{
 	private Queue<Node> queueSearch;
 	private SearchBean searchBean;
 	public MonitorSearch monitorSearch;
+	public Node[][] library;
 	
-	public SearchGrid(MonitorSearch monitorSearch, String fromNode, int positionY, int posittionX, int finalPositionY, int finalPositionX, SearchBean searchBean2){
+	public SearchGrid(Node[][] library2,MonitorSearch monitorSearch, String fromNode, int positionY, int posittionX, int finalPositionY, int finalPositionX, SearchBean searchBean2){
 		this.setNodeIndexX(posittionX);
 		this.setNodeIndexY(positionY);
 		this.setFinalIndexX(finalPositionX);
@@ -31,6 +32,7 @@ public class SearchGrid extends Thread{
 		this.setQueueSearch(new LinkedList<Node>());
 		this.searchBean = searchBean2;
 		this.monitorSearch = monitorSearch;
+		this.library = library2;
 	}
 	
 	public SearchBean getSearchBean() {
@@ -216,13 +218,13 @@ public class SearchGrid extends Thread{
 
 	public  void whoIsYourDaddy(Node adjNode, Node principalNode) {
 
-		Node parentNode = Library.map[principalNode.getPositionY()][principalNode.getPositionX()];
+		Node parentNode = library[principalNode.getPositionY()][principalNode.getPositionX()];
 		if(this.fromWhoInicialNodeComes.equals("BEGIN")){
-			Library.map[adjNode.getPositionY()][adjNode.getPositionX()].setParentFromBeginNode(parentNode);
+			library[adjNode.getPositionY()][adjNode.getPositionX()].setParentFromBeginNode(parentNode);
 			
 		}
 		else{
-			Library.map[adjNode.getPositionY()][adjNode.getPositionX()].setParentFromEndNode(parentNode);
+			library[adjNode.getPositionY()][adjNode.getPositionX()].setParentFromEndNode(parentNode);
 		}
 	}
 
@@ -251,7 +253,7 @@ public class SearchGrid extends Thread{
 	
 	public void run(){
 		Node firstNode = new Node();
-		firstNode = Library.map[this.nodeIndexY][this.nodeIndexX];
+		firstNode = library[this.nodeIndexY][this.nodeIndexX];
 		queueSearch.add(firstNode);
 		
 		this.BreadthFirstSearch(firstNode);

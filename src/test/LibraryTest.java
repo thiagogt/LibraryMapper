@@ -11,28 +11,30 @@ import org.junit.Test;
 
 public class LibraryTest {
 
-//	@Test
-//	public void testLibraryConstructor() {
-//		Library.Mapping(GlobalUtils.LIBRARY_WIDTH,GlobalUtils.LIBRARY_HEIGHT);
-//		
-//		String type;
-//		for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++) {
-//				System.out.println("");
-//			for (int j = 0; j < GlobalUtils.LIBRARY_WIDTH; j++) {
-//				type = Library.map[i][j].getContentType();
-//				
-//				if(type.equals("Free"))
-//					System.out.print("0"+" | ");
-//				if(type.equals("Forbidden"))
-//					System.out.print("x"+" | ");
-//				if(type.equals("QrCode"))
-//					System.out.print("qr"+" | ");
-//				if(type.equals("Shelf"))
-//					System.out.print("s"+" | ");
-//			}
-//			
-//		}
-//	}
+	@Test
+	public void testLibraryConstructor() {
+		
+		Library library = new Library();
+		library.Mapping(GlobalUtils.LIBRARY_WIDTH,GlobalUtils.LIBRARY_HEIGHT);
+		GlobalUtils.mapLibrary = library.map;
+		String type;
+		for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++) {
+				System.out.println("");
+			for (int j = 0; j < GlobalUtils.LIBRARY_WIDTH; j++) {
+				type = GlobalUtils.mapLibrary[i][j].getContentType();
+				
+				if(type.equals("Free"))
+					System.out.print("0"+" | ");
+				if(type.equals("Forbidden"))
+					System.out.print("x"+" | ");
+				if(type.equals("QrCode"))
+					System.out.print("qr"+" | ");
+				if(type.equals("Shelf"))
+					System.out.print("s"+" | ");
+			}
+			
+		}
+	}
 	@Test
 	public void testDeleteLibrary() {
 		Library.deleteAllLibrary(2);
