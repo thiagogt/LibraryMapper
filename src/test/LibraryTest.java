@@ -37,7 +37,7 @@ public class LibraryTest {
 //	}
 	@Test
 	public void testDeleteLibrary() {
-		Library.deleteAllLibrary(12);
+		Library.deleteAllLibrary(2);
 		
 	}
 	@Test

@@ -146,18 +146,62 @@ import library.utils.SQLFactory;
 	public  void createInitialShelfIndetification(
 			String codeIdInitialShelf) {
 		String versionCodeId = null;
+		
+		//IMPORTANTE: caso nao haja versao, ou seja, vem apenas a identificacao sem espaco depois(EX: QA1**QA999) Ele retorna -1.
+		//DEVE-SE LEMBRAR O USUARIO DE COLOCAR A VERSAO DO LIVRO OU ESTANTE NA IDENTIFICACAO
 		int sizeOfcodeId = foundDivisionBetweenPrefixAndVersionId(codeIdInitialShelf);
 		
 		String prefixCodeId = codeIdInitialShelf.substring(0, sizeOfcodeId);
 		Integer numberPosition = returnNumberPosition(prefixCodeId) ;
 		setCodeIdInitial(cacthVersionId(prefixCodeId));
 		setPrefixCodeIdInitial(prefixCodeId.substring(0, numberPosition));
+		
 		//para o caso de nao haver versao do livro
 		if(sizeOfcodeId < codeIdInitialShelf.length())
 			versionCodeId = codeIdInitialShelf.substring(sizeOfcodeId+1, codeIdInitialShelf.length());
 		setVersionCodeIdInitial(versionCodeId);
+		verifySpecialCases();
+		
+		
 		
 	}
+	private void verifySpecialCases() {
+		if(prefixCodeIdInitial.contains("IME-RAE-CEA")){
+			setPrefixCodeIdInitial("IME-RAE-CEA");
+			setPrefixCodeIdFinal("IME-RAE-CEA");
+			setCodeIdInitial(0);
+			setCodeIdFinal(0);
+		}
+
+		if(prefixCodeIdInitial.contains("BBC")){
+			setPrefixCodeIdInitial("BBC");
+			setPrefixCodeIdFinal("BBC");
+			setCodeIdInitial(0);
+			setCodeIdFinal(0);
+		}
+		if(prefixCodeIdInitial.contains("BDBH")){
+			setPrefixCodeIdInitial("BDBH");
+			setPrefixCodeIdFinal("BDBH");
+			setCodeIdInitial(0);
+			setCodeIdFinal(0);
+		}
+
+		if(prefixCodeIdInitial.contains("REF.")){
+			setPrefixCodeIdInitial("REF.");
+			setPrefixCodeIdFinal("REF.");
+			setCodeIdInitial(0);
+			setCodeIdFinal(0);
+		}
+
+		if(prefixCodeIdInitial.contains("OB/ESP")){
+			setPrefixCodeIdInitial("OB/ESP");
+			setPrefixCodeIdFinal("OB/ESP");
+			setCodeIdInitial(0);
+			setCodeIdFinal(0);
+		}
+		
+	}
+
 	private Integer returnNumberPosition(String prefixCodeId) {
 		for (int i = 0; i < prefixCodeId.length(); i++) {
 			Character character = prefixCodeId.charAt(i);
@@ -182,7 +226,7 @@ import library.utils.SQLFactory;
 		if(sizeOfcodeId < codeIdFinalShelf.length())
 			versionCodeId = codeIdFinalShelf.substring(sizeOfcodeId+1, codeIdFinalShelf.length());
 		setVersionCodeIdFinal(versionCodeId);
-		
+		verifySpecialCases();
 	}
 	public  int foundDivisionBetweenPrefixAndVersionId(String xml){
 		int firstSpace = xml.indexOf(' ');
@@ -205,6 +249,7 @@ import library.utils.SQLFactory;
 				
 			}
 			else{
+				System.out.println("aquiii");
 				endSpace = firstSpace;
 							
 				

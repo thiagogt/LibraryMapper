@@ -19,6 +19,16 @@ public class Library {
 	
     public Library(){
     	idLibrary = GlobalUtils.idLibrary;
+    	
+    	if(GlobalUtils.mapLibrary == null){
+			Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
+			GlobalUtils.mapLibrary = map;
+    	}
+    	else{
+    		map = new Node[GlobalUtils.LIBRARY_HEIGHT][];
+			for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++)
+				map[i] = GlobalUtils.mapLibrary[i].clone();
+	    }
     }
     
     public Library(Integer idLibrary2, int lIBRARY_WIDTH, int lIBRARY_HEIGHT) {

@@ -96,7 +96,7 @@ public class SearchGrid extends Thread{
 	
 		while(!queueSearch.isEmpty() && monitorSearch.stopAllOtherTasks == false){
 			try {
-	 
+				System.out.println("entrei no try");
 				Node principalNode = queueSearch.remove();
 				
 				Queue<Node> brothersPrincipalNode = findReachablesBrothers(principalNode);
@@ -104,6 +104,7 @@ public class SearchGrid extends Thread{
 				for (Node adjNode : brothersPrincipalNode) {
 					whoIsYourDaddy(adjNode,principalNode);
 					if( monitorSearch.stopAllOtherTasks == true){
+						System.out.println("existe um stop= true 1");
 						break;
 					}
 					//P(adjNode)
@@ -115,6 +116,7 @@ public class SearchGrid extends Thread{
 						Node middleNode = adjNode;
 						System.out.println("No final: "+fromWhoInicialNodeComes);
 						if( monitorSearch.stopAllOtherTasks == true){
+							System.out.println("existe um stop= true 2");
 							break;
 						}
 						monitorSearch.stopAllOtherTasks = true;
@@ -131,6 +133,7 @@ public class SearchGrid extends Thread{
 							adjNode.setWhoMarkedThisNode(fromWhoInicialNodeComes);
 							adjNode.setPathCost(principalNode.getPathCost()+1);
 							if( monitorSearch.stopAllOtherTasks == true){
+								System.out.println("existe um stop= true 3");
 								break;
 							}
 							queueSearch.add(adjNode);
@@ -140,6 +143,7 @@ public class SearchGrid extends Thread{
 								if(adjNode.getWhoMarkedThisNode() != fromWhoInicialNodeComes){
 									Node middleNode = adjNode;
 									if( monitorSearch.stopAllOtherTasks == true){
+										System.out.println("existe um stop= true 4");
 										break;
 									}
 									buildBFSPath(middleNode);
@@ -255,7 +259,8 @@ public class SearchGrid extends Thread{
 		Node firstNode = new Node();
 		firstNode = library[this.nodeIndexY][this.nodeIndexX];
 		queueSearch.add(firstNode);
-		
+		monitorSearch.stopAllOtherTasks  = false;
+		System.out.println("pelo menos eu entrei! size: "+queueSearch.size()+" and stop: "+monitorSearch.stopAllOtherTasks);
 		this.BreadthFirstSearch(firstNode);
 		monitorSearch.stopAllOtherTasks = true;	
 		

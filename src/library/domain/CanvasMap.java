@@ -133,9 +133,7 @@ public class CanvasMap {
 		
 		try {
 			Library library = new Library();
-			if(GlobalUtils.mapLibrary == null)
-				library.Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
-				GlobalUtils.mapLibrary = library.map;
+			
 			for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++) {
 				for (int j = 0; j < GlobalUtils.LIBRARY_WIDTH; j++) {
 					
