@@ -40,6 +40,7 @@ public class MonitorSearch {
 //				lybrary.map[i][j] = node;
 //			}
 //		}
+		
 		stopAllOtherTasks = false;
 		inicialSearch = new SearchGrid(lybrary.map,this,"BEGIN", inicialPositionY, inicialPositionX, finalPositionY, finalPositionX,searchBean);
 		finalSearch = new SearchGrid(lybrary.map,this,"END", finalPositionY, finalPositionX, inicialPositionY, inicialPositionX,searchBean);
@@ -50,7 +51,11 @@ public class MonitorSearch {
 //		while(!stopAllOtherTasks);
 		inicialSearch.join();
 		finalSearch.join();
-		
+		if(inicialSearch.isAlive() || finalSearch.isAlive()){
+
+			inicialSearch.interrupt();
+			finalSearch.interrupt();
+		}
 //		{
 //			System.out.println("to Aqui");
 //			

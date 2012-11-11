@@ -193,7 +193,7 @@ import library.utils.SQLFactory;
 			setCodeIdFinal(0);
 		}
 
-		if(prefixCodeIdInitial.contains("OB/ESP")){
+		if(prefixCodeIdInitial.contains("OB/ESP") || prefixCodeIdInitial.contains("RARE")){
 			setPrefixCodeIdInitial("OB/ESP");
 			setPrefixCodeIdFinal("OB/ESP");
 			setCodeIdInitial(0);
