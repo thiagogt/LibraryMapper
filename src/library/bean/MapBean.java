@@ -17,6 +17,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpServlet;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import sun.org.mozilla.javascript.regexp.SubString;
 
 import library.domain.Bookshelf;
@@ -25,6 +28,7 @@ import library.domain.JsonMap;
 import library.domain.Node;
 import library.domain.QrCodeMark;
 import library.utils.GlobalUtils;
+import library.utils.SQLFactory;
 import library.domain.Library;
 
 import com.google.gson.Gson;
@@ -50,6 +54,8 @@ public class MapBean extends HttpServlet implements Serializable{
 	ArrayList<Node> listForbidden;
 	ArrayList<Node> listShelf;
 	ArrayList<Node> listQrCode;
+	
+	private static Log log = LogFactory.getLog(MapBean.class);
 	
 	public ArrayList<Node> getListForbidden() {
 		return listForbidden;
@@ -316,7 +322,7 @@ public class MapBean extends HttpServlet implements Serializable{
 			fw.write(out.toString());  
 			fw.close();	
 		} catch (Exception e) {
-			System.out.println("Erro ao carregar arquivo para impressao da Biblioteca:ERRO "+e);
+			log.error("Erro ao carregar arquivo para impressao da Biblioteca:ERRO ",e);
 			e.printStackTrace();
 		}  
 		  		

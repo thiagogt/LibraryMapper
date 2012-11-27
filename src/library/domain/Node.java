@@ -7,6 +7,8 @@ import library.mapper.NodeMapper;
 import library.utils.GlobalUtils;
 import library.utils.SQLFactory;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 
 public class Node extends Thread implements Cloneable{
@@ -25,9 +27,11 @@ public class Node extends Thread implements Cloneable{
 	private Semaphore semaphore;
 	private String color;
 	private String whoMarkedThisNode;
-	public String getWhoMarkedThisNode() {
-		return whoMarkedThisNode;
-	}
+	
+	private static Log log = LogFactory.getLog(Node.class);
+	
+	
+	
 	@Override
 	protected Node clone() throws CloneNotSupportedException {
 		
@@ -46,7 +50,9 @@ public class Node extends Thread implements Cloneable{
 		node.whoMarkedThisNode = this.whoMarkedThisNode;
 		return node;
 	}
-
+	public String getWhoMarkedThisNode() {
+		return whoMarkedThisNode;
+	}
 	public void setWhoMarkedThisNode(String whoMarkedThisNode) {
 		this.whoMarkedThisNode = whoMarkedThisNode;
 	}
@@ -201,7 +207,7 @@ public class Node extends Thread implements Cloneable{
 					return brotherNode;
 				}	
 				catch (Exception e) {
-					System.out.println("Ainda nao tem cor");
+					log.error("Ainda nao tem cor ",e);
 					e.printStackTrace();
 					return brotherNode;
 				}
@@ -213,7 +219,7 @@ public class Node extends Thread implements Cloneable{
 			
 				
 		} catch (Exception e) {
-			System.out.println("Erro no brotherReachable");
+			log.error("Erro no brotherReachable ",e);
 			e.printStackTrace();
 			return null;
 		}

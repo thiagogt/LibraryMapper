@@ -147,8 +147,7 @@ import library.utils.SQLFactory;
 			String codeIdInitialShelf) {
 		String versionCodeId = null;
 		
-		//IMPORTANTE: caso nao haja versao, ou seja, vem apenas a identificacao sem espaco depois(EX: QA1**QA999) Ele retorna -1.
-		//DEVE-SE LEMBRAR O USUARIO DE COLOCAR A VERSAO DO LIVRO OU ESTANTE NA IDENTIFICACAO
+		
 		int sizeOfcodeId = foundDivisionBetweenPrefixAndVersionId(codeIdInitialShelf);
 		
 		String prefixCodeId = codeIdInitialShelf.substring(0, sizeOfcodeId);
@@ -239,7 +238,6 @@ import library.utils.SQLFactory;
 				Character character = xml.charAt(i);
 				if(Character.isDigit(character)){
 					firstDigit = i;
-					
 					break;
 				}	
 			}

@@ -1,6 +1,10 @@
 package library.domain;
 
 import java.util.ArrayList;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import library.domain.Node;
 import library.mapper.LibraryMapper;
 import library.utils.GlobalUtils;
@@ -14,7 +18,7 @@ public class Library {
 
     public  ArrayList<Bookshelf> bookShelves;
     public  ArrayList<QrCodeMark> qrCodesMarks;
-	
+    private static Log log = LogFactory.getLog(Library.class);
     public volatile Node[][] map;
 	
     public Library(){
@@ -29,7 +33,7 @@ public class Library {
 					try {
 						GlobalUtils.mapLibrary[i][j] = map[i][j].clone();
 					} catch (CloneNotSupportedException e) {
-						System.out.println("Nao foi possivel clonar elemento");
+						log.error("Nao foi possivel clonar elemento ",e);
 						e.printStackTrace();
 					}
 				}
@@ -43,7 +47,7 @@ public class Library {
 					try {
 						map[i][j] = GlobalUtils.mapLibrary[i][j].clone();
 					} catch (CloneNotSupportedException e) {
-						System.out.println("Nao foi possivel clonar elemento");
+						log.error("Nao foi possivel clonar elemento ",e);
 						e.printStackTrace();
 					}
 				}

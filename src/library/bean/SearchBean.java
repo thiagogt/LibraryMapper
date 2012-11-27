@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import library.domain.Book;
 import library.domain.CanvasMap;
 import library.domain.Library;
@@ -33,7 +36,8 @@ public class SearchBean implements Serializable{
 	ArrayList<Node> pathNodeSearch;
 	public boolean naoExisteAEstante;
 	
-
+	private static Log log = LogFactory.getLog(SearchBean.class);
+	
 	public ArrayList<Node> getPathNodeSearch() {
 		return pathNodeSearch;
 	}
@@ -114,16 +118,9 @@ public class SearchBean implements Serializable{
 		try {
 			String xml = ServiceWeb.querySearchOnColmeia(this.query);
 			this.books = 	ParseColmeiaXML.extractBookList(xml);
-//			//for (Book book : books) {
-//				System.out.println(book.getNomeLivro());	
-//				System.out.println(book.getAutorLivro());
-//				System.out.println(book.getBookShelf());
-//				System.out.println(book.getCopiasNessaBiblioteca());
-//				System.out.println(book.getPublisher());
-//				System.out.println();
-//			}
+
 		} catch (Exception e) {
-			System.out.println("ERRO: Nao foi possivel carregar toda a busca! : "+e);
+			log.error("ERRO: Nao foi possivel carregar toda a busca! : ",e);
 			e.printStackTrace();
 		}
 		return "bookSelection.xhtml";
@@ -135,10 +132,11 @@ public class SearchBean implements Serializable{
 			if(!naoExisteAEstante)
 				setPrintMapNode(GlobalUtils.PRINT_MAP_FILE);
 			else{
+				log.info("A estante "+selectedBook.getBookShelf()+" nao existe");
 				setPrintMapNode(GlobalUtils.PRINT_ERRO_FILE);
 			}
 		} catch (Exception e) {
-			System.out.println("\nCreate Map ERROR : "+e);
+			log.error("\nCreate Map ERROR : ",e);
 			e.printStackTrace();
 			setPrintMapNode(GlobalUtils.PRINT_ERRO_FILE);
 		}
@@ -151,17 +149,7 @@ public class SearchBean implements Serializable{
 		StringBuilder out = new StringBuilder();  
 		canvasMap.init(out, selectedBook,this); 
 		outPutCanvas= out;
-//				  
-//		String path = GlobalUtils.ROOT_PATH + GlobalUtils.WEB_CONTENT_PATH + GlobalUtils.WEB_LIBRARY_PATH + GlobalUtils.PRINT_MAP_FILE;  
-//		File f = new File(path);
-//		System.out.println(f.getAbsoluteFile());
-//		try {
-//			FileWriter fw = new FileWriter(f);  
-//			fw.write(out.toString());  
-//			fw.close();	
-//		} catch (Exception e) {
-//			System.out.println("Erro ao carregar arquivo para impressao da Biblioteca:ERRO "+e);
-//		}  
+
 		  
 	}
 	

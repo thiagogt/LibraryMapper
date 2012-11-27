@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 
 
 import library.bean.SearchBean;
@@ -23,6 +26,7 @@ public class SearchGrid extends Thread{
 	public MonitorSearch monitorSearch;
 	public Node[][] library;
 	
+	private static Log log = LogFactory.getLog(SearchGrid.class);
 	
 	public SearchGrid(Node[][] library2,MonitorSearch monitorSearch, String fromNode, int positionY, int posittionX, int finalPositionY, int finalPositionX, SearchBean searchBean2){
 		this.setNodeIndexX(posittionX);
@@ -152,7 +156,7 @@ public class SearchGrid extends Thread{
 					principalNode.setColor("BLACK");
 				}
 			} catch (Exception e) {
-				System.out.println("Erro na busca");
+				log.error("Erro na busca ",e);
 				e.printStackTrace();
 				
 			}

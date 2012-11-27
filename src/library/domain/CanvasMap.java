@@ -4,14 +4,19 @@ import java.util.ArrayList;
 
 import javax.faces.bean.ManagedProperty;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import library.bean.SearchBean;
 import library.search.MonitorSearch;
 import library.utils.GlobalUtils;
+import library.utils.SQLFactory;
 
 public class CanvasMap {
 	
 	private SearchBean searchBean;
 	private ArrayList<Node> pathNodeSearch;
+	private static Log log = LogFactory.getLog(CanvasMap.class);
 	
 	public SearchBean getSearchBean() {
 		return searchBean;
@@ -76,7 +81,7 @@ public class CanvasMap {
 				}
 			}
 			catch(Exception e){
-				System.out.println("Load Search book on html ERROR: "+e);
+				log.error("Load Search book on html ERROR: ",e);
 				e.printStackTrace();
 				searchBean.naoExisteAEstante = true;
 			}
@@ -138,7 +143,7 @@ public class CanvasMap {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Nao foi possivel carregar a biblioteca: ERRO : "+e);
+			log.error("Nao foi possivel carregar a biblioteca: ERRO : ",e);
 			e.printStackTrace();
 		}
 		
