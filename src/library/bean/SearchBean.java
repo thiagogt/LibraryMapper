@@ -31,6 +31,7 @@ public class SearchBean implements Serializable{
 	String idDoQr;
 	StringBuilder outPutCanvas;
 	ArrayList<Node> pathNodeSearch;
+	public boolean naoExisteAEstante;
 	
 
 	public ArrayList<Node> getPathNodeSearch() {
@@ -130,7 +131,11 @@ public class SearchBean implements Serializable{
 	public String createMap() throws IOException {
 		try {
 			criaArquivoPrintMapHTML();
-			setPrintMapNode(GlobalUtils.PRINT_MAP_FILE);
+			if(!naoExisteAEstante)
+				setPrintMapNode(GlobalUtils.PRINT_MAP_FILE);
+			else{
+				setPrintMapNode(GlobalUtils.PRINT_ERRO_FILE);
+			}
 		} catch (Exception e) {
 			System.out.println("\nCreate Map ERROR : "+e);
 			e.printStackTrace();

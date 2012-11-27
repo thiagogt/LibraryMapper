@@ -38,6 +38,7 @@ public class CanvasMap {
 	}
 	private  void loadSearch(StringBuilder out, Book selectedBook) throws InterruptedException {
 		MonitorSearch monitorSearch ;
+		searchBean.naoExisteAEstante = false;
 		int finalY;
 		int finalX;
 		//Fazer METODO Q BUSCA POR UM INTERVALO DE ESTANTES
@@ -54,41 +55,39 @@ public class CanvasMap {
 		bookshelf.createInitialShelfIndetification(searchBean.getSelectedBook().getBookShelf());
 		bookshelf.createFinalShelfIndetification(searchBean.getSelectedBook().getBookShelf());
 		ArrayList<Node> nodeShelfList = bookshelf.returnNodeOfShelf();
-		for (Node node : nodeShelfList) {
-			createJavaScriptForSearchImpression(node, out, node.getPositionY(), node.getPositionX());
-		}
+		if(nodeShelfList.size()>0){
+			for (Node node : nodeShelfList) {
+				createJavaScriptForSearchImpression(node, out, node.getPositionY(), node.getPositionX());
+			}
 			monitorSearch =  new MonitorSearch(searchBean);
 			 finalY = nodeShelfList.get(0).getPositionY();
 			 finalX=nodeShelfList.get(0).getPositionX();
 			 monitorSearch.startSearch(initialY,initialX , finalY, finalX);
 				
-				int i,j;
-				try{
+			int i,j;
+			try{
+				
+				this.pathNodeSearch = this.searchBean.getPathNodeSearch();
+				
+				for (Node node : this.pathNodeSearch) {
 					
-					this.pathNodeSearch = this.searchBean.getPathNodeSearch();
-					
-					for (Node node : this.pathNodeSearch) {
-						
-						i = node.getPositionY();
-						j = node.getPositionX();
-						System.out.print("("+i+","+j+")"+" | ");
-						createJavaScriptForSearchImpression(node,out,i,j);
-					}
-					System.out.println("\nacabou com mapa de tamanho: "+this.pathNodeSearch.size());
+					i = node.getPositionY();
+					j = node.getPositionX();
+					System.out.print("("+i+","+j+")"+" | ");
+					createJavaScriptForSearchImpression(node,out,i,j);
 				}
-				catch(Exception e){
-					System.out.println("Load Search book on html ERROR: "+e);
-					e.printStackTrace();
-				}
-		
-		
-		
-//		,finalY,finalX);
-//		System.out.println("Esse eh o finalY: "+finalY+",finalX: "+finalX);
-		
-//		if(finalY>0 && finalX>0){
+				System.out.println("\nacabou com mapa de tamanho: "+this.pathNodeSearch.size());
+			}
+			catch(Exception e){
+				System.out.println("Load Search book on html ERROR: "+e);
+				e.printStackTrace();
+				searchBean.naoExisteAEstante = true;
+			}
 			
-//		}
+		}
+		else{
+			searchBean.naoExisteAEstante = true;
+		}
 	}
 	
 	

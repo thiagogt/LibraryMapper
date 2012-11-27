@@ -193,7 +193,7 @@ import library.utils.SQLFactory;
 			setCodeIdFinal(0);
 		}
 
-		if(prefixCodeIdInitial.contains("OB/ESP") || prefixCodeIdInitial.contains("RARE")){
+		if(prefixCodeIdInitial.contains("OB/ESP") || prefixCodeIdInitial.contains("RARO")){
 			setPrefixCodeIdInitial("OB/ESP");
 			setPrefixCodeIdFinal("OB/ESP");
 			setCodeIdInitial(0);
@@ -245,11 +245,15 @@ import library.utils.SQLFactory;
 			}
 			if(firstDigit > firstSpace){
 				endSpace = xml.indexOf(' ', firstSpace+1);
+				if(endSpace<0){
+					endSpace = xml.length();
+					System.out.println("aquiii");
+				}
 				
 				
 			}
 			else{
-				System.out.println("aquiii");
+				
 				endSpace = firstSpace;
 							
 				
