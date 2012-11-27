@@ -3,7 +3,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	 xmlns:ui="http://java.sun.com/jsf/facelets"
 	 xmlns:f="http://java.sun.com/jsf/core">
-<head><title>Map</title></head>
+<head>
+<link type="text/css" href="css/styleButton.css" rel="stylesheet" />
+<title>Map</title>
+</head>
 <body onload="init();">
 <canvas id="canvas" width="1200" height="600"></canvas><br/>
 <script type="text/javascript">function init() {
@@ -11,6 +14,10 @@
 	var ctx = canvas.getContext("2d");
 	<h:outputText value="#{search.outPutCanvas}" escape="false"/>
 }</script>
+<h:form>
 
+<h:commandButton  styleClass="searchButton" value="my Book" action="chosenBook.xhtml"></h:commandButton>
+<h:commandButton  styleClass="searchButton" value="Search" action="bookSearch.xhtml"></h:commandButton>
+</h:form>
 </body>
 </html>

@@ -9,7 +9,7 @@ import library.utils.SQLFactory;
 
 import org.apache.ibatis.session.SqlSession;
 
-public class Node extends Thread {
+public class Node extends Thread implements Cloneable{
     
 	private Integer idNode;
     private Integer positionX;
@@ -27,6 +27,24 @@ public class Node extends Thread {
 	private String whoMarkedThisNode;
 	public String getWhoMarkedThisNode() {
 		return whoMarkedThisNode;
+	}
+	@Override
+	protected Node clone() throws CloneNotSupportedException {
+		
+		Node node = (Node) super.clone();
+		node.idLibrary = this.idLibrary;
+		node.positionX = this.positionX;
+		node.positionY = this.positionY;
+		node.codeIdFinalShelf = this.codeIdFinalShelf;
+		node.codeIdInitialShelf = this.codeIdInitialShelf;
+		node.contentId = this.contentId;
+		node.contentType = this.contentType;
+		node.idNode = this.idNode;
+		node.parentFromBeginNode = this.parentFromBeginNode;
+		node.parentFromEndNode = this.parentFromEndNode;
+		node.isInUse = this.isInUse;
+		node.whoMarkedThisNode = this.whoMarkedThisNode;
+		return node;
 	}
 
 	public void setWhoMarkedThisNode(String whoMarkedThisNode) {
@@ -148,32 +166,33 @@ public class Node extends Thread {
     }
 
 	public boolean estaEmUsoParaleloAgora(Node adjNode) {
+		boolean returnUse = false;
 		if(adjNode.getIsInUse() >= 2){
 			
-			return true;
+			returnUse =  true;
 		}
 		adjNode.semaphore.release();
-		return false;
+		return returnUse;
 	}
 
-	public Node IsUpBrotherReachable(Node principalNode) {
-		return brotherReachable(principalNode,principalNode.getPositionY() -1,principalNode.getPositionX());
+	public Node IsUpBrotherReachable(Node[][] library,Node principalNode) {
+		return brotherReachable(library,principalNode,principalNode.getPositionY() -1,principalNode.getPositionX());
 	}
 
-	public Node IsLeftBrotherReachable(Node principalNode) {
-		 return brotherReachable(principalNode,principalNode.getPositionY(),principalNode.getPositionX() -1);
+	public Node IsLeftBrotherReachable(Node[][] library,Node principalNode) {
+		 return brotherReachable(library,principalNode,principalNode.getPositionY(),principalNode.getPositionX() -1);
 	}
-	public Node IsRightBrotherReachable(Node principalNode) {
-		return brotherReachable(principalNode,principalNode.getPositionY(),principalNode.getPositionX()+1);
+	public Node IsRightBrotherReachable(Node[][] library,Node principalNode) {
+		return brotherReachable(library,principalNode,principalNode.getPositionY(),principalNode.getPositionX()+1);
 	}
-	public Node IsDownBrotherReachable(Node principalNode) {
-		return brotherReachable(principalNode,principalNode.getPositionY()+1,principalNode.getPositionX());
+	public Node IsDownBrotherReachable(Node[][] library,Node principalNode) {
+		return brotherReachable(library,principalNode,principalNode.getPositionY()+1,principalNode.getPositionX());
 	}
-	private Node brotherReachable(Node principalNode, Integer brotherPositionY, Integer brotherPositionX) {
+	private Node brotherReachable(Node[][] library,Node principalNode, Integer brotherPositionY, Integer brotherPositionX) {
 		
 		
 		try {
-			Node brotherNode  = getNodeByPosition(brotherPositionY,brotherPositionX);
+			Node brotherNode  = getNodeByPosition(library,brotherPositionY,brotherPositionX);
 			
 			if(brotherNode.getContentType().equals("Free"))
 				try{
@@ -206,12 +225,15 @@ public class Node extends Thread {
 		this.semaphore = semaphore;
 	}
 
-	public static Node getNodeByPosition( int positionY, int positionX) {
-		
-		NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
-		Node node = new Node();
-		node = nodeMapper.selectByPositionXAndY(GlobalUtils.idLibrary, positionY, positionX);
-		return node;
+	public static Node getNodeByPosition(Node[][] library, int positionY, int positionX) {
+		Node node;
+		if(library == null){
+			NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
+			 node = new Node();
+			node = nodeMapper.selectByPositionXAndY(GlobalUtils.idLibrary, positionY, positionX);
+		}else
+			node = library[positionY][positionX];
+	return node;
 		
 	}
 	public static void deleteAllNodesFromLibrary(int idLibrary) {

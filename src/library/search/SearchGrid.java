@@ -23,6 +23,7 @@ public class SearchGrid extends Thread{
 	public MonitorSearch monitorSearch;
 	public Node[][] library;
 	
+	
 	public SearchGrid(Node[][] library2,MonitorSearch monitorSearch, String fromNode, int positionY, int posittionX, int finalPositionY, int finalPositionX, SearchBean searchBean2){
 		this.setNodeIndexX(posittionX);
 		this.setNodeIndexY(positionY);
@@ -108,7 +109,9 @@ public class SearchGrid extends Thread{
 						break;
 					}
 					//P(adjNode)
+					System.out.println("esperando semaforo"+fromWhoInicialNodeComes);
 					adjNode.getSemaphore().acquire();
+					System.out.println("pegou semaforo");
 					if(adjNode.getWhoMarkedThisNode() != fromWhoInicialNodeComes)
 						adjNode.isInUse++;
 					System.out.println(fromWhoInicialNodeComes+" On the node: "+adjNode.getPositionY()+","+ adjNode.getPositionX());
@@ -120,10 +123,10 @@ public class SearchGrid extends Thread{
 							break;
 						}
 						monitorSearch.stopAllOtherTasks = true;
-						buildBFSPath(middleNode);
+						this.monitorSearch.middleNode = middleNode;
+						break;
 						
-						
-						//TODO: resolver  o problema do broadcast de fim
+				
 						
 					}
 					else{
@@ -146,8 +149,9 @@ public class SearchGrid extends Thread{
 										System.out.println("existe um stop= true 4");
 										break;
 									}
-									buildBFSPath(middleNode);
-									
+									monitorSearch.stopAllOtherTasks = true;
+									this.monitorSearch.middleNode = middleNode;
+									break;
 								}
 							}
 						}
@@ -162,62 +166,62 @@ public class SearchGrid extends Thread{
 		
 	}
 
-	public void buildBFSPath(Node middleNode) {
-		
-		ArrayList<Node> firstHalfList = CreateListFromBeginToMidle(middleNode);
-		System.out.println("Comecou a primeira metade.");
-		for (Node principalNodes : firstHalfList) {
-			System.out.print(principalNodes.getPositionY()+" , "+principalNodes.getPositionX()+" - ");
-	}
-		ArrayList<Node> secondHalfList = CreateListFromMiddleToEnd(middleNode);
-	System.out.println("Comecou a segunda metade.");
-		for (Node principalNode : secondHalfList) {
-			System.out.print(principalNode.getPositionY()+" , "+principalNode.getPositionX()+" - ");
-	}
-		firstHalfList.addAll(secondHalfList);
-		
-//		for (Node principalNode : firstHalfList) {
-//			System.out.print(principalNode.getPositionX()+" , "+principalNode.getPositionY()+" - ");
+//	public void buildBFSPath(Node middleNode) {
+//		
+//		ArrayList<Node> firstHalfList = CreateListFromBeginToMidle(middleNode);
+//		System.out.println("Comecou a primeira metade.");
+//		for (Node principalNodes : firstHalfList) {
+//			System.out.print(principalNodes.getPositionY()+" , "+principalNodes.getPositionX()+" - ");
+//	}
+//		ArrayList<Node> secondHalfList = CreateListFromMiddleToEnd(middleNode);
+//	System.out.println("Comecou a segunda metade.");
+//		for (Node principalNode : secondHalfList) {
+//			System.out.print(principalNode.getPositionY()+" , "+principalNode.getPositionX()+" - ");
+//	}
+//		firstHalfList.addAll(secondHalfList);
+//		
+////		for (Node principalNode : firstHalfList) {
+////			System.out.print(principalNode.getPositionX()+" , "+principalNode.getPositionY()+" - ");
+////		}
+//		System.out.println();
+//		System.out.println("iniciando Impressao no GlobalUtils");
+//		
+//			ArrayList<Node> pathMap=new ArrayList<Node>();
+//			pathMap.addAll(firstHalfList);
+//			this.searchBean.setPathNodeSearch(pathMap);
+//			System.out.println("terminada a Impressao no GlobalUtils");
+//		
+//		
+//	}
+//
+//	public static ArrayList<Node> CreateListFromMiddleToEnd(Node middleNode) {
+//		ArrayList<Node> secondHalfList = new ArrayList<Node>();
+//		Node actualNode = middleNode.getParentFromEndNode(); 
+//		while(actualNode != null){
+//			secondHalfList.add(actualNode);
+//			actualNode = actualNode.getParentFromEndNode();
 //		}
-		System.out.println();
-		System.out.println("iniciando Impressao no GlobalUtils");
-		
-			ArrayList<Node> pathMap=new ArrayList<Node>();
-			pathMap.addAll(firstHalfList);
-			this.searchBean.setPathNodeSearch(pathMap);
-			System.out.println("terminada a Impressao no GlobalUtils");
-		
-		
-	}
-
-	public static ArrayList<Node> CreateListFromMiddleToEnd(Node middleNode) {
-		ArrayList<Node> secondHalfList = new ArrayList<Node>();
-		Node actualNode = middleNode.getParentFromEndNode(); 
-		while(actualNode != null){
-			secondHalfList.add(actualNode);
-			actualNode = actualNode.getParentFromEndNode();
-		}
-		return secondHalfList;
-		
-				
-	}
-	public  ArrayList<Node> CreateListFromBeginToMidle(Node middleNode) {
-		ArrayList<Node> firstHalfList = new ArrayList<Node>();
-		Node actualNode = middleNode; 
-		while(actualNode!=null){
-			firstHalfList.add(actualNode);
-			actualNode = actualNode.getParentFromBeginNode();
-		}
-		return reverseList(firstHalfList);
-	}
-
-	public static ArrayList<Node> reverseList(ArrayList<Node> secondHalfList) {
-		ArrayList<Node> reverseList = new ArrayList<Node>();
-		for (int i = secondHalfList.size() -1; i >= 0; i--) {
-			reverseList.add(secondHalfList.get(i));
-		}
-		return reverseList;
-	}
+//		return secondHalfList;
+//		
+//				
+//	}
+//	public  ArrayList<Node> CreateListFromBeginToMidle(Node middleNode) {
+//		ArrayList<Node> firstHalfList = new ArrayList<Node>();
+//		Node actualNode = middleNode; 
+//		while(actualNode!=null){
+//			firstHalfList.add(actualNode);
+//			actualNode = actualNode.getParentFromBeginNode();
+//		}
+//		return reverseList(firstHalfList);
+//	}
+//
+//	public static ArrayList<Node> reverseList(ArrayList<Node> secondHalfList) {
+//		ArrayList<Node> reverseList = new ArrayList<Node>();
+//		for (int i = secondHalfList.size() -1; i >= 0; i--) {
+//			reverseList.add(secondHalfList.get(i));
+//		}
+//		return reverseList;
+//	}
 
 
 	public  void whoIsYourDaddy(Node adjNode, Node principalNode) {
@@ -232,12 +236,12 @@ public class SearchGrid extends Thread{
 		}
 	}
 
-	public static Queue<Node> findReachablesBrothers(Node principalNode) {
+	public  Queue<Node> findReachablesBrothers(Node principalNode) {
 		Queue<Node> reachablesBrothers = new LinkedList<Node>();
-		Node upBrotherNode = principalNode.IsUpBrotherReachable(principalNode);
-		Node leftBrotherNode = principalNode.IsLeftBrotherReachable(principalNode);
-		Node rightBrotherNode = principalNode.IsRightBrotherReachable(principalNode);
-		Node downBrotherNode = principalNode.IsDownBrotherReachable(principalNode);
+		Node upBrotherNode = principalNode.IsUpBrotherReachable(library,principalNode);
+		Node leftBrotherNode = principalNode.IsLeftBrotherReachable(library,principalNode);
+		Node rightBrotherNode = principalNode.IsRightBrotherReachable(library,principalNode);
+		Node downBrotherNode = principalNode.IsDownBrotherReachable(library,principalNode);
 		
 		if(upBrotherNode!=null){
 			 reachablesBrothers.add(upBrotherNode);

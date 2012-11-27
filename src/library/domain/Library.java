@@ -1,7 +1,7 @@
 package library.domain;
 
 import java.util.ArrayList;
-
+import library.domain.Node;
 import library.mapper.LibraryMapper;
 import library.utils.GlobalUtils;
 import library.utils.SQLFactory;
@@ -15,19 +15,37 @@ public class Library {
     public  ArrayList<Bookshelf> bookShelves;
     public  ArrayList<QrCodeMark> qrCodesMarks;
 	
-    public  Node[][] map;
+    public volatile Node[][] map;
 	
     public Library(){
     	idLibrary = GlobalUtils.idLibrary;
     	
     	if(GlobalUtils.mapLibrary == null){
 			Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
-			GlobalUtils.mapLibrary = map;
+			GlobalUtils.mapLibrary = new Node[GlobalUtils.LIBRARY_HEIGHT][GlobalUtils.LIBRARY_WIDTH];
+			for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++){
+				for (int j = 0; j < GlobalUtils.LIBRARY_WIDTH; j++){
+					try {
+						GlobalUtils.mapLibrary[i][j] = map[i][j].clone();
+					} catch (CloneNotSupportedException e) {
+						System.out.println("Nao pfoi possivel clonar elemento");
+						e.printStackTrace();
+					}
+				}
+    		}
     	}
     	else{
-    		map = new Node[GlobalUtils.LIBRARY_HEIGHT][];
-			for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++)
-				map[i] = GlobalUtils.mapLibrary[i].clone();
+    		map = new Node[GlobalUtils.LIBRARY_HEIGHT][GlobalUtils.LIBRARY_WIDTH];
+			for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++){
+				for (int j = 0; j < GlobalUtils.LIBRARY_WIDTH; j++){
+					try {
+						map[i][j] = GlobalUtils.mapLibrary[i][j].clone();
+					} catch (CloneNotSupportedException e) {
+						System.out.println("Nao pfoi possivel clonar elemento");
+						e.printStackTrace();
+					}
+				}
+    		}
 	    }
     }
     
@@ -48,7 +66,7 @@ public class Library {
 		for (int i = 0; i < sizeY; i++) {
 			for (int j = 0; j < sizeX; j++) {
 				
-				Node node = Node.getNodeByPosition(i,j);
+				Node node = Node.getNodeByPosition(null,i,j);
 				if(node!=null)
 					map[i][j] = node;
 				else
