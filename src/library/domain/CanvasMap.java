@@ -50,7 +50,6 @@ public class CanvasMap {
 		int initialY = returnPositionYFrom(idQrCode);
 		int initialX = returnPositionXFrom(idQrCode);
 		Bookshelf bookshelf = new Bookshelf();
-		//System.out.println("A busca eh feita por essa Estante:"+ searchBean.getSelectedBook().getBookShelf());
 		
 		bookshelf.createInitialShelfIndetification(searchBean.getSelectedBook().getBookShelf());
 		bookshelf.createFinalShelfIndetification(searchBean.getSelectedBook().getBookShelf());
@@ -73,10 +72,8 @@ public class CanvasMap {
 					
 					i = node.getPositionY();
 					j = node.getPositionX();
-					System.out.print("("+i+","+j+")"+" | ");
 					createJavaScriptForSearchImpression(node,out,i,j);
 				}
-				System.out.println("\nacabou com mapa de tamanho: "+this.pathNodeSearch.size());
 			}
 			catch(Exception e){
 				System.out.println("Load Search book on html ERROR: "+e);
@@ -156,9 +153,7 @@ public class CanvasMap {
 
 	public  void drawPositionFromMap(Node node, StringBuilder out,int i,int j) {
 		
-		//System.out.println(node.getContentType()+i+j);
 		if(node.getContentType().equals("Free")){
-			//System.out.println("entro");
 			out.append("\t\tctx.fillStyle = \"white\";\n");
 		}
 		else if(node.getContentType().equals("Shelf")){

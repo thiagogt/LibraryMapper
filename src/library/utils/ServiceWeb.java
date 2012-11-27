@@ -85,32 +85,5 @@ public class ServiceWeb {
 		return response;
 	}
 	
-	
-	
-//	public static void registraLog(String descricao){
-//		try {
-//			URL url = new URL(ServiceWeb.InicioURLServicos() + "registrarLog/" + GlobalUtil.getRestaurante().getIdRestaurante() + "/PainelMonitoracao/" + descricao + "/"+ new Date().getTime());
-//			//faz o request e cria o writer pra criar o arquivo
-//			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//			connection.setReadTimeout(10000);
-//			connection.connect();
-//			if (connection.getResponseCode() != 200) {
-//				log.error("Erro ao tentar logar \"" + descricao + "\" c√≥digo de retorno: " + connection.getResponseCode() + " resposta: " + connection.getResponseMessage());
-//				log.error("URL acessada :\"" + url.toString() + "\"");
-//			}
-//		}
-//		catch(Exception e) {
-//			log.error("Erro ao tentar logar \"" + descricao + "\" no servidor web: " + e.getMessage(),e);
-//		}
-//	}
-	
-	
-//	public static String objectToJson(Object objeto) throws JsonGenerationException, JsonMappingException, IOException{
-//	ObjectMapper mapper = new ObjectMapper();
-//	 
-//	Writer strWriter = new StringWriter();
-//	mapper.writeValue(strWriter, objeto);
-//	return strWriter.toString();
-//	}
 
 }

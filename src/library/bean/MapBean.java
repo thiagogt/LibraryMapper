@@ -259,7 +259,7 @@ public class MapBean extends HttpServlet implements Serializable{
 					node = new Node();
 					node.setContentType(nodeType);
 					node.setContentId(contId);
-					System.out.println("Esse eh o id : "+contId);
+					//System.out.println("Esse eh o id : "+contId);
 					if(nodeType.equals("QrCode"))
 						 lastQrCodeId =contId;
 					if(nodeType.equals("Shelf"))
@@ -317,6 +317,7 @@ public class MapBean extends HttpServlet implements Serializable{
 			fw.close();	
 		} catch (Exception e) {
 			System.out.println("Erro ao carregar arquivo para impressao da Biblioteca:ERRO "+e);
+			e.printStackTrace();
 		}  
 		  		
 	}

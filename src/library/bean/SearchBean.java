@@ -94,18 +94,18 @@ public class SearchBean implements Serializable{
 	}
 	
 	public void setSelectedIten(String selectedIten) {
-		System.out.println(selectedIten);
+		//System.out.println(selectedIten);
 		
 		int inicialOfIten = selectedIten.indexOf("\"");
 		int finalOfIten = selectedIten.lastIndexOf("\"");
 		if(inicialOfIten>=0 && finalOfIten>=0){
 			String iten = selectedIten.substring(inicialOfIten+1, finalOfIten);
-			System.out.println("Esse eh o iten cortado "+iten);
+			//System.out.println("Esse eh o iten cortado "+iten);
 			
 			this.selectedIten = iten;
 			int position =Integer.parseInt(this.selectedIten);
 			
-			System.out.println("Position: "+position);
+			//System.out.println("Position: "+position);
 			this.selectedBook = books.get(position);
 		}
 	}
@@ -114,16 +114,17 @@ public class SearchBean implements Serializable{
 		try {
 			String xml = ServiceWeb.querySearchOnColmeia(this.query);
 			this.books = 	ParseColmeiaXML.extractBookList(xml);
-			for (Book book : books) {
-				System.out.println(book.getNomeLivro());	
-				System.out.println(book.getAutorLivro());
-				System.out.println(book.getBookShelf());
-				System.out.println(book.getCopiasNessaBiblioteca());
-				System.out.println(book.getPublisher());
-				System.out.println();
-			}
+//			//for (Book book : books) {
+//				System.out.println(book.getNomeLivro());	
+//				System.out.println(book.getAutorLivro());
+//				System.out.println(book.getBookShelf());
+//				System.out.println(book.getCopiasNessaBiblioteca());
+//				System.out.println(book.getPublisher());
+//				System.out.println();
+//			}
 		} catch (Exception e) {
 			System.out.println("ERRO: Nao foi possivel carregar toda a busca! : "+e);
+			e.printStackTrace();
 		}
 		return "bookSelection.xhtml";
 	}
@@ -141,7 +142,7 @@ public class SearchBean implements Serializable{
 			e.printStackTrace();
 			setPrintMapNode(GlobalUtils.PRINT_ERRO_FILE);
 		}
-		System.out.println(printMapNode);
+		//System.out.println(printMapNode);
 		return printMapNode;
 	}
 

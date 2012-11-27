@@ -22,9 +22,6 @@ public class LibraryMain {
 		try {
 			System.out.println("Carregando a biblioteca de id: "+GlobalUtils.idLibrary);
 			Library library = new Library();
-			
-			library.Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
-			GlobalUtils.mapLibrary = library.map;
 			System.out.println("Pronto");
 			
 		} catch (Exception e) {

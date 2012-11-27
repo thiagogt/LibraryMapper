@@ -23,5 +23,7 @@
         <location>/viewExpired.xhtml</location>
 
     </error-page>
-    
+    <listener>
+        <listener-class>library.utils.MyServlet</listener-class>
+    </listener>
 </web-app>

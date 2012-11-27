@@ -202,6 +202,7 @@ public class Node extends Thread implements Cloneable{
 				}	
 				catch (Exception e) {
 					System.out.println("Ainda nao tem cor");
+					e.printStackTrace();
 					return brotherNode;
 				}
 		
@@ -212,7 +213,8 @@ public class Node extends Thread implements Cloneable{
 			
 				
 		} catch (Exception e) {
-//			System.out.println("Nao existe");
+			System.out.println("Erro no brotherReachable");
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -267,9 +269,7 @@ public class Node extends Thread implements Cloneable{
 	public void getBookShelfNodeFromBD(Bookshelf bookshelf) {
 		NodeMapper nodeMapper = SQLFactory.section.getMapper(NodeMapper.class);
 		
-		System.out.println(bookshelf.getIdBookshelf());
 		Node node = nodeMapper.selectNodeByContentIdAndType(GlobalUtils.idLibrary,bookshelf.getIdBookshelf(),"Shelf");
-		System.out.println("Sao as posicoes yx da estante: "+node.getPositionY()+","+node.getPositionX());
 		setPositionX(node.getPositionX());
 		setPositionY(node.getPositionY());
 	}

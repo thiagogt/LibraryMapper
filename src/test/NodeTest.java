@@ -19,10 +19,10 @@ public class NodeTest {
 		
 		System.out.println(realBookShelf.getContentType());
 		
-		Node node = realBookShelf.IsDownBrotherReachable(realBookShelf);
-		node = realBookShelf.IsUpBrotherReachable(realBookShelf);
-		node = realBookShelf.IsLeftBrotherReachable(realBookShelf);
-		node = realBookShelf.IsRightBrotherReachable(realBookShelf);
+		Node node = realBookShelf.IsDownBrotherReachable(null,realBookShelf);
+		node = realBookShelf.IsUpBrotherReachable(null,realBookShelf);
+		node = realBookShelf.IsLeftBrotherReachable(null,realBookShelf);
+		node = realBookShelf.IsRightBrotherReachable(null,realBookShelf);
 		
 		
 		

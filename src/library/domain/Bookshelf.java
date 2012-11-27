@@ -247,7 +247,6 @@ import library.utils.SQLFactory;
 				endSpace = xml.indexOf(' ', firstSpace+1);
 				if(endSpace<0){
 					endSpace = xml.length();
-					System.out.println("aquiii");
 				}
 				
 				
@@ -262,7 +261,6 @@ import library.utils.SQLFactory;
 		else
 			endSpace = xml.length();
 		
-		System.out.println("esse eh o size da separacao: "+endSpace);
 		return endSpace;
 	}
 	public  int cacthVersionId(String codeIdShelf) {
@@ -285,18 +283,11 @@ import library.utils.SQLFactory;
 	}
 
 	public ArrayList<Node> returnNodeOfShelf() {
-		System.out.println("Esse eh o prefixo: "+getPrefixCodeIdInitial());
-		System.out.println("Esse eh code id: "+getCodeIdInitial());
-		System.out.println("Essa eh a versao: "+getVersionCodeIdInitial());
-		System.out.println("Esse eh o prefixo Final: "+getPrefixCodeIdFinal());
-		System.out.println("Esse eh code id Final: "+getCodeIdFinal());
-		System.out.println("Essa eh a versao Final: "+getVersionCodeIdFinal());
 		
 		ArrayList<Node> nodeList = new ArrayList<Node>();
 		BookshelfMapper bookshelfMapper = SQLFactory.section.getMapper(BookshelfMapper.class);
 		
 		List<Bookshelf> shelfList = bookshelfMapper.selectByCodeIdShelf(this);
-		System.out.println("Esse eh o tamanho da lista shelf: "+shelfList.size());
 		Node node;
 		
 		for (Bookshelf bookshelf2 : shelfList) {

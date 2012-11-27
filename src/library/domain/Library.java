@@ -23,16 +23,18 @@ public class Library {
     	if(GlobalUtils.mapLibrary == null){
 			Mapping(GlobalUtils.LIBRARY_WIDTH, GlobalUtils.LIBRARY_HEIGHT);
 			GlobalUtils.mapLibrary = new Node[GlobalUtils.LIBRARY_HEIGHT][GlobalUtils.LIBRARY_WIDTH];
+			System.out.println("Pronto!");
 			for (int i = 0; i < GlobalUtils.LIBRARY_HEIGHT; i++){
 				for (int j = 0; j < GlobalUtils.LIBRARY_WIDTH; j++){
 					try {
 						GlobalUtils.mapLibrary[i][j] = map[i][j].clone();
 					} catch (CloneNotSupportedException e) {
-						System.out.println("Nao pfoi possivel clonar elemento");
+						System.out.println("Nao foi possivel clonar elemento");
 						e.printStackTrace();
 					}
 				}
     		}
+			
     	}
     	else{
     		map = new Node[GlobalUtils.LIBRARY_HEIGHT][GlobalUtils.LIBRARY_WIDTH];
@@ -41,7 +43,7 @@ public class Library {
 					try {
 						map[i][j] = GlobalUtils.mapLibrary[i][j].clone();
 					} catch (CloneNotSupportedException e) {
-						System.out.println("Nao pfoi possivel clonar elemento");
+						System.out.println("Nao foi possivel clonar elemento");
 						e.printStackTrace();
 					}
 				}
@@ -62,7 +64,7 @@ public class Library {
 		sizeX = newSize_X;
 		sizeY = newSize_Y;
 		map = new Node[sizeY][sizeX];
-		
+		System.out.println("Iniciando a leitura do banco de dados..");
 		for (int i = 0; i < sizeY; i++) {
 			for (int j = 0; j < sizeX; j++) {
 				
@@ -72,7 +74,9 @@ public class Library {
 				else
 					map[i][j].setContentType("Forbidden");
 			}
-			
+			if(i == sizeY/2){
+				System.out.print("..");
+			}
 		}
 	}
 	public static void deleteAllLibrary(int idLibrary2) {

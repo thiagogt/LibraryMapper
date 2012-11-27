@@ -23,7 +23,6 @@ public class JsonMap {
 		this.top = top2;
 		this.left = left2;
 		this.height = heigth2;
-		System.out.println("ola aii  "+heigth2);
 		this.width = width2;
 		this.idInitialShelf = idShelfInitial;
 		this.idFinalShelf = idShelfFinal;
