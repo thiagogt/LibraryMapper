@@ -119,7 +119,7 @@ public class CanvasMap {
 	private  void drawSearchOnMap(Node node, StringBuilder out, int i,
 			int j) {
 		if(node.getContentType().equals("QrCode")){
-			out.append("\t\tctx.fillStyle = \"yellow\";\n");
+			out.append("\t\tctx.fillStyle = \"#a09b98\";\n");
 		}else if(node.getContentType().equals("SelectedShelf")){
 			out.append("\t\tctx.fillStyle = \"blue\";\n");
 		}else
@@ -162,7 +162,9 @@ public class CanvasMap {
 			out.append("\t\tctx.fillStyle = \"white\";\n");
 		}
 		else if(node.getContentType().equals("Shelf")){
-			out.append("\t\tctx.fillStyle = \"brown\";\n");
+			out.append("\t\tctx.fillStyle = \"#b77d5a\";\n");
+		}else if(node.getContentType().equals("QrCode")){
+			out.append("\t\tctx.fillStyle = \"gray\";\n");
 		}else{
 			out.append("\t\tctx.fillStyle = \"black\";\n");
 		}

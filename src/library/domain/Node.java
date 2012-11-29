@@ -14,15 +14,15 @@ import org.apache.ibatis.session.SqlSession;
 public class Node extends Thread implements Cloneable{
     
 	private Integer idNode;
-    private Integer positionX;
-    private Integer positionY;
-    private Integer contentId;
-    private Integer idLibrary;
-    private String codeIdInitialShelf;
-    private String codeIdFinalShelf;
+	private Integer positionX;
+	private Integer positionY;
+	private Integer contentId;
+	private Integer idLibrary;
+	private String codeIdInitialShelf;
+	private String codeIdFinalShelf;
 	private String contentType;//Free,QrCode,Forbidden,Shelf
-    private Node parentFromBeginNode;
-    private Node parentFromEndNode;
+	private Node parentFromBeginNode;
+	private Node parentFromEndNode;
 	public int isInUse;
 	private Semaphore semaphore;
 	private String color;
@@ -33,9 +33,9 @@ public class Node extends Thread implements Cloneable{
 	
 	
 	@Override
-	protected Node clone() throws CloneNotSupportedException {
-		
-		Node node = (Node) super.clone();
+	public Node clone() throws CloneNotSupportedException {
+		Object obj = super.clone();
+		Node node =  (Node) obj;
 		node.idLibrary = this.idLibrary;
 		node.positionX = this.positionX;
 		node.positionY = this.positionY;

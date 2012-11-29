@@ -1,5 +1,14 @@
+Library Mapper
+
+Thiago Gomes Toledo
+thiago.toledo@usp.br
+
+Para instalar o Library Mapper no linux :
+
+-Instale a openjdk-6 .
 
 - Baixe e instale um versao do postgresl (preferencia 9.1)
+
 - Crie  um Banco de dados:
 	.abra um terminal
 	.digite "sudo su postgres -c psql template1"
@@ -67,12 +76,20 @@
 
 
 -Instale o pdAdmin3
+
 -Crie um servidor de bd no pgAdmin3:
 	path = localhost
 	senha = postgres
 	usuario e owner = postgres
 -Crie um BD com o nome libraryMapperDB e owner postgres 
+
 -Faca um restore do BD exemplo passado(backupLibraryMapper.backup) 
 
-
 - Baixe uma versao do tomcat(preferencia 7.x) e o uso como servidor.	
+
+- No arquivo log4j.properties escreva o caminho para o arquivo de log na variavel log4j.appender.file.File.
+
+- inicie o Tomcat e abra a pagina http://localhost:8080/LibraryMapper/faces/WebLibraryMapper/bookSearch.xhtml?QRId=916 para testar a busca
+
+- crie um mapa na pagina http://localhost:8080/LibraryMapper/faces/WebLibraryMapper/mapCreation.xhtml. Para usar esse mapa verifique no pgAdmin o ultimo
+id da biblioteca criado e o coloque na variavel public static Integer idLibrary do GlobalUtils. 

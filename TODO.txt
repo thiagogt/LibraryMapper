@@ -1,11 +1,1 @@
--criar metodo q pega desse id e chama a busca com o id da estante selecionada
-
--Criar metodo para buscar a estante no bd pelo id dado e o id da biblioteca
-
--criar arquivo printErro.xhtml.
-
--concertar as palavras q chegam do bd com codificacao diferente
-	
--monografia
-
--apresentacao
+done
