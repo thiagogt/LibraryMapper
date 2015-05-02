@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServlet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import sun.org.mozilla.javascript.regexp.SubString;
+
 
 import library.domain.Bookshelf;
 import library.domain.CanvasMap;
